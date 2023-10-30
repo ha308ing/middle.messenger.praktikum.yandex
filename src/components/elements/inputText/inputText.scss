@@ -1,5 +1,4 @@
-$inputTextBorderColor: #000;
-$inputTextErrorColor: #950e0e;
+@use "/components/styles/modules/colors";
 
 .inputText {
   position: relative;
@@ -12,7 +11,7 @@ $inputTextErrorColor: #950e0e;
 
 .inputText_input {
   border: 0;
-  border-bottom: 2px solid $inputTextBorderColor;
+  border-bottom: 2px solid colors.$pureBlack;
   text-align: center;
   padding: 6px 0;
   width: 100%;
@@ -32,7 +31,7 @@ $inputTextErrorColor: #950e0e;
 .inputText__invalid {
   & .inputText_input,
   &::after {
-    color: $inputTextErrorColor;
+    color: colors.$darkBrickRed;
   }
   &::after {
     position: absolute;

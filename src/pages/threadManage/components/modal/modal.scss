@@ -1,10 +1,12 @@
+@use "/components/styles/modules/colors";
+
 .modal_container {
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: #ffffffcb;
+  background-color: colors.$whiteLightTransparent;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -16,9 +18,9 @@
   // width: ;
   .modal {
     border-style: solid;
-    border-color: #000;
+    border-color: colors.$pureBlack;
     border-width: 1px 3px 3px 1px;
-    background-color: #fff;
+    background-color: colors.$pureWhite;
     text-align: center;
     // padding-bottom: 2rem;
   }

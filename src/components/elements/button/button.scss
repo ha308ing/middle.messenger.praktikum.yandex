@@ -1,12 +1,11 @@
-$buttonBackgroundColor: #000;
-$buttonColor: #fff;
+@use "/components/styles/modules/colors";
 
 .button {
-  color: $buttonColor;
+  color: colors.$pureWhite;
   border-radius: 0;
   line-height: 2;
   padding: 5px 3rem;
-  background-color: $buttonBackgroundColor;
+  background-color: colors.$pureBlack;
   border: 0;
   cursor: pointer;
 }

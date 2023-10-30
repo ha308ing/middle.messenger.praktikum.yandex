@@ -1,3 +1,4 @@
+@use "/components/styles/modules/colors";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
 
 :root {
@@ -24,7 +25,7 @@ body {
 
 .page {
   font-family: "Open Sans", sans-serif;
-  background-color: #fff;
+  background-color: colors.$pureWhite;
   width: 100vw;
   height: 100vh;
   margin: 0;

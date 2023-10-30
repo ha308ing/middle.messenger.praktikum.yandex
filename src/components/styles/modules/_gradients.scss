@@ -1,0 +1,9 @@
+@use "/components/styles/modules/colors";
+
+$whiteGreyWhite: linear-gradient(
+  to right,
+  colors.$pureWhite,
+  colors.$lightGrey,
+  colors.$lightGrey,
+  colors.$pureWhite,
+);

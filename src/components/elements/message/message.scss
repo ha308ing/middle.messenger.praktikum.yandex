@@ -1,4 +1,4 @@
-$messageTimestampColor: #999;
+@use "/components/styles/modules/colors";
 
 .message {
   width: 100%;
@@ -24,7 +24,7 @@ $messageTimestampColor: #999;
   .message_timestamp {
     font-weight: 700;
     font-size: 0.75rem;
-    color: $messageTimestampColor;
+    color: colors.$mediumDarkGrey;
   }
 }
 
