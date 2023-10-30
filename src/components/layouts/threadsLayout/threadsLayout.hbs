@@ -1,13 +1,15 @@
 {{#> body }}
 <div class="threadsPage_container leftPanelLayout_container">
 
-  <div class="leftPanel_container">
-    {{#> topBar contextButton=true}}
-      {{> avatar }}
-      <h1>{{login}}</h1>
-    {{/ topBar }}
+  <section class="leftPanel_container">
+    <header>
+      {{#> topBar contextButton=true}}
+        {{> avatar }}
+        <h1>{{login}}</h1>
+      {{/ topBar }}
 
-    {{> inputText class="threadList_search" type="search" id="search" name="search" placeholder="Search" }}
+      {{> inputText class="threadList_search" type="search" id="search" name="search" placeholder="Search" }}
+    </header>
 
     <ul class="threadList">
       {{#each threads}}
@@ -19,11 +21,11 @@
     </ul>
 
     {{> button buttonClass="button_startThread" buttonText="Start a thread" }}
-  </div>
+  </section>
 
-  <div class="rightPanel_container">
+  <section class="rightPanel_container">
     {{> @partial-block }}
-  </div>
+  </section>
 
 </div>
 {{/body}}

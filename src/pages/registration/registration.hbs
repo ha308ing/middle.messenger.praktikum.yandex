@@ -1,14 +1,14 @@
 {{#> body }}
-<div class="registrationPage_container bigLogoLayout_container">
+<article class="registrationPage_container bigLogoLayout_container">
 
-  <div class="bigLogoLayout_logo_container">
+  <header class="bigLogoLayout_logo_container">
     {{> logo }}
-  </div>
+  </header>
 
-  <div class="bigLogoLayout_content_container">
+  <section class="bigLogoLayout_content_container">
     <h1 class="heading">Registration</h1>
     <form action="">
-      <section class="registration_inputs">
+      <div class="registration_inputs">
         {{>inputText_login__vertical }}
         {{>inputText_email__vertical}}
         {{>inputText_phone__vertical}}
@@ -16,9 +16,9 @@
         {{>inputText_secondName__vertical}}
         {{>inputText_password__vertical}}
         {{>button buttonClass="button__signup" buttonText="Sign up" }}
-      </section>
+      </div>
     </form>
-  </div>
+  </section>
 
-</div>
+</article>
 {{/body}}
