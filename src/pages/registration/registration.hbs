@@ -8,14 +8,10 @@
   <div class="bigLogoLayout_content_container">
     <h1 class="heading">Registration</h1>
     <form action="">
-      <section class="registration_inputs registration_inputs__first">
-        {{>inputText class="inputText_login" label="Login" type="text" name="login" placeholder="Login" vertical=true value="wrong login"}}
+      <section class="registration_inputs">
+        {{>inputText_login__vertical }}
         {{>inputText_email__vertical}}
         {{>inputText_phone__vertical}}
-        {{>button buttonClass="button__next" buttonText="Next" }}
-      </section>
-
-      <section class="registration_inputs registration_inputs__last hidden">
         {{>inputText_firstName__vertical}}
         {{>inputText_secondName__vertical}}
         {{>inputText_password__vertical}}

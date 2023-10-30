@@ -19,7 +19,7 @@
 }
 
 .inputText {
-  margin-bottom: 5rem;
+  margin-bottom: 1.5rem;
   min-width: 16.25rem;
 }
 
@@ -34,4 +34,6 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  max-height: 65vh;
+  overflow: auto;
 }
