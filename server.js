@@ -1,6 +1,7 @@
 import express from "express";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
+import open from "open"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
@@ -13,4 +14,7 @@ app.get("/", (req, res, next) => {
   res.sendFile(resolve(distDir, "index.html"));
 });
 
-app.listen(PORT, () => console.log(`App started at ${PORT} port`));
+app.listen(PORT, async () => {
+  console.log(`App started at ${PORT} port`)
+  open(`http://localhost:${PORT}`)
+});
