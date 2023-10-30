@@ -1,0 +1,12 @@
+.iconButton {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: inherit;
+  cursor: pointer;
+
+  .iconButton_icon {
+    height: 2rem;
+    width: auto;
+  }
+}

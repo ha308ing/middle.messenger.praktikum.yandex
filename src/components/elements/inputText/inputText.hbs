@@ -1,0 +1,15 @@
+<div class="inputText {{#if readonly}}inputText__readonly{{/if}} {{#if vertical}}inputText__vertical{{/if}} {{#if horizontal}}inputText__horizontal{{/if}} {{class}}">
+  {{#if label}}
+    <label for="{{name}}" class="inputText_label">{{label}}</label>
+  {{/if}}
+
+  <input
+    class="inputText_input  {{#if readonly}}inputText_input__readonly{{/if}}"
+    type="{{type}}"
+    id="{{name}}"
+    name="{{name}}"
+    placeholder="{{placeholder}}"
+    value="{{value}}"
+    {{#if readonly}}readonly{{/if}}
+  />
+</div>

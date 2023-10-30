@@ -1,0 +1,17 @@
+{{#> body }}
+<div class="bigLogoLayout_container">
+
+  <div class="bigLogoLayout_logo_container">
+    {{> logo }}
+  </div>
+
+  <div class="errorPage_message bigLogoLayout_content_container">
+    <h1 class="errorPage_message_header">{{errorCode}}</h1>
+
+    <p class="errorPage_message_description">{{errorMessage}}</p>
+
+    {{> button buttonClass="button errorPage_message_button" }}
+  </div>
+
+</div>
+{{/ body }}

@@ -1,0 +1,15 @@
+.attachment {
+  &__image,
+  &__video {
+    max-height: 10rem;
+    width: auto;
+  }
+  &__audio,
+  &__document {
+    height: 6rem;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+}

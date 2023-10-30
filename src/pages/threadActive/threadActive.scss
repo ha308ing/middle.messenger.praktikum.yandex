@@ -1,0 +1,65 @@
+@use "/components/styles/modules/leftPanelLayout";
+
+.threadActivePage {
+  .rightPanel_container {
+    .topBar {
+      width: 100%;
+    }
+  }
+  .rightPanel_content {
+    position: relative;
+    height: 100%;
+  }
+  .messages_container {
+    overflow-y: auto;
+    height: calc(100vh - 4rem - 5rem);
+  }
+  .messages {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: end;
+    min-height: 100%;
+  }
+  .message_content {
+    word-wrap: break-word;
+  }
+
+  .sendBar {
+    position: absolute;
+    bottom: 0;
+    // height: 5rem;
+    width: 100%;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .avatar_thread {
+    height: 2rem;
+    width: auto;
+    margin-right: 1rem;
+  }
+
+  .leftPanel_container {
+    display: none;
+  }
+}
+@media screen and (min-width: leftPanelLayout.$desktopThreshold) {
+  .threadActivePage {
+    .button_startThread {
+      left: calc(leftPanelLayout.$leftPanel_desktopWidth / 2 - 15rem / 2);
+    }
+    .leftPanel_container {
+      display: flex;
+    }
+    .messages_container {
+      max-width: 40rem;
+      margin: auto;
+    }
+    .sendBar {
+      max-width: 32rem;
+      left: calc(
+        50vw - leftPanelLayout.$leftPanel_desktopWidth / 2 - 32rem / 2
+      );
+    }
+  }
+}

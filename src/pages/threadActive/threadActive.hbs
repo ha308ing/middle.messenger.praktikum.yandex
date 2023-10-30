@@ -1,0 +1,20 @@
+{{#>threadsLayout}}
+  <div class="rightPanel_content threadList__active">
+    {{#> topBar contextButton=true }}
+      {{>iconButton_back}}
+      {{>avatarThread}}
+      <h1>&lt;Thread title&gt;</h1>
+    {{/topBar}}
+
+    <div class="messages_container">
+      <div class="messages">
+        {{#each messages}}
+          {{> message }}
+        {{/each}}
+      </div>
+    </div>
+
+    {{> sendBar }}
+  </div>
+</div>
+{{/threadsLayout}}

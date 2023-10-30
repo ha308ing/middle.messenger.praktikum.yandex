@@ -1,0 +1,18 @@
+{{#> body }}
+<div class="authorizationPage_container bigLogoLayout_container">
+
+  <div class="bigLogoLayout_logo_container">
+    {{> logo }}
+  </div>
+
+  <div class="bigLogoLayout_content_container">
+    <form>
+      {{> inputText class="inputText_login" label="Login" type="text" name="login" placeholder="Login" vertical=true}}
+      {{> inputText class="inputText_password inputText__invalid" label="Password" type="password" name="password" placeholder="Password" vertical=true}}
+      {{> buttonSignin }}
+      {{> buttonSignup }}
+    </form>
+  </div>
+
+</div>
+{{/body}}

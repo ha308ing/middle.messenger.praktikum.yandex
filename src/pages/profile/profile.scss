@@ -1,0 +1,53 @@
+$button_saveProfile_width: 15rem;
+
+.profile {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .hidden {
+    display: none;
+  }
+
+  .topBar {
+    margin-bottom: 2rem;
+    .topBar_heading {
+      margin-right: auto;
+    }
+  }
+
+  .avatarContainer {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .avatar_profile {
+    height: 8rem;
+    width: auto;
+  }
+
+  .heading_login {
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .inputsContainer {
+    flex-grow: 1;
+  }
+
+  .inputText {
+    width: 100%;
+    padding: 0 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .button_saveProfile {
+    position: fixed;
+    bottom: 2.5rem;
+    width: $button_saveProfile_width;
+    left: calc(50vw - $button_saveProfile_width / 12);
+  }
+}

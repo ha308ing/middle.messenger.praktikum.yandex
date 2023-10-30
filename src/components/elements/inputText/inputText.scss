@@ -1,0 +1,45 @@
+$inputTextBorderColor: #000;
+$inputTextErrorColor: #950e0e;
+
+.inputText {
+  position: relative;
+}
+
+.inputText__vertical {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.inputText_input {
+  border: 0;
+  border-bottom: 2px solid $inputTextBorderColor;
+  text-align: center;
+  padding: 6px 0;
+  width: 100%;
+  &:focus-visible {
+    outline: 0;
+  }
+}
+
+.inputText__readonly .inputText_input {
+  border-color: transparent;
+}
+
+.inputText_label {
+  margin-bottom: 0.5rem;
+}
+
+.inputText__invalid {
+  & .inputText_input,
+  &::after {
+    color: $inputTextErrorColor;
+  }
+  &::after {
+    position: absolute;
+    content: "Wrong input";
+    text-align: center;
+    font-size: 0.75rem;
+    width: 100%;
+    bottom: -1.5em;
+  }
+}

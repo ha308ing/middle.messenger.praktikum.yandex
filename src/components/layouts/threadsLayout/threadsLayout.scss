@@ -1,0 +1,56 @@
+@use "/components/styles/modules/leftPanelLayout";
+
+$button_startThread_width: 15rem;
+$threadList_search_max-width: 300px;
+
+.threadList {
+  list-style: none;
+  padding: 0;
+  overflow-y: auto;
+  flex-grow: 1;
+  margin: 0;
+  padding-bottom: 5rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.button_startThread {
+  line-height: 2;
+  width: $button_startThread_width;
+  position: fixed;
+  bottom: 2rem;
+  left: calc(50vw - $button_startThread_width / 2);
+  padding: 5px 0;
+}
+
+.threadList_search {
+  text-align: center;
+  margin-bottom: 1rem;
+  & > input {
+    max-width: $threadList_search_max-width;
+    width: 80%;
+  }
+}
+
+.threadList__noActive {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.threadList__empty_message {
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@media screen and (min-width: leftPanelLayout.$desktopThreshold) {
+  .button_startThread {
+    left: calc(
+      leftPanelLayout.$leftPanel_desktopWidth / 2 - $button_startThread_width /
+        2
+    );
+  }
+}

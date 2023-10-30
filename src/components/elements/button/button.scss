@@ -1,0 +1,12 @@
+$buttonBackgroundColor: #000;
+$buttonColor: #fff;
+
+.button {
+  color: $buttonColor;
+  border-radius: 0;
+  line-height: 2;
+  padding: 5px 3rem;
+  background-color: $buttonBackgroundColor;
+  border: 0;
+  cursor: pointer;
+}

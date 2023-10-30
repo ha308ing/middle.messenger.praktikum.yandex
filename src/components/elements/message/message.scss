@@ -1,0 +1,39 @@
+$messageTimestampColor: #999;
+
+.message {
+  width: 100%;
+  padding: 1rem 1rem 0.5rem;
+  position: relative;
+
+  .message_sender {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+
+  .message_content,
+  .message_attachment {
+    padding: 0 3rem 0 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .message_content {
+    font-size: 0.875rem;
+  }
+
+  .message_timestamp {
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: $messageTimestampColor;
+  }
+}
+
+.message__outgoing {
+  position: relative;
+  .message_sender {
+    position: absolute;
+  }
+  .message_content {
+    padding: 0 1rem 0 3rem;
+  }
+}

@@ -1,0 +1,37 @@
+@use "/components/styles/modules/bigLogoLayout";
+
+.registrationPage {
+  // background-color: blue;
+  padding-top: 5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.heading {
+  font-weight: normal;
+  font-size: 1.5rem;
+  margin-bottom: 5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.inputText {
+  margin-bottom: 5rem;
+  min-width: 16.25rem;
+}
+
+.button {
+  min-width: 10rem;
+  padding: 5px 3rem;
+  margin: 0 auto;
+  min-width: 10rem;
+}
+
+.registration_inputs {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}

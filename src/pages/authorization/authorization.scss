@@ -1,0 +1,26 @@
+@use "/components/styles/modules/bigLogoLayout";
+
+$button_width: 15rem;
+
+.inputText {
+  width: 20rem;
+}
+
+.inputText_login {
+  margin-bottom: 2rem;
+}
+
+.inputText_password {
+  margin-bottom: 5rem;
+}
+
+.button_signin,
+.button_signup {
+  display: block;
+  width: $button_width;
+  margin: 0 auto;
+}
+
+.button_signin {
+  margin-bottom: 2rem;
+}

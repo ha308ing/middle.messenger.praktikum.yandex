@@ -1,0 +1,21 @@
+.logo {
+  display: flex;
+  align-items: center;
+  &__horizontal {
+    flex-direction: row;
+    .logo_image {
+      margin-right: 1rem;
+    }
+  }
+  &_vertical {
+    flex-direction: column;
+  }
+  & .logo_image {
+    height: 2rem;
+    width: auto;
+  }
+  & .logo_title {
+    font-size: 2rem;
+    text-transform: uppercase;
+  }
+}

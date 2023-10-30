@@ -1,0 +1,29 @@
+{{#> body }}
+<div class="threadsPage_container leftPanelLayout_container">
+
+  <div class="leftPanel_container">
+    {{#> topBar contextButton=true}}
+      {{> avatar }}
+      <h1>{{login}}</h1>
+    {{/ topBar }}
+
+    {{> inputText class="threadList_search" type="search" id="search" name="search" placeholder="Search" }}
+
+    <ul class="threadList">
+      {{#each threads}}
+          {{!-- <li>{{> threadListItem title=this.threadTitle preview=this.threadPreview active=this.active}}</li> --}}
+          <li>{{> threadListItem threadActive=this.active}}</li>
+        {{else }}
+          <span class="threadList__empty_message">you have no threads</span>
+      {{/each}}
+    </ul>
+
+    {{> button buttonClass="button_startThread" buttonText="Start a thread" }}
+  </div>
+
+  <div class="rightPanel_container">
+    {{> @partial-block }}
+  </div>
+
+</div>
+{{/body}}

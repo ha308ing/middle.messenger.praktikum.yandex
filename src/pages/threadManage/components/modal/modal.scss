@@ -1,0 +1,51 @@
+.modal_container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #ffffffcb;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  .hidden {
+    display: none;
+  }
+  // width: ;
+  .modal {
+    border-style: solid;
+    border-color: #000;
+    border-width: 1px 3px 3px 1px;
+    background-color: #fff;
+    text-align: center;
+    // padding-bottom: 2rem;
+  }
+  .modal_message {
+    font-weight: 700;
+    padding: 0 1rem;
+    margin-bottom: 3rem;
+    word-wrap: break-word;
+  }
+  .modal_button {
+    margin: 0 auto 2rem;
+    display: block;
+    width: 15rem;
+  }
+  .modal_close {
+    position: relative;
+    padding: 1rem;
+    text-align: right;
+    margin-bottom: 3.125rem;
+    .iconButton_icon {
+      height: 1rem;
+      width: auto;
+    }
+  }
+  // .iconButton_close {
+  //   position: absolute;
+  //   top: 1rem;
+  //   right: 1rem;
+  // }
+}

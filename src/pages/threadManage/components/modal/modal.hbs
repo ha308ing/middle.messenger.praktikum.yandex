@@ -1,0 +1,11 @@
+<div class="modal_container hidden {{class}}">
+  <div class="modal">
+    <div class="modal_close">
+      {{> iconButton_close }}
+    </div>
+    <div class="modal_message">{{message}}</div>
+    {{#each buttons }}
+      {{> button buttonClass="modal_button" buttonText=buttonText onclick=handler }}
+    {{/each}}
+  </div>
+</div>

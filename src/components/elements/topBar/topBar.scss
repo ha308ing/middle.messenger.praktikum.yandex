@@ -1,0 +1,29 @@
+.topBar {
+  // background-color: pink;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 1rem;
+  margin: 0;
+  height: 4rem;
+  align-items: center;
+
+  h1 {
+    margin-right: auto;
+  }
+
+  .iconButton {
+    flex-grow: 0;
+    flex-shrink: 0;
+    & > .iconButton_icon {
+      height: 1rem;
+      width: auto;
+    }
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  .avatar {
+    margin-right: 1rem;
+  }
+}
