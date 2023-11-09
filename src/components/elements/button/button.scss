@@ -1,0 +1,11 @@
+@use "/components/styles/modules/colors";
+
+.button {
+  color: colors.$pureWhite;
+  border-radius: 0;
+  line-height: 2;
+  padding: 5px 3rem;
+  background-color: colors.$pureBlack;
+  border: 0;
+  cursor: pointer;
+}

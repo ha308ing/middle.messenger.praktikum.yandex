@@ -1,0 +1,15 @@
+.threadMember {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  .avatar {
+    margin-right: 1rem;
+  }
+  .threadMember_login {
+    margin-right: auto;
+  }
+  .iconButton_icon {
+    height: 1rem;
+    width: auto;
+  }
+}

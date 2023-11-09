@@ -1,0 +1,26 @@
+$desktopThreshold: 1160px;
+$leftPanel_desktopWidth: 22.5rem;
+
+.leftPanelLayout_container,
+.rightPanel_container,
+.leftPanel_container {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+.leftPanel_container {
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: $desktopThreshold) {
+  .leftPanelLayout_container {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .leftPanel_container {
+    width: $leftPanel_desktopWidth;
+  }
+}

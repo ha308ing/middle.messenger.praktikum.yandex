@@ -1,0 +1,24 @@
+{{#> body }}
+<article class="registrationPage_container bigLogoLayout_container">
+
+  <header class="bigLogoLayout_logo_container">
+    {{> logo }}
+  </header>
+
+  <section class="bigLogoLayout_content_container">
+    <h1 class="heading">Registration</h1>
+    <form action="">
+      <div class="registration_inputs">
+        {{>inputText_login__vertical }}
+        {{>inputText_email__vertical}}
+        {{>inputText_phone__vertical}}
+        {{>inputText_firstName__vertical}}
+        {{>inputText_secondName__vertical}}
+        {{>inputText_password__vertical}}
+        {{>button buttonClass="button__signup" buttonText="Sign up" }}
+      </div>
+    </form>
+  </section>
+
+</article>
+{{/body}}

@@ -1,0 +1,27 @@
+{{#>threadsLayout}}
+<div class="rightPanel_content threadList__active">
+
+  <section class="profile">
+    <header>
+      {{#> topBar backButton=true exitButton=true passwordChangeButton=true editButton=true}}
+        <h2 class="topBar_heading">{{topBarHeading}}</h2>
+      {{/topBar}}
+
+      <div class="avatarContainer">
+        {{>avatarProfile}}
+      </div>
+
+      <h3 class="heading_login">&lt;Login&gt;</h3>
+    </header>
+
+    <div class="inputsContainer">
+      <form>
+        {{> @partial-block }}
+      </form>
+    </div>
+
+    {{> button buttonClass=saveButtonClasses buttonText="Save" }}
+  </section>
+
+</div>
+{{/threadsLayout}}

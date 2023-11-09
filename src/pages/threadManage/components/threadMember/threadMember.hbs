@@ -1,0 +1,14 @@
+<div class="threadMember" data-login="{{login}}">
+
+  {{> avatar }}
+
+  <div class="threadMember_login">{{login}}</div>
+  {{#if isMember}}
+    {{>iconButton iconButtonClass="button_removeMember" iconButtonIcon=iconClose }}
+    {{!-- {{>iconButton_close}} --}}
+  {{else}}
+    {{>iconButton iconButtonClass="button_inviteMember" iconButtonIcon=iconInvite}}
+    {{!-- {{>iconButton_invite}} --}}
+  {{/if}}
+
+</div>

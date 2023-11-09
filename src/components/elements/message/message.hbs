@@ -1,0 +1,34 @@
+<div
+  class="message
+    {{#if sender}}
+      message__incoming
+    {{else}}
+      message__outgoing
+    {{/if}}"
+>
+
+<div class="message_sender">
+  {{#if sender}}
+    {{ sender }}:
+  {{else}}
+    Me:
+  {{/if}}
+</div>
+
+<div class="message_content">
+  {{text}}
+</div>
+
+{{#with attachments.images}}
+  <div class="message_attachment message_attachment__images">
+    {{#each this}}
+      {{> attachment attachmentSrc=this }}
+    {{/each}}
+  </div>
+{{/with}}
+
+<div class="message_timestamp">
+  {{ time }}
+</div>
+
+</div>

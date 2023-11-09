@@ -1,0 +1,12 @@
+@use "/components/styles/modules/leftPanelLayout";
+
+.rightPanel_container {
+  display: none;
+}
+
+@media screen and (min-width: leftPanelLayout.$desktopThreshold) {
+  .rightPanel_container {
+    display: flex;
+    flex-grow: 1;
+  }
+}
