@@ -1,5 +1,6 @@
 <button
   class="button {{buttonClass}}"
   onclick="{{buttonClick}}"
-  type="button"
+  type="{{#if buttonType}}{{buttonType}}{{else}}button{{/if}}"
+  {{#if disabled}}disabled{{/if}}
 >{{buttonText}}</button>
