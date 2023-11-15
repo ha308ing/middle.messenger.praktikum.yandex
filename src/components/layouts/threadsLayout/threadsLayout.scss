@@ -26,6 +26,7 @@ $threadList_search_max-width: 300px;
 .threadList_search {
   text-align: center;
   margin-bottom: 1rem;
+
   & > input {
     max-width: $threadList_search_max-width;
     width: 80%;
@@ -48,9 +49,6 @@ $threadList_search_max-width: 300px;
 
 @media screen and (min-width: leftPanelLayout.$desktopThreshold) {
   .button_startThread {
-    left: calc(
-      leftPanelLayout.$leftPanel_desktopWidth / 2 - $button_startThread_width /
-        2
-    );
+    left: calc(leftPanelLayout.$leftPanel_desktopWidth / 2 - $button_startThread_width / 2);
   }
 }

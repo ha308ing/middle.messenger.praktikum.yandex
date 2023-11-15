@@ -8,6 +8,7 @@ $leftPanel_desktopWidth: 22.5rem;
   position: relative;
   width: 100%;
 }
+
 .leftPanel_container {
   overflow: hidden;
   display: flex;
@@ -20,6 +21,7 @@ $leftPanel_desktopWidth: 22.5rem;
     display: flex;
     flex-flow: row nowrap;
   }
+
   .leftPanel_container {
     width: $leftPanel_desktopWidth;
   }

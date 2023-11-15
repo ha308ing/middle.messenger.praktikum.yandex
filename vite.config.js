@@ -34,10 +34,7 @@ export default defineConfig({
         threadActive: resolve(__dirname, "src/pages/threadActive/index.html"),
         threadManage: resolve(__dirname, "src/pages/threadManage/index.html"),
         profile: resolve(__dirname, "src/pages/profile/index.html"),
-        passwordChange: resolve(
-          __dirname,
-          "src/pages/passwordChange/index.html"
-        ),
+        passwordChange: resolve(__dirname, "src/pages/passwordChange/index.html"),
         404: resolve(__dirname, "src/pages/404/index.html"),
         "5xx": resolve(__dirname, "src/pages/5xx/index.html"),
       },

@@ -10,6 +10,4 @@ const authorizationPageContext = {
   rootClass: "page authorizationPage bigLogoLayout",
 };
 
-document.body.innerHTML = Handlebars.compile(authorizationTemplateString)(
-  authorizationPageContext
-);
+document.body.innerHTML = Handlebars.compile(authorizationTemplateString)(authorizationPageContext);

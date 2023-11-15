@@ -50,6 +50,4 @@ const threadActiveContext = {
   ],
 };
 
-document.body.innerHTML = Handlebars.compile(threadActiveTemplateString)(
-  threadActiveContext
-);
+document.body.innerHTML = Handlebars.compile(threadActiveTemplateString)(threadActiveContext);

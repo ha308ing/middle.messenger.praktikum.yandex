@@ -6,9 +6,19 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  .errorPage_message_header {
+    font-size: 4rem;
+  }
+
+  .errorPage_message_description {
+    font-size: 1rem;
+  }
+
   & > .errorPage_message_header {
     margin-bottom: 2rem;
   }
+
   & > .errorPage_message_description {
     margin-bottom: 4rem;
   }
@@ -16,12 +26,4 @@
 
 .bigLogoLayout_logo_container {
   display: none;
-}
-
-.errorPage_message_header {
-  font-size: 4rem;
-}
-
-.errorPage_message_description {
-  font-size: 1rem;
 }

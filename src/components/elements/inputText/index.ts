@@ -89,10 +89,7 @@ const inputs = {
 };
 
 Object.entries(inputs).forEach(([key, values]) => {
-  Handlebars.registerPartial(
-    `inputText_${key}`,
-    Handlebars.compile(inputTextTemplateString)(values)
-  );
+  Handlebars.registerPartial(`inputText_${key}`, Handlebars.compile(inputTextTemplateString)(values));
   Handlebars.registerPartial(
     `inputText_${key}__vertical`,
     Handlebars.compile(inputTextTemplateString)({ ...values, vertical: true })

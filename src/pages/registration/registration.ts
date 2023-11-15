@@ -2,15 +2,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputs = document.querySelectorAll(".inputText_input");
 
   const removeInvalidClass = (input: HTMLElement) => {
-    let inputParent;
-    if (!(inputParent = input.parentElement)) return;
-    if (inputParent.classList.contains("inputText__invalid")) {
-      inputParent.classList.remove("inputText__invalid");
+    const inputParent = input.parentElement;
+    if (inputParent == null) return;
+    const inputParentClassList = inputParent.classList;
+    if (inputParentClassList.contains("inputText__invalid")) {
+      inputParentClassList.remove("inputText__invalid");
     }
   };
 
-  inputs.forEach((input) => {
+  inputs.forEach(input => {
     if (!(input instanceof HTMLElement)) return;
-    input.addEventListener("input", () => removeInvalidClass(input));
+    input.addEventListener("input", () => {
+      removeInvalidClass(input);
+    });
   });
 });

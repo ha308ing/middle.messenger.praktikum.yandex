@@ -1,4 +1,5 @@
 @use "/components/styles/modules/leftPanelLayout";
+
 $buttonSaveWidth: 15rem;
 $inputsContainerWidth: 35rem;
 
@@ -16,6 +17,7 @@ $inputsContainerWidth: 35rem;
 
     .topBar {
       margin-bottom: 2rem;
+
       .topBar_heading {
         font-weight: 700;
         margin-right: auto;
@@ -42,6 +44,7 @@ $inputsContainerWidth: 35rem;
     .inputsContainer {
       flex-grow: 1;
       overflow-y: auto;
+
       &_edit {
         padding-bottom: 4rem;
       }
@@ -65,15 +68,13 @@ $inputsContainerWidth: 35rem;
     display: none;
   }
 }
+
 @media screen and (min-width: leftPanelLayout.$desktopThreshold) {
   .profileEditPage,
   .passwordChangePage {
     .rightPanel_content {
       .button_save {
-        left: calc(
-          50vw + leftPanelLayout.$leftPanel_desktopWidth / 2 - $buttonSaveWidth /
-            2
-        );
+        left: calc(50vw + leftPanelLayout.$leftPanel_desktopWidth / 2 - $buttonSaveWidth / 2);
         bottom: 2rem;
       }
 

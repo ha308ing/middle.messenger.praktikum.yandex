@@ -8,6 +8,7 @@
   position: relative;
   white-space: nowrap;
   cursor: pointer;
+
   &::after {
     position: absolute;
     display: block;
@@ -17,6 +18,7 @@
     background-image: gradients.$whiteGreyWhite;
     bottom: 0;
   }
+
   &_active {
     background-image: gradients.$whiteGreyWhite;
   }

@@ -12,7 +12,6 @@ const passwordChangeContext = {
   saveButtonClasses: "button_save button_savePassword",
 };
 
-const page = Handlebars.compile(passwordChangeTemplateString)(
-  passwordChangeContext
-);
+const page = Handlebars.compile(passwordChangeTemplateString)(passwordChangeContext);
+
 document.body.innerHTML = page;

@@ -24,6 +24,4 @@ const threadListContext = {
   threads: new Array(4).fill(threadContext),
 };
 
-document.body.innerHTML = Handlebars.compile(threadListTemplateString)(
-  threadListContext
-);
+document.body.innerHTML = Handlebars.compile(threadListTemplateString)(threadListContext);

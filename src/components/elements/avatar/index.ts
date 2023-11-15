@@ -14,11 +14,5 @@ const avatarThreadContext = {
 };
 
 Handlebars.registerPartial("avatar", avatarTemplateString);
-Handlebars.registerPartial(
-  "avatarProfile",
-  Handlebars.compile(avatarTemplateString)(avatarProfileContext)
-);
-Handlebars.registerPartial(
-  "avatarThread",
-  Handlebars.compile(avatarTemplateString)(avatarThreadContext)
-);
+Handlebars.registerPartial("avatarProfile", Handlebars.compile(avatarTemplateString)(avatarProfileContext));
+Handlebars.registerPartial("avatarThread", Handlebars.compile(avatarTemplateString)(avatarThreadContext));

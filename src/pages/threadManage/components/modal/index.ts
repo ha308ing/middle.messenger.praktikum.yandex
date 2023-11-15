@@ -20,7 +20,4 @@ const contextConfirm = {
 };
 
 Handlebars.registerPartial("modal", modalTemplateString);
-Handlebars.registerPartial(
-  "modalConfirm",
-  Handlebars.compile(modalTemplateString)(contextConfirm)
-);
+Handlebars.registerPartial("modalConfirm", Handlebars.compile(modalTemplateString)(contextConfirm));
