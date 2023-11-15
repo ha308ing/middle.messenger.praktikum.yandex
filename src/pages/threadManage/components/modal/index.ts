@@ -1,7 +1,7 @@
 import modalTemplateString from "/pages/threadManage/components/modal/modal.hbs?raw";
 import Handlebars from "handlebars";
-import "/components/elements/iconButton/index.js";
-import "/components/elements/button/index.js";
+import "/components/elements/iconButton";
+import "/components/elements/button";
 import "/pages/threadManage/components/modal/modal.scss";
 
 const contextConfirm = {

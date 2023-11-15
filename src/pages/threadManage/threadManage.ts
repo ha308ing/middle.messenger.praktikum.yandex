@@ -6,32 +6,36 @@ document.addEventListener("DOMContentLoaded", () => {
     ".threadManage .button__leaveThread"
   );
 
-  const intentToRemoveMember = (login) => () =>
+  const intentToRemoveMember = (login: string) => () =>
     console.log(`intent to remove ${login}`);
-  const intentToInviteMember = (login) => () =>
+
+  const intentToInviteMember = (login: string) => () =>
     console.log(`intent to invite ${login}`);
 
   threadMembers.forEach((m) => {
+    if (!m || !(m instanceof HTMLElement)) return;
     const login = m.dataset["login"];
 
     const buttonRemoveMember = m.querySelector(".button_removeMember");
     const buttonInviteMember = m.querySelector(".button_inviteMember");
 
-    if (buttonRemoveMember) {
+    if (buttonRemoveMember && login) {
       buttonRemoveMember.addEventListener("click", intentToRemoveMember(login));
     }
-    if (buttonInviteMember) {
+
+    if (buttonInviteMember && login) {
       buttonInviteMember.addEventListener("click", intentToInviteMember(login));
     }
   });
 
-  buttonLeaveThread.addEventListener("click", () => {
-    const modal = document.querySelector(
-      ".threadManage .modal_container.modal_confirmLeaveThread.hidden"
-    );
-    console.log(modal);
-    if (modal) {
-      modal.classList.remove("hidden");
-    }
-  });
+  buttonLeaveThread &&
+    buttonLeaveThread.addEventListener("click", () => {
+      const modal = document.querySelector(
+        ".threadManage .modal_container.modal_confirmLeaveThread.hidden"
+      );
+      console.log(modal);
+      if (modal) {
+        modal.classList.remove("hidden");
+      }
+    });
 });

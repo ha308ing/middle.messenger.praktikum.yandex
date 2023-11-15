@@ -1,17 +1,16 @@
 import Handlebars from "handlebars";
 import threadActiveTemplateString from "/pages/threadActive/threadActive.hbs?raw";
-import "/components/layouts/body/index.js";
-import "/components/layouts/threadsLayout/index.js";
-import "/components/elements/topBar/index.js";
-import "/components/elements/message/index.js";
-import "/components/elements/avatar/index.js";
-import "/components/elements/threadListItem/index.js";
-import "/components/elements/button/index.js";
-import "/components/elements/sendBar/index.js";
+import "/components/layouts/body";
+import "/components/layouts/threadsLayout";
+import "/components/elements/topBar";
+import "/components/elements/message";
+import "/components/elements/avatar";
+import "/components/elements/threadListItem";
+import "/components/elements/button";
+import "/components/elements/sendBar";
 import "/pages/threadActive/threadActive.scss";
 import avatarSrc from "/assets/sweater.png";
 import mediaUrl from "/assets/media.png";
-import iconAttach from "/assets/icon_attach.png";
 
 const messages = [
   {

@@ -1,9 +1,9 @@
 import Handlebars from "handlebars";
 import profileTemplateString from "/pages/profile/profile.hbs?raw";
 import "/pages/profile/profile.scss";
-import "/pages/profile/profile.js";
-import "/components/layouts/profileEditTemplate/index.js";
-import "/components/elements/inputText/index.js";
+import "/pages/profile/profile.ts";
+import "/components/layouts/profileEditTemplate";
+import "/components/elements/inputText";
 import avatarSrc from "/assets/sweater.png";
 
 const profileEditContext = {

@@ -1,4 +1,4 @@
-import "/components/layouts/errorPage/index.js";
+import "/components/layouts/errorPage";
 import Handlebars from "handlebars";
 import erroPageTemplateString from "/components/layouts/errorPage/errorPage.hbs?raw";
 

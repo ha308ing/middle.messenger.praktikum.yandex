@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
 import passwordChangeTemplateString from "/pages/passwordChange/passwordChange.hbs?raw";
-import "/components/layouts/profileEditTemplate/index.js";
-import "/components/elements/inputText/index.js";
+import "/components/layouts/profileEditTemplate";
+import "/components/elements/inputText";
 import avatarSrc from "/assets/sweater.png";
 
 const passwordChangeContext = {

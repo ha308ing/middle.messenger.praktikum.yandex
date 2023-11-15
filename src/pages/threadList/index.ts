@@ -1,16 +1,15 @@
 import Handlebars from "handlebars";
-import "/components/layouts/body/index.js";
-import "/components/elements/avatar/index.js";
-import "/components/elements/inputText/index.js";
-import "/components/elements/button/index.js";
-import "/components/elements/threadListItem/index.js";
-import "/components/elements/iconButton/index.js";
-import "/components/elements/topBar/index.js";
+import "/components/layouts/body";
+import "/components/elements/avatar";
+import "/components/elements/inputText";
+import "/components/elements/button";
+import "/components/elements/threadListItem";
+import "/components/elements/iconButton";
+import "/components/elements/topBar";
 import "/pages/threadList/threadList.scss";
 import threadListTemplateString from "/pages/threadList/threadList.hbs?raw";
 import avatarSrc from "/assets/sweater.png";
-import iconAttach from "/assets/icon_attach.png";
-import "/components/layouts/threadsLayout/index.js";
+import "/components/layouts/threadsLayout";
 
 const threadContext = {
   avatarSrc,
