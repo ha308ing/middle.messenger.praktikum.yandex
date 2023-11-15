@@ -1,5 +1,6 @@
 import Handlebars from "handlebars";
 import authorizationTemplateString from "/pages/authorization/authorization.hbs?raw";
+import "/pages/authorization/authorization.ts";
 import "/pages/authorization/authorization.scss";
 import "/components/layouts/body";
 import "/components/elements/logo";
