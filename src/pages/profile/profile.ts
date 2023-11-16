@@ -1,7 +1,11 @@
+import { formValidator } from "../../utils/formValidation";
+
 document.addEventListener("DOMContentLoaded", () => {
   let editMode = true;
-
   updateInputs(editMode);
+
+  const form: HTMLFormElement | null = document.querySelector("form.form_profileEdit");
+  if (form !== null) formValidator(form);
 
   const profileEditButton = document.querySelector(".profile .iconButton_edit");
 

@@ -35,7 +35,7 @@ Object.entries(icons).forEach(([iconName, iconButtonIcon]) => {
   const context = {
     iconButtonIcon,
     iconButtonClick: handler,
-    iconButtonClass: iconButtonName,
+    iconButtonClass: iconName === "send" ? iconButtonName + " button_submit" : iconButtonName,
   };
   const iconButton = Handlebars.compile(iconButtonTemplateString)(context);
   Handlebars.registerPartial(iconButtonName, iconButton);

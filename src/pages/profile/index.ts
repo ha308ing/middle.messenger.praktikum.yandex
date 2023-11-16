@@ -11,7 +11,7 @@ const profileEditContext = {
   avatarSrc,
   login: "<Login>",
   topBarHeading: "My Profile",
-  saveButtonClasses: "button_save button_saveProfile hidden",
+  saveButtonClasses: "button_save button_saveProfile hidden button_submit",
 };
 
 const page = Handlebars.compile(profileTemplateString)(profileEditContext);

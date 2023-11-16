@@ -61,9 +61,13 @@ const inputValidator: Record<string, (string: string) => boolean> = {
   email: emailValidate,
   first_name: nameValidate,
   second_name: nameValidate,
+  display_name: nameValidate,
   password: passwordValidate,
   phone: phoneValidate,
   message: messageValidate,
+  avatar: () => {
+    return true;
+  },
 };
 
 export default inputValidator;

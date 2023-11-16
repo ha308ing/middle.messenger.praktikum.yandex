@@ -6,7 +6,7 @@ const buttonSigninContext = Handlebars.compile(buttonTemplateString)({
   buttonClass: "button_signin button_submit",
   buttonText: "Sign In",
   buttonType: "submit",
-  disabled: true
+  disabled: true,
 });
 
 const buttonSignupContext = Handlebars.compile(buttonTemplateString)({

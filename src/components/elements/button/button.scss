@@ -10,7 +10,8 @@
   cursor: pointer;
 }
 
-.button__disabled, .button:disabled {
+.button__disabled,
+.button:disabled {
   background-color: colors.$pureWhite;
   color: colors.$pureBlack;
   cursor: default;

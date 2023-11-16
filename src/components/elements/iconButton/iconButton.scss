@@ -10,3 +10,13 @@
     width: auto;
   }
 }
+
+.button__disabled,
+.button_submit[disabled] {
+  filter: blur(1px) opacity(60%);
+  cursor: default;
+}
+
+.inputText__invalid::after {
+  display: none;
+}
