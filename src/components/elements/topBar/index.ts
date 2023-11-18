@@ -1,6 +1,9 @@
-import Handlebars from "handlebars";
-import "/components/elements/topBar/topBar.scss";
-import topBarTemplateString from "/components/elements/topBar/topBar.hbs?raw";
-import "/components/elements/iconButton";
+import Component from "@/system/Component";
+import topBarTemplateString from "./topBar.hbs?raw";
+import "./topBar.scss";
 
-Handlebars.registerPartial("topBar", topBarTemplateString);
+export default class TopBar_ extends Component {
+  protected _setTemplate(): string {
+    return topBarTemplateString.trim();
+  }
+}

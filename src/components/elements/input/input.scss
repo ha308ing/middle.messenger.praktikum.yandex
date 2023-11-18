@@ -1,0 +1,53 @@
+@use "@/components/styles/modules/colors";
+@use "@/components/styles/modules/variables";
+
+.input {
+  position: relative;
+}
+
+.input__vertical {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.input_input {
+  border: 0;
+  border-bottom: 2px solid colors.$pureBlack;
+  text-align: center;
+  padding: 6px 0;
+  width: 100%;
+
+  &:focus-visible {
+    outline: 0;
+  }
+}
+
+.input__invalid {
+  & .input_input,
+  &::after {
+    color: colors.$darkBrickRed;
+  }
+
+  &::after {
+    position: absolute;
+    content: "Wrong input";
+    text-align: center;
+    font-size: 0.75rem;
+    width: 100%;
+    bottom: -1.5em;
+  }
+}
+
+.input_file .input_input {
+  border-color: transparent;
+}
+
+.input__readonly .input_input,
+.input[data-readonly] .input_input {
+  border-color: transparent;
+  cursor: default;
+}
+
+.input_label {
+  margin-bottom: 0.5rem;
+}

@@ -1,71 +1,59 @@
-import Handlebars from "handlebars";
-import "/pages/threadManage/threadManage.scss";
-import threadManageTemplateString from "/pages/threadManage/threadManage.hbs?raw";
-import "/components/layouts/body";
-import "/components/layouts/threadsLayout";
-import "/components/elements/topBar";
-import "/components/elements/avatar";
-import "/components/elements/button";
-import "/components/elements/inputText";
-import "/components/elements/threadListItem";
-import "/pages/threadManage/components/threadMember";
-import "/pages/threadManage/components/modal";
-import "/pages/threadManage/threadManage.ts";
-import avatarSrc from "/assets/sweater.png";
-import iconClose from "/assets/icon_close.png";
-import iconInvite from "/assets/icon_invite.png";
+import Component from "@/system/Component";
+import threadManageTemplateString from "./threadManage.hbs?raw";
+import "./threadManage.scss";
+import { createThreadLayout } from "@/pages/threadList";
+import { createIconButtonBack } from "@/components/elements/iconButton";
+import TopBar_ from "@/components/elements/topBar";
+import { createAvatarThread } from "@/components/elements/avatar";
+import Input from "@/components/elements/input";
+import { createThreadMember } from "./components/threadMember";
+import Button from "@/components/elements/button";
 
-const threadMembers = [
-  {
-    avatarSrc,
-    login: "<User 1>",
-    isMember: true,
-  },
-  {
-    avatarSrc,
-    login: "<User 2>",
-    isMember: true,
-  },
-  {
-    avatarSrc,
-    login: "<User 1>",
-    isMember: true,
-  },
-  {
-    avatarSrc,
-    login: "<found user not in thread>",
-    isMember: false,
-  },
-];
+export default class ThreadManageLayout_ extends Component {
+  protected _setTemplate(): string {
+    return threadManageTemplateString.trim();
+  }
+}
 
-document.body.innerHTML = Handlebars.compile(threadManageTemplateString)({
-  rootClass: "page threadManagePage leftPanelLayout",
-  avatarSrc,
-  login: "<Login>",
-  threadMembers,
-  iconClose,
-  iconInvite,
-  threads: [
-    {
-      avatarSrc,
-      threadTitle: "<Thread title>",
-      threadPreview: "<Thread preview>",
-    },
-    {
-      avatarSrc,
-      threadTitle: "<Thread title>",
-      threadPreview: "<Thread preview>",
-      active: true,
-    },
-    {
-      avatarSrc,
-      threadTitle: "<Thread title>",
-      threadPreview: "<Thread preview>",
-    },
-    {
-      avatarSrc,
-      threadTitle: "<Thread title>",
-      threadPreview: "<Thread preview>",
-    },
-  ],
-});
+const ButtonBack = createIconButtonBack();
+
+const TopBar = new TopBar_(
+  "nav",
+  {
+    threadTitle: "Thread title",
+    content: [createAvatarThread(), `<h1>{{threadTitle}}</h1>`],
+    backButton: ButtonBack,
+  },
+  "topBar"
+);
+
+const InputFindUser = new Input(
+  "div",
+  {
+    class: "findUser",
+    type: "text",
+    placeholder: "Find user",
+  },
+  "searchContainer"
+);
+
+const member1 = createThreadMember();
+const member2 = createThreadMember({ login: "User2" });
+const member3 = createThreadMember({ login: "User3" });
+const member4 = createThreadMember({ login: "User4", isMember: false });
+const threadMembers = [member1, member2, member3, member4];
+
+const ButtonLeaveThread = new Button("button", { buttonText: "Leave thread" }, "button button__leaveThread");
+
+export const ThreadManageLayout = new ThreadManageLayout_(
+  "section",
+  {
+    TopBar,
+    InputFindUser,
+    threadMembers,
+    ButtonLeaveThread,
+  },
+  "rightPanel_content rightPanel_content_manageThread threadList__active"
+);
+
+export const ThreadManage = createThreadLayout({ content: ThreadManageLayout, threadActive: true });

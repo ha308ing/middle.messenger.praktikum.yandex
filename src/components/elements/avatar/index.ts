@@ -1,18 +1,33 @@
-import Handlebars from "handlebars";
-import avatarTemplateString from "/components/elements/avatar/avatar.hbs?raw";
-import "/components/elements/avatar/avatar.scss";
-import sweaterImage from "/assets/sweater.png";
+import Component, { type Props } from "@/system/Component";
+import sweaterImage from "@/assets/sweater.png";
+import "./avatar.scss";
 
-const avatarProfileContext = {
-  avatarSrc: sweaterImage,
-  avatarClass: "avatar_profile",
-};
+export default class Avatar extends Component {
+  _setTemplate() {
+    return " ";
+  }
+}
 
-const avatarThreadContext = {
-  avatarSrc: sweaterImage,
-  avatarClass: "avatar_thread",
-};
+export function createAvatarProfile(props: Props = {}, persistClass = "") {
+  return new Avatar(
+    "img",
+    {
+      src: sweaterImage,
+      class: "avatar avatar_profile",
+      ...props,
+    },
+    persistClass
+  );
+}
 
-Handlebars.registerPartial("avatar", avatarTemplateString);
-Handlebars.registerPartial("avatarProfile", Handlebars.compile(avatarTemplateString)(avatarProfileContext));
-Handlebars.registerPartial("avatarThread", Handlebars.compile(avatarTemplateString)(avatarThreadContext));
+export function createAvatarThread(props: Props = {}, persistClass = "") {
+  return new Avatar(
+    "img",
+    {
+      src: sweaterImage,
+      class: "avatar avatar_thread",
+      ...props,
+    },
+    persistClass
+  );
+}

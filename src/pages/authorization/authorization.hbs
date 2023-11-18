@@ -1,5 +1,29 @@
-{{#> body }}
+{{!-- {{#> body }} --}}
 <article class="authorizationPage_container bigLogoLayout_container">
+
+  <header class="bigLogoLayout_logo_container">
+    {{{ logo }}}
+  </header>
+
+  <section class="bigLogoLayout_content_container">
+    {{{form}}}
+  </section>
+
+</article>
+{{!-- {{/body}} --}}
+
+{{!-- rootClass = page authorizationPage bigLogoLayout --}}
+
+{{!-- <body>
+  <main class="{{rootClass}}">
+    {{> @partial-block }}
+  </main>
+</body>
+ --}}
+
+ {{!--
+
+ <article class="authorizationPage_container bigLogoLayout_container">
 
   <header class="bigLogoLayout_logo_container">
     {{> logo }}
@@ -15,4 +39,5 @@
   </section>
 
 </article>
-{{/body}}
+
+  --}}

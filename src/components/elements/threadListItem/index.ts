@@ -1,5 +1,13 @@
-import Handlebars from "handlebars";
-import "/components/elements/threadListItem/threadListItem.scss";
-import threadListItemTemplateString from "/components/elements/threadListItem/threadListItem.hbs?raw";
+import Component, { type Props } from "@/system/Component";
+import threadListItemTemplateString from "./threadListItem.hbs?raw";
+import "./threadListItem.scss";
 
-Handlebars.registerPartial("threadListItem", threadListItemTemplateString);
+export default class ThreadListItem_ extends Component {
+  protected _setTemplate(): string {
+    return threadListItemTemplateString.trim();
+  }
+}
+
+export function createThreadListItem(props: Props = {}) {
+  return new ThreadListItem_("li", { ...props }, "threadListItem");
+}

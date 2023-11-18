@@ -1,6 +1,6 @@
-import "/components/layouts/errorPage";
 import Handlebars from "handlebars";
-import errorPageTemplateString from "/components/layouts/errorPage/errorPage.hbs?raw";
+import "@/components/layouts/errorPage";
+import errorPageTemplateString from "@/components/layouts/errorPage/errorPage.hbs?raw";
 
 const pageContext = {
   rootClass: "page errorPage errorPage_5xx bigLogoLayout",

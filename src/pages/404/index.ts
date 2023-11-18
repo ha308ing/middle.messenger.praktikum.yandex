@@ -1,6 +1,6 @@
-import "/components/layouts/errorPage";
 import Handlebars from "handlebars";
-import erroPageTemplateString from "/components/layouts/errorPage/errorPage.hbs?raw";
+import "@/components/layouts/errorPage";
+import errorPageTemplateString from "@/components/layouts/errorPage/errorPage.hbs?raw";
 
 const pageContext = {
   rootClass: "page errorPage errorPage_404 bigLogoLayout",
@@ -10,6 +10,6 @@ const pageContext = {
   onclick: "console.log('errorPage button clicked')",
 };
 
-const page = Handlebars.compile(erroPageTemplateString);
+const page = Handlebars.compile(errorPageTemplateString);
 
 document.body.innerHTML = page(pageContext);

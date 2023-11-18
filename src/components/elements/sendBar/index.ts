@@ -1,8 +1,9 @@
-import Handlebars from "handlebars";
-import sendBarTemplateString from "/components/elements/sendBar/sendBar.hbs?raw";
-import "/components/elements/sendBar/sendBar.ts";
-import "/components/elements/sendBar/sendBar.scss";
-import "/components/elements/iconButton";
-import "/components/elements/inputText";
+import Component from "@/system/Component";
+import sendBarTemplateString from "./sendBar.hbs?raw";
+import "./sendBar.scss";
 
-Handlebars.registerPartial("sendBar", sendBarTemplateString);
+export default class SendBar_ extends Component {
+  protected _setTemplate(): string {
+    return sendBarTemplateString.trim();
+  }
+}

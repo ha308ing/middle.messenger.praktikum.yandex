@@ -1,19 +1,18 @@
-import buttonTemplateString from "./button.hbs?raw";
-import Handlebars from "handlebars";
+import Component from "@/system/Component";
 import "./button.scss";
 
-const buttonSigninContext = Handlebars.compile(buttonTemplateString)({
-  buttonClass: "button_signin button_submit",
-  buttonText: "Sign In",
-  buttonType: "submit",
-  disabled: true,
-});
+export default class Button extends Component {
+  protected _setTemplate(): string {
+    return `{{buttonText}}`;
+  }
+}
 
-const buttonSignupContext = Handlebars.compile(buttonTemplateString)({
-  buttonClass: "button_signup",
+export const ButtonSubmitRegistration = new Button("button", {
+  class: "button button_signup button_submit",
   buttonText: "Sign Up",
 });
 
-Handlebars.registerPartial("buttonSignin", buttonSigninContext);
-Handlebars.registerPartial("buttonSignup", buttonSignupContext);
-Handlebars.registerPartial("button", buttonTemplateString);
+export const ButtonCancelRegistration = new Button("button", {
+  class: "button",
+  buttonText: "Cancel",
+});

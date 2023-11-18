@@ -1,53 +1,84 @@
-import Handlebars from "handlebars";
-import threadActiveTemplateString from "/pages/threadActive/threadActive.hbs?raw";
-import "/components/layouts/body";
-import "/components/layouts/threadsLayout";
-import "/components/elements/topBar";
-import "/components/elements/message";
-import "/components/elements/avatar";
-import "/components/elements/threadListItem";
-import "/components/elements/button";
-import "/components/elements/sendBar";
-import "/pages/threadActive/threadActive.scss";
-import avatarSrc from "/assets/sweater.png";
-import mediaUrl from "/assets/media.png";
+import Component from "@/system/Component";
+import threadActiveTemplateString from "./threadActive.hbs?raw";
+import "./threadActive.scss";
+import { createThreadLayout } from "@/pages/threadList";
+import {
+  createIconButtonContextHorizontal,
+  createIconButtonBack,
+  createIconButtonAttach,
+  createIconButtonSend,
+} from "@/components/elements/iconButton";
+import TopBar_ from "@/components/elements/topBar";
+import { createAvatarThread } from "@/components/elements/avatar";
+import SendBar_ from "@/components/elements/sendBar";
+import { createMessageAttachment } from "@/components/elements/message/components/attachment";
+import { createMessage } from "@/components/elements/message";
+import Input from "@/components/elements/input";
 
-const messages = [
+export default class ThreadActiveLayout_ extends Component {
+  protected _setTemplate(): string {
+    return threadActiveTemplateString.trim();
+  }
+}
+
+const ButtonContext = createIconButtonContextHorizontal();
+const ButtonBack = createIconButtonBack();
+
+const TopBar = new TopBar_(
+  "nav",
   {
-    sender: "<Thread user 1>",
-    text: "Lorem ipsum dolor sit amet consectetur. In massa tempus fusce nunc pellentesque vestibulum suscipit ut. Turpis eget porttitor ac aenean pellentesque tempor parturient facilisis. Sed orci gravida facilisis posuere orci lectus pellentesque ut pharetra. Turpis quis diam nisi vel arcu pretium proin. Et in viverra tincidunt faucibus viverra. Sem magna rutrum nisi id venenatis tincidunt ut nisl. Nisl.",
-    time: "2 January 2005 15:06",
+    threadTitle: "Thread title",
+    content: [createAvatarThread(), `<h1>{{threadTitle}}</h1>`],
+    backButton: ButtonBack,
+    contextButton: ButtonContext,
   },
+  "topBar"
+);
+
+const attachment = createMessageAttachment();
+const message1 = createMessage({
+  sender: "<Thread user 1>",
+  text: "Lorem ipsum dolor sit amet consectetur. In massa tempus fusce nunc pellentesque vestibulum suscipit ut. Turpis eget porttitor ac aenean pellentesque tempor parturient facilisis. Sed orci gravida facilisis posuere orci lectus pellentesque ut pharetra. Turpis quis diam nisi vel arcu pretium proin. Et in viverra tincidunt faucibus viverra. Sem magna rutrum nisi id venenatis tincidunt ut nisl. Nisl.",
+  time: "2 January 2005 15:06",
+});
+const message2 = createMessage({
+  sender: "<Thread user 2>",
+  text: "Lorem ipsum dolor sit amet consectetur. Mollis morbi dui feugiat sociis.",
+  time: "2 January 2005 15:06",
+  attachment,
+});
+const message3 = createMessage({
+  text: "Lorem ipsum dolor sit amet consectetur. Erat vehicula aenean nam mus mi eleifend tempus odio. At erat cursus pharetra nunc. Et tortor turpis pulvinar orci ipsum dolor vel diam suscipit.",
+  time: "3 January 2005 15:26",
+});
+
+const IconButtonAttach = createIconButtonAttach();
+const IconButtonSend = createIconButtonSend();
+const InputMessage = new Input(
+  "div",
   {
-    sender: "<Thread user 2>",
-    text: "Lorem ipsum dolor sit amet consectetur. Mollis morbi dui feugiat sociis.",
-    time: "2 January 2005 15:06",
-    attachments: {
-      images: [mediaUrl],
-    },
+    type: "text",
+    name: "message",
+    placeholder: "Enter message",
   },
+  "input input_message"
+);
+export const SendBar = new SendBar_(
+  "form",
   {
-    text: "Lorem ipsum dolor sit amet consectetur. Erat vehicula aenean nam mus mi eleifend tempus odio. At erat cursus pharetra nunc. Et tortor turpis pulvinar orci ipsum dolor vel diam suscipit.",
-    time: "3 January 2005 15:26",
+    items: [IconButtonAttach, InputMessage, IconButtonSend],
   },
-];
+  "sendBar"
+);
 
-const threadContext = {
-  avatarSrc,
-  threadTitle: "<Thread title>",
-  threadPreview: "<Thread preview>",
-};
+export const ThreadActiveLayout = new ThreadActiveLayout_(
+  "section",
+  {
+    topBar: TopBar,
+    messages: [message1, message2, message3],
+    sendBar: SendBar,
+  },
+  "rightPanel_content threadList__active"
+);
 
-const threadActiveContext = {
-  rootClass: "page threadActivePage leftPanelLayout",
-  messages,
-  avatarSrc,
-  login: "<Login>",
-  threads: [
-    ...new Array(3).fill(threadContext),
-    { ...threadContext, active: true },
-    ...new Array(4).fill(threadContext),
-  ],
-};
-
-document.body.innerHTML = Handlebars.compile(threadActiveTemplateString)(threadActiveContext);
+export const ThreadActive = createThreadLayout({ content: ThreadActiveLayout, threadActive: true });

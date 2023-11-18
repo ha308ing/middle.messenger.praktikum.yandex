@@ -1,9 +1,17 @@
-{{#> profileEdit}}
-  {{>inputText_login__vertical__readonly}}
-  {{>inputText_email__vertical__readonly}}
-  {{>inputText_phone__vertical__readonly}}
-  {{>inputText_displayName__vertical__readonly}}
-  {{>inputText_firstName__vertical__readonly}}
-  {{>inputText_secondName__vertical__readonly}}
-  {{>inputText_avatar__vertical__readonly}}
-{{/profileEdit}}
+
+  <section class="profile">
+    <header>
+      {{{TopBar}}}
+
+      <div class="avatarContainer">
+        {{{Avatar}}}
+      </div>
+
+      <h3 class="heading_login">{{login}}</h3>
+    </header>
+
+    <div class="inputsContainer">
+      {{{FormProfile}}}
+    </div>
+
+  </section>

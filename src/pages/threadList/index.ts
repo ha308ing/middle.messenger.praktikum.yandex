@@ -1,27 +1,145 @@
-import Handlebars from "handlebars";
-import "/components/layouts/body";
-import "/components/elements/avatar";
-import "/components/elements/inputText";
-import "/components/elements/button";
-import "/components/elements/threadListItem";
-import "/components/elements/iconButton";
-import "/components/elements/topBar";
-import "/pages/threadList/threadList.scss";
-import threadListTemplateString from "/pages/threadList/threadList.hbs?raw";
-import avatarSrc from "/assets/sweater.png";
-import "/components/layouts/threadsLayout";
+import Component from "@/system/Component";
+import threadsLayoutTemplateString from "./threadList.hbs?raw";
+import "./threadList.scss";
+import TopBar_ from "@/components/elements/topBar";
+import { createIconButtonContextVertical } from "@/components/elements/iconButton";
+import { createAvatarProfile } from "@/components/elements/avatar";
+import Input from "@/components/elements/input";
+import { createThreadListItem } from "@/components/elements/threadListItem";
+import Button from "@/components/elements/button";
 
-const threadContext = {
-  avatarSrc,
-  threadTitle: "<Thread title>",
-  threadPreview: "<Thread preview>",
-};
+export default class ThreadsLayout extends Component {
+  protected _setTemplate(): string {
+    return threadsLayoutTemplateString.trim();
+  }
+}
 
-const threadListContext = {
-  rootClass: "page threadListPage leftPanelLayout",
-  avatarSrc,
-  login: "<Login>",
-  threads: new Array(4).fill(threadContext),
-};
+const IconButtonContext = createIconButtonContextVertical({
+  click: () => {
+    console.log("context clicked");
+  },
+});
 
-document.body.innerHTML = Handlebars.compile(threadListTemplateString)(threadListContext);
+const TopBar = new TopBar_(
+  "nav",
+  {
+    login: "Username",
+    content: [createAvatarProfile(), `<h1>{{login}}</h1>`],
+    contextButton: IconButtonContext,
+  },
+  "topBar"
+);
+
+const ThreadListSearchInput = new Input(
+  "div",
+  {
+    type: "search",
+    id: "search",
+    name: "search",
+    placeholder: "Search",
+  },
+  "threadList_search"
+);
+
+const thread1 = createThreadListItem({
+  threadTitle: "Thread title 1",
+  threadPreview: "Thread Preview 1",
+  avatar: createAvatarProfile(),
+});
+const thread2 = createThreadListItem({
+  threadTitle: "Thread title 2",
+  threadPreview: "Thread Preview 2",
+  avatar: createAvatarProfile(),
+});
+const thread3 = createThreadListItem({
+  threadTitle: "Thread title 3",
+  threadPreview: "Thread Preview 3",
+  avatar: createAvatarProfile(),
+});
+const thread4 = createThreadListItem({
+  threadTitle: "Thread title 4",
+  threadPreview: "Thread Preview 4",
+  avatar: createAvatarProfile(),
+});
+const thread5 = createThreadListItem({
+  threadTitle: "Thread title 5",
+  threadPreview: "Thread Preview 5",
+  avatar: createAvatarProfile(),
+});
+
+const ButtonStartThread = new Button("button", { buttonText: "Start a thread" }, "button button_startThread");
+
+export const ThreadList = new ThreadsLayout(
+  "div",
+  {
+    topBar: TopBar,
+    search: ThreadListSearchInput,
+    threads: [thread1, thread2, thread3, thread4, thread5],
+    noThreadsMessage: "<i>you have no threads</i>",
+    button: ButtonStartThread,
+    // content: "content",
+    noContentMessage: "please select a thread",
+  },
+  "threadsPage_container leftPanelLayout_container"
+);
+
+export function createThreadLayout(props: Record<string, unknown>) {
+  return new ThreadsLayout(
+    "div",
+    {
+      topBar: new TopBar_(
+        "nav",
+        {
+          login: "Username",
+          content: [createAvatarProfile(), `<h1>{{login}}</h1>`],
+          contextButton: IconButtonContext,
+        },
+        "topBar"
+      ),
+      search: new Input(
+        "div",
+        {
+          type: "search",
+          id: "search",
+          name: "search",
+          placeholder: "Search",
+        },
+        "threadList_search"
+      ),
+      threads: [
+        createThreadListItem({
+          threadTitle: "Thread title 1",
+          threadPreview: "Thread Preview 1",
+          avatar: createAvatarProfile(),
+        }),
+        createThreadListItem({
+          threadTitle: "Thread title 2",
+          threadPreview: "Thread Preview 2",
+          avatar: createAvatarProfile(),
+          class: props?.threadActive === true ? "threadListItem_active" : "",
+        }),
+        createThreadListItem({
+          threadTitle: "Thread title 3",
+          threadPreview: "Thread Preview 3",
+          avatar: createAvatarProfile(),
+        }),
+        createThreadListItem({
+          threadTitle: "Thread title 4",
+          threadPreview: "Thread Preview 4",
+          avatar: createAvatarProfile(),
+        }),
+        createThreadListItem({
+          threadTitle: "Thread title 5",
+          threadPreview: "Thread Preview 5",
+          avatar: createAvatarProfile(),
+        }),
+      ],
+      noThreadsMessage: "<i>you have no threads</i>",
+      button: new Button("button", { buttonText: "Start a thread" }, "button button_startThread"),
+      // content: "content",
+      noContentMessage: "please select a thread",
+      ...props,
+    },
+    "threadsPage_container leftPanelLayout_container"
+  );
+}

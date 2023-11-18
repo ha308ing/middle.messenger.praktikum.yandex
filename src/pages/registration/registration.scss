@@ -7,31 +7,39 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-}
 
-.heading {
-  font-weight: normal;
-  font-size: 1.5rem;
-  margin-bottom: 5rem;
-  width: 100%;
-  text-align: center;
-}
+  .heading {
+    font-weight: normal;
+    font-size: 1.5rem;
+    margin-bottom: 5rem;
+    width: 100%;
+    text-align: center;
+  }
 
-.inputText {
-  margin-bottom: 1.5rem;
-  min-width: 16.25rem;
-}
+  .input {
+    margin-bottom: 2rem;
+    min-width: 20rem;
+  }
 
-.button {
-  min-width: 10rem;
-  padding: 5px 3rem;
-  margin: 0 auto;
-}
+  .input_password {
+    margin-bottom: 5rem;
+  }
 
-.registration_inputs {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  max-height: 65vh;
-  overflow: auto;
+  .button {
+    min-width: 16.25rem;
+    padding: 5px 3rem;
+    margin: 0 auto;
+  }
+
+  .button_signup {
+    margin-bottom: 2rem;
+  }
+
+  .form_registration {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    max-height: 65vh;
+    overflow: auto;
+  }
 }

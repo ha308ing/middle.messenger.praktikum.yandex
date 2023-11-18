@@ -1,12 +1,48 @@
-import Handlebars from "handlebars";
-import registrationTemplateString from "/pages/registration/registration.hbs?raw";
-import "/pages/registration/registration.scss";
-import "/pages/registration/registration.ts";
-import "/components/layouts/body";
-import "/components/elements/logo";
-import "/components/elements/inputText";
-import "/components/elements/button";
+import Component from "@/system/Component";
+import registrationPageTemplateString from "./registration.hbs?raw";
+import "./registration.scss";
+import DefaultLogo from "@/components/elements/logo";
+import { createForm } from "@/components/elements/form";
+import {
+  createInputLogin,
+  createInputEmail,
+  createInputPhone,
+  createInputFirstName,
+  createInputSecondName,
+  createInputPassword,
+} from "@/components/elements/input";
+import { ButtonSubmitRegistration, ButtonCancelRegistration } from "@/components/elements/button";
 
-document.body.innerHTML = Handlebars.compile(registrationTemplateString)({
-  rootClass: "page registrationPage bigLogoLayout",
-});
+export default class RegistrationPage_ extends Component {
+  protected _setTemplate(): string {
+    return registrationPageTemplateString.trim();
+  }
+}
+
+export const LogoRegistation = new DefaultLogo();
+
+const InputLogin = createInputLogin();
+const InputEmail = createInputEmail();
+const InputPhone = createInputPhone();
+const InputFirstName = createInputFirstName();
+const InputSecondName = createInputSecondName();
+const InputPassword = createInputPassword();
+
+const FormRegistration = createForm(
+  {
+    inputs: [InputLogin, InputEmail, InputPhone, InputFirstName, InputSecondName, InputPassword],
+    buttons: [ButtonSubmitRegistration, ButtonCancelRegistration],
+  },
+  "form form_registration registration_inputs"
+);
+
+export const RegistrationPage = new RegistrationPage_(
+  "main",
+  {
+    logo: LogoRegistation,
+    form: FormRegistration,
+  },
+  "page registrationPage bigLogoLayout"
+);
+
+export const RegistrationPageContent = RegistrationPage.content;

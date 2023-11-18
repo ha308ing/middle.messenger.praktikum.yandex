@@ -24,7 +24,8 @@ body {
   padding: 0;
 }
 
-.page {
+.page,
+#app {
   font-family: "Open Sans", sans-serif;
   background-color: colors.$pureWhite;
   width: 100vw;
