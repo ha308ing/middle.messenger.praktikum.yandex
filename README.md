@@ -37,16 +37,7 @@ _Sweater is a messenger that will make you sweat._
 
 ## Pages (links to netlify)
 
-- Index with links to all pages [link](https://tangerine-panda-5ff950.netlify.app/)
-- Authorization [link](https://tangerine-panda-5ff950.netlify.app/pages/authorization/)
-- Registration [link](https://tangerine-panda-5ff950.netlify.app/pages/registration/)
-- List of threads [link](https://tangerine-panda-5ff950.netlify.app/pages/threadList/)
-- Active thread [link](https://tangerine-panda-5ff950.netlify.app/pages/threadActive/)
-- Manage thread [link](https://tangerine-panda-5ff950.netlify.app/pages/threadManage/)
-- User profile [link](https://tangerine-panda-5ff950.netlify.app/pages/profile/)
-- Change password [link](https://tangerine-panda-5ff950.netlify.app/pages/passwordchange/)
-- 404 [link](https://tangerine-panda-5ff950.netlify.app/pages/404/)
-- 5xx [link](https://tangerine-panda-5ff950.netlify.app/pages/5xx/)
+- Index page [link](https://tangerine-panda-5ff950.netlify.app/)
 
 ## Prototype
 
