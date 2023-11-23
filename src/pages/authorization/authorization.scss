@@ -1,26 +1,29 @@
+@use "@/components/styles/modules/variables";
 @use "/components/styles/modules/bigLogoLayout";
 
-$button_width: 15rem;
+.authorizationPage {
+  .input {
+    width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.inputText {
-  width: 20rem;
-}
+  .input_login {
+    margin-bottom: 2rem;
+  }
 
-.inputText_login {
-  margin-bottom: 2rem;
-}
+  .input_password {
+    margin-bottom: 5rem;
+  }
 
-.inputText_password {
-  margin-bottom: 5rem;
-}
+  .button_signin,
+  .button_signup {
+    display: block;
+    width: variables.$button_width;
+    margin: 0 auto;
+  }
 
-.button_signin,
-.button_signup {
-  display: block;
-  width: $button_width;
-  margin: 0 auto;
-}
-
-.button_signin {
-  margin-bottom: 2rem;
+  .button_signin {
+    margin-bottom: 2rem;
+  }
 }

@@ -30,9 +30,11 @@
 
 .message__outgoing {
   position: relative;
+
   .message_sender {
     position: absolute;
   }
+
   .message_content {
     padding: 0 1rem 0 3rem;
   }

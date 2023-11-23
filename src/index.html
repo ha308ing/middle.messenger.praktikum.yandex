@@ -1,18 +1,4 @@
 {{#>layouts/index/index}}
-<main style="width: 500px; margin: 150px auto">
-  <article>
-    <h1 style="text-align: center">{{title}}</h1>
-    <p>The idea is that each user is a filament.</p>
-    <p>Filaments interweave to threads.</p>
-    <p>And threads form Sweater.</p>
-    <p>Also Sweater contains 'sweat' to refer to hot debate.</p>
-    <nav>
-      <ul style="line-height: 2">
-        {{#each pages }}
-        <li><a href="{{@key}}">{{this.title}}</a></li>
-        {{/each }}
-      </ul>
-    </nav>
-  </article>
-</main>
+  <main id="app"></main>
+  <aside id="navigator"></aside>
 {{/layouts/index/index}}

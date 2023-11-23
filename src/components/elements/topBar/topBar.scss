@@ -13,10 +13,12 @@
   .iconButton {
     flex-grow: 0;
     flex-shrink: 0;
+
     & > .iconButton_icon {
       height: 1rem;
       width: auto;
     }
+
     &:not(:last-child) {
       margin-right: 1rem;
     }

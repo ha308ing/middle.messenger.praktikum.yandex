@@ -1,5 +1,4 @@
-$desktopThreshold: 1160px;
-$leftPanel_desktopWidth: 22.5rem;
+@use "@/components/styles/modules/variables";
 
 .leftPanelLayout_container,
 .rightPanel_container,
@@ -8,6 +7,7 @@ $leftPanel_desktopWidth: 22.5rem;
   position: relative;
   width: 100%;
 }
+
 .leftPanel_container {
   overflow: hidden;
   display: flex;
@@ -15,12 +15,13 @@ $leftPanel_desktopWidth: 22.5rem;
   flex-shrink: 0;
 }
 
-@media screen and (min-width: $desktopThreshold) {
+@media screen and (min-width: variables.$desktopThreshold) {
   .leftPanelLayout_container {
     display: flex;
     flex-flow: row nowrap;
   }
+
   .leftPanel_container {
-    width: $leftPanel_desktopWidth;
+    width: variables.$leftPanel_desktopWidth;
   }
 }

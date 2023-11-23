@@ -1,21 +1,15 @@
-{{#>threadsLayout}}
-  <section class="rightPanel_content threadList__active">
-    <header>
-      {{#> topBar contextButton=true }}
-        {{>iconButton_back}}
-        {{>avatarThread}}
-        <h1>&lt;Thread title&gt;</h1>
-      {{/topBar}}
-    </header>
+<header>
+  {{{topBar}}}
+</header>
 
-    <section class="messages_container">
-      <div class="messages">
-        {{#each messages}}
-          {{> message }}
-        {{/each}}
-      </div>
+<section class="messages_container">
+  <div class="messages">
+    {{#if messages}}
+    {{{messages}}}
+    {{else}}
+    no messages
+    {{/if}}
+  </div>
 
-    {{> sendBar }}
-    </section>
-  </section>
-{{/threadsLayout}}
+{{{sendBar}}}
+</section>

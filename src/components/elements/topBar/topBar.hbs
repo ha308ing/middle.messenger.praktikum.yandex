@@ -1,24 +1,21 @@
-<nav class="topBar">
-  {{#if backButton }}
-    {{> iconButton_back }}
-  {{/if}}
+{{#if backButton }}
+  {{{backButton}}}
+{{/if}}
 
+{{{content}}}
 
-  {{> @partial-block }}
+{{#if contextButton }}
+  {{{ contextButton }}}
+{{/if}}
 
-  {{#if contextButton }}
-    {{> iconButton_context_horizontal }}
-  {{/if}}
+{{#if passwordChangeButton }}
+  {{{passwordChangeButton}}}
+{{/if}}
 
-  {{#if passwordChangeButton }}
-    {{> iconButton_password }}
-  {{/if}}
+{{#if editButton }}
+  {{{editButton}}}
+{{/if}}
 
-  {{#if editButton }}
-    {{> iconButton_edit }}
-  {{/if}}
-
-  {{#if exitButton }}
-    {{> iconButton_exit }}
-  {{/if}}
-</nav>
+{{#if exitButton }}
+  {{{exitButton}}}
+{{/if}}
