@@ -1,0 +1,112 @@
+@use "@/components/styles/modules/variables";
+@use "@/components/styles/modules/leftPanelLayout";
+
+.threadManage {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .topBar {
+    margin-bottom: 2rem;
+    width: 100%;
+    height: 4rem;
+  }
+
+  .avatat {
+    height: 2em;
+    width: auto;
+  }
+
+  .heading {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+    width: 100%;
+  }
+
+  .form_inputsContainer {
+    width: 20rem;
+  }
+
+  .form_threadManage {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    .form_inputsContainer {
+      margin-bottom: 0;
+    }
+  }
+
+  .searchContainer,
+  .titleContainer {
+    margin-bottom: 2rem;
+    width: 100%;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .threadMembersContainer {
+    width: 80vw;
+    padding: 1rem;
+    flex-grow: 1;
+    padding-bottom: 8.5rem;
+    margin: 0 auto;
+    // height: 50vh;
+    overflow-y: auto;
+  }
+
+  .threadMember {
+    margin-bottom: 1rem;
+  }
+
+  .button__leaveThread {
+    position: fixed;
+    bottom: 4rem;
+    width: 16rem;
+    left: calc(50vw - 8rem);
+  }
+
+  .threadMembersList {
+    padding-left: 0;
+  }
+}
+
+/*   .leftPanel_container {
+    display: none;
+  }
+
+  .threadMembersList {
+    list-style: none;
+    padding: 0;
+  }
+} */
+
+@media screen and (min-width: variables.$desktopThreshold) {
+  .threadManage {
+    .button_startThread {
+      left: calc(variables.$leftPanel_desktopWidth / 2 - 15rem / 2);
+    }
+
+    .button__leaveThread {
+      left: calc(50vw + variables.$leftPanel_desktopWidth / 2 - 16rem / 2);
+      bottom: 2rem;
+    }
+
+    .members_container,
+    .title_container {
+      // width: 35rem;
+      margin: 0 auto;
+    }
+
+    .threadMembersContainer {
+      width: 40vw;
+    }
+  }
+
+  /*     .leftPanel_container {
+      display: flex;
+    } */
+}

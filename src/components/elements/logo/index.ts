@@ -1,27 +1,21 @@
 import "./logo.scss";
 import logoImage from "./logo.png";
 import logoTemplateString from "./logo.hbs?raw";
-import Handlebars from "handlebars";
-import Component from "@/system/Component";
+import Component from "@/system/component";
 
-export default class DefaultLogo extends Component {
-  constructor(tag = "div", props = {}) {
-    super(tag, { src: logoImage, alt: "Sweater Messenger", logoText: "Sweater", class: "logo", ...props });
+type LogoProps = {
+  src: string;
+  alt: string;
+  logoText: string;
+  class: string;
+};
+
+export default class Logo extends Component<LogoProps> {
+  constructor(props = {}) {
+    super("div", { src: logoImage, alt: "Sweater Messenger", logoText: "Sweater", class: "logo", ...props });
   }
 
   protected _setTemplate(): string {
     return logoTemplateString.trim();
   }
 }
-
-const logoContext = {
-  logoImage: {
-    src: logoImage,
-    alt: "",
-  },
-  logoText: "Sweater",
-};
-
-const logoTemplateSpec = Handlebars.compile(logoTemplateString);
-const logo = logoTemplateSpec(logoContext);
-Handlebars.registerPartial("logo", logo);

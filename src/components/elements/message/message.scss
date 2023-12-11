@@ -6,9 +6,12 @@
   position: relative;
 
   .message_sender {
+    padding-right: 3rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
     font-size: 0.75rem;
+    display: inline-block;
+    cursor: pointer;
   }
 
   .message_content,

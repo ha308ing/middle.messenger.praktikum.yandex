@@ -1,0 +1,45 @@
+
+  {{!-- <section class="threadManage"> --}}
+{{!--     <header>
+      {{{TopBar}}}
+    </header>
+
+    <article class="title_container">
+{     <header>
+        <h2 class="heading">Thread title</h2>
+      </header>
+
+      <div class="titleContainer">
+        {{{ThreadTitleForm}}}
+      </div>
+    </article>
+ --}}
+
+    <article class="members_container">
+      <header>
+        <div class="searchContainer">
+          {{{FindUserForm}}}
+        </div>
+      </header>
+    </article>
+
+      <section class="threadMembersContainer">
+        {{#if ThreadMembers}}
+          <h2 class="heading">Thread members</h2>
+            <ul class="threadMembersList">
+              {{{ThreadMembers}}}
+            </ul>
+        {{/if}}
+        {{#if FoundUsers}}
+        <h3 class="heading">Found users</h3>
+        <ul class="threadMembersList">
+          {{{FoundUsers}}}
+        </ul>
+        {{/if}}
+    </section>
+
+    {{{ButtonLeaveThread}}}
+
+    {{!-- {{> modalConfirm }} --}}
+    </article>
+  {{!-- </section> --}}

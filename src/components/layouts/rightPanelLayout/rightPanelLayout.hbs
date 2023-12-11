@@ -1,0 +1,11 @@
+  {{!-- <section class="rightPanel_container"> --}}
+
+  <article class="rightPanel_content {{#unless content}}threadList__noActive{{/unless}}">
+    {{#if content}}
+      {{{content}}}
+    {{else}}
+      <span>{{{noContentMessage}}}</span>
+    {{/if}}
+  </article>
+
+  {{!-- </section> --}}

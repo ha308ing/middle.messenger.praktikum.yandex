@@ -1,18 +1,22 @@
 {
-  "env": {"browser": true},
-  "ignorePatterns":["dist/"],
+  "root": true,
+  "env": { "browser": true },
+  "ignorePatterns": ["dist/"],
   "overrides": [
     {
       "files": "./src/**/*.{ts,js}",
       "extends": ["standard-with-typescript", "prettier"],
       "rules": {
-        "@typescript-eslint/explicit-function-return-type":  "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/return-await": "off",
-        "@typescript-eslint/promise-function-async": "off"
+        "@typescript-eslint/promise-function-async": "off",
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/no-floating-promises": "off"
       }
     },
     {
-      "env": {"node": true, "es6": true},
+      "env": { "node": true, "es6": true },
       "extends": ["eslint:recommended"],
       "files": "./*.js",
       "parserOptions": { "project": null, "sourceType": "module", "ecmaVersion": "latest" }

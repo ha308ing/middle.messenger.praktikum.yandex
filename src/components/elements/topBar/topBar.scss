@@ -6,9 +6,21 @@
   height: 4rem;
   align-items: center;
 
-  h1 {
+  .topBar__titleLink {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     margin-right: auto;
+    cursor: pointer;
+
+    & * {
+      pointer-events: none;
+    }
   }
+
+  // h1 {
+  //   margin-right: auto;
+  // }
 
   .iconButton {
     flex-grow: 0;

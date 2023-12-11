@@ -1,27 +1,29 @@
+{{#if text}}
 <div
   class="message
-    {{#if sender}}
-      message__incoming
-    {{else}}
+    {{#if isOutgoing}}
       message__outgoing
+    {{else}}
+      message__incoming
     {{/if}}"
 >
 
-  <div class="message_sender">
-    {{#if sender}}
-      {{ sender }}:
-    {{else}}
-      Me:
-    {{/if}}
-  </div>
+<div class ="message_sender">
+
+    {{#if isOutgoing}}
+    Me:
+{{else}}
+{{sender}}:
+{{/if}}
+</div>
 
   <div class="message_content">
     {{text}}
   </div>
 
-  {{#if attachment}}
+  {{#if attachments}}
     <div class="message_attachment message_attachment__images">
-      {{{attachment}}}
+      {{{attachments}}}
     </div>
   {{/if}}
 
@@ -30,3 +32,14 @@
   </div>
 
 </div>
+{{/if}}
+
+
+
+{{!--   <div class="message_sender">
+    {{#if isOutgoing}}
+      {{{sender}}}:
+    {{else}}
+      Me:
+    {{/if}}
+  </div> --}}
