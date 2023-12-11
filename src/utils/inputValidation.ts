@@ -1,4 +1,4 @@
-import inputValidator from "./inputValidator";
+import inputValidator from "@/utils/inputValidator";
 
 export function inputValidate(input: HTMLInputElement, allowEmpty: boolean = true) {
   const inputName = input.getAttribute("name");

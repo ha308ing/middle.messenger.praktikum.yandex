@@ -68,6 +68,10 @@ const inputValidator: Record<string, (string: string) => boolean> = {
   repeat_password: passwordValidate,
   phone: phoneValidate,
   message: messageValidate,
+  findUser: () => true,
+  setTitle: () => {
+    return true;
+  },
   avatar: () => {
     return true;
   },
