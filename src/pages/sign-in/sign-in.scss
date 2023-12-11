@@ -1,7 +1,15 @@
 @use "@/components/styles/modules/variables";
-@use "/components/styles/modules/bigLogoLayout";
+@use "@/components/styles/modules/bigLogoLayout";
 
-.authorizationPage {
+.bigLogoLayout_content_container .heading {
+  font-weight: normal;
+  font-size: 1.5rem;
+  margin-bottom: 5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.form_authorization {
   .input {
     width: 20rem;
     margin-left: auto;

@@ -30,11 +30,11 @@
   }
 
   .sendBar {
-    position: absolute;
+    // position: absolute;
     bottom: 0;
-    width: 100%;
+    max-width: 40rem;
     padding: 0 1rem;
-    margin-bottom: 2rem;
+    margin: 1rem auto 2rem;
   }
 
   .avatar_thread {
@@ -52,6 +52,11 @@
     margin: auto 3em;
   }
 
+  .emptyThreadMessage {
+    text-align: center;
+    margin-bottom: 35vh;
+  }
+
   @media screen and (min-width: variables.$desktopThreshold) {
     .button_startThread {
       left: calc(variables.$leftPanel_desktopWidth / 2 - 15rem / 2);
@@ -62,13 +67,13 @@
     }
 
     .messages_container {
-      max-width: 40rem;
+      max-width: 35rem;
       margin: auto;
     }
 
-    .sendBar {
+    /*     .sendBar {
       max-width: 45rem;
       left: calc(50vw - variables.$leftPanel_desktopWidth / 2 - 50rem / 2);
-    }
+    } */
   }
 }
