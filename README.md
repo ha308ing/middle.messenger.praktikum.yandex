@@ -1,15 +1,11 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4abdf3ad-280d-4be4-a89a-c669f97d395f/deploy-status?branch=deploy)](https://app.netlify.com/sites/tangerine-panda-5ff950/deploys)
 
-# Sprint 2 Info
-- switched from serving static content built with vite and handlebars
-  to observer/event-bus method to dynamically add and update components
-- instead of multiple pages, only one is used to manage displayed content
-- implemented forms validation and input collection based on a Form component
-- switched to typescript
-- added linters eslint and stylelint with standard configs and prettier formatter
-- added a constructor for network requests
+# Sprint 3 Info
+- connect to a chat api with http and websocket
+- to use external data store, event bus and controllers were used
+- added routing
 
-[![output.gif](https://i.postimg.cc/xdRzL8YZ/output.gif)](https://postimg.cc/LqJ5pHJk)
+[![2023-12-12-043356.gif](https://i.postimg.cc/mrG8HQqg/2023-12-12-043356.gif)](https://postimg.cc/FYDytJNM)
 
 
 # Project Messenger "Sweater"
