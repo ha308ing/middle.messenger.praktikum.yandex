@@ -1,6 +1,5 @@
 import Component from "@/system/component";
 import rightPanelLayoutTemplateString from "./rightPanelLayout.hbs?raw";
-import "./rightPanelLayout.scss";
 
 export type RightPanelProps = {
   content?: any;
