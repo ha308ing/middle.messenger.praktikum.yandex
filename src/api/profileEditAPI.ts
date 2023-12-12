@@ -18,7 +18,7 @@ class ProfileEditAPI extends BaseAPI {
 
       throw new Error(`Send user detailes failed ${JSON.parse(response).reason}`);
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     return null;
   }
@@ -36,7 +36,7 @@ class ProfileEditAPI extends BaseAPI {
       }
       throw new Error(`Avatar upload failed ${JSON.parse(response).reason}`);
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
 
     return null;
