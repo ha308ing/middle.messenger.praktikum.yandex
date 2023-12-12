@@ -54,7 +54,6 @@
     flex-grow: 1;
     padding-bottom: 8.5rem;
     margin: 0 auto;
-    // height: 50vh;
     overflow-y: auto;
   }
 
@@ -74,16 +73,6 @@
   }
 }
 
-/*   .leftPanel_container {
-    display: none;
-  }
-
-  .threadMembersList {
-    list-style: none;
-    padding: 0;
-  }
-} */
-
 @media screen and (min-width: variables.$desktopThreshold) {
   .threadManage {
     .button_startThread {
@@ -97,7 +86,6 @@
 
     .members_container,
     .title_container {
-      // width: 35rem;
       margin: 0 auto;
     }
 
@@ -105,8 +93,4 @@
       width: 40vw;
     }
   }
-
-  /*     .leftPanel_container {
-      display: flex;
-    } */
 }
