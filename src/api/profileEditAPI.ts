@@ -11,13 +11,14 @@ class ProfileEditAPI extends BaseAPI {
       });
 
       const { status, response } = request;
+
       if (status === 200) {
         return JSON.parse(response);
       }
 
-      throw new Error(`Send user detailes failed ${response.reason}`);
+      throw new Error(`Send user detailes failed ${JSON.parse(response).reason}`);
     } catch (e) {
-      console.error(e);
+      alert(e);
     }
     return null;
   }
@@ -33,9 +34,9 @@ class ProfileEditAPI extends BaseAPI {
       if (status === 200) {
         return JSON.parse(response);
       }
-      throw new Error(`Send user detailes failed ${response.reason}`);
+      throw new Error(`Avatar upload failed ${JSON.parse(response).reason}`);
     } catch (e) {
-      console.error(e);
+      alert(e);
     }
 
     return null;
