@@ -42,7 +42,7 @@ export default class WSTransport extends EventBus {
     this.send("ping", "ping");
   }
 
-  getOld(lastMessageId: string) {
+  getOld(lastMessageId = 0) {
     this.socket.send(
       JSON.stringify({
         content: lastMessageId,
@@ -70,10 +70,15 @@ export default class WSTransport extends EventBus {
     });
 
     this.socket.addEventListener("message", event => {
-      const { type, ...message } = JSON.parse(event.data);
-      if (type === "message") {
-        console.log("WS got data:", message);
-        this.emit(WSEvents.newMessage, { type, ...message });
+      const dataParsed = JSON.parse(event.data);
+      if (dataParsed?.type !== "pong" && dataParsed != null) {
+        if (Array.isArray(dataParsed)) {
+          this.emit(WSEvents.newMessage, dataParsed);
+        } else {
+          const dataArray = [];
+          dataArray.push(dataParsed);
+          this.emit(WSEvents.newMessage, dataArray);
+        }
       }
     });
 

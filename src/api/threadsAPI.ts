@@ -129,7 +129,7 @@ class ThreadsAPI extends BaseAPI {
       const { status, response } = request;
 
       const response_ = JSON.parse(response);
-      if (status === 200) return response_;
+      if (status === 200) return response_.token;
       throw new Error(`${status}, ${response_.reason}`);
     } catch (e) {
       console.error("ThradsAPI: getThreadToken failed");

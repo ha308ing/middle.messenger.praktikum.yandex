@@ -55,7 +55,12 @@ export class SendBar extends Component {
 
           const view = document.querySelector(".messages_container");
           if (view != null) view.scrollTo(0, view.scrollHeight);
-          wsController.sendMessage(threadId, message);
+          wsController.sendMessage(threadId, message).then(
+            () => {},
+            rej => {
+              console.error(rej);
+            }
+          );
           input.value = "";
         },
         ...props,

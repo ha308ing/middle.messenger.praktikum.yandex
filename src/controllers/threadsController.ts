@@ -1,6 +1,6 @@
 import UsersAPI from "@/api/usersAPI";
 import avatarFix from "@/utils/avatarFix";
-import ThreadAPI from "@/api/threadsAPI";
+import threadsAPI from "@/api/threadsAPI";
 import { type Thread } from "@/types/types.api";
 import STORE, { StoreEvents } from "@/system/store";
 import router from "@/system/router";
@@ -12,7 +12,7 @@ import router from "@/system/router";
 
 class ThreadsController {
   public async getThreads(offset?: number, limit?: number, title?: string): Promise<Thread[]> {
-    const response = await ThreadAPI.getThreads(offset, limit, title);
+    const response = await threadsAPI.getThreads(offset, limit, title);
     if (response == null) return [];
     return response;
   }
@@ -20,14 +20,14 @@ class ThreadsController {
   // public async saveThreads() {
   public async updateThreads() {
     const threads = await this.getThreads();
-    const threadsFiltered = threads.reduce((res: Thread[], thread: Thread) => {
-      let { avatar, ...other } = thread;
+    const threadsMod: Thread[] = [];
+
+    threads.forEach(thread => {
+      thread.avatar = avatarFix(thread.avatar);
+      threadsMod.push({ ...thread });
       STORE.emit(StoreEvents.gotThread, thread);
-      avatar = avatarFix(avatar);
-      const threadMod = { avatar, ...other };
-      return [...res, threadMod];
-    }, []);
-    STORE.set("threads", threadsFiltered);
+    });
+    STORE.set("threads", threadsMod);
   }
 
   public async createThread() {
@@ -38,7 +38,7 @@ class ThreadsController {
       if (title === null) return null;
     } while (!titleRegexp.test(title));
 
-    const response = await ThreadAPI.createThread(title);
+    const response = await threadsAPI.createThread(title);
 
     if (response == null) {
       alert("Failed to create thread");
@@ -68,7 +68,7 @@ class ThreadsController {
   }
 
   public async addUsers(userId: number, threadId: number) {
-    const response = await ThreadAPI.addUsers(userId, threadId);
+    const response = await threadsAPI.addUsers(userId, threadId);
     if (response === false) return false;
     const users = await this.getThreadUsers(threadId);
     STORE.emit(StoreEvents.updateUsers, users);
@@ -76,7 +76,7 @@ class ThreadsController {
   }
 
   public async getThreadUsers(threadId: number) {
-    const response = await ThreadAPI.getThreadUsers(threadId);
+    const response = await threadsAPI.getThreadUsers(threadId);
 
     if (response === false) return false;
 
@@ -90,7 +90,7 @@ class ThreadsController {
   }
 
   public async removeUsers(userId: number, threadId: number) {
-    const response = await ThreadAPI.removeUsers(userId, threadId);
+    const response = await threadsAPI.removeUsers(userId, threadId);
     if (!response) return false;
     const users = await this.getThreadUsers(threadId);
     STORE.emit(StoreEvents.updateUsers, users);
@@ -98,7 +98,7 @@ class ThreadsController {
   }
 
   public async removeThread(threadId: number) {
-    const response = await ThreadAPI.removeThread(threadId);
+    const response = await threadsAPI.removeThread(threadId);
     if (!response) return false;
     this.updateThreads().then(() => {
       STORE.set("activeThread", null);

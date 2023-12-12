@@ -9,18 +9,16 @@ import router from "@/system/router";
 import PasswordChangePage from "@/pages/password-change";
 import MessengerPage from "@/pages/messenger";
 import ThreadManagePage from "@/pages/thread-manage";
-import threadsAPI from "./api/threadsAPI";
 import wsController from "./controllers/wsController";
 import Error404 from "@/pages/404";
 import Error5xx from "@/pages/5xx";
+import threadsAPI from "./api/threadsAPI";
 
 store.on(StoreEvents.gotThread, threadData => {
   const { id: threadId } = threadData;
-  threadsAPI.getThreadToken(threadId).then(threadTokenObj => {
-    const { token: threadToken } = threadTokenObj;
+  const userId = store.get("user.id");
 
-    const userId = store.get("user.id");
-
+  threadsAPI.getThreadToken(threadId).then(threadToken => {
     wsController.connect(userId, threadId, threadToken).then(
       socket => {
         store.set(`sockets.${threadId}`, socket);
@@ -58,9 +56,10 @@ if (store.get("user")?.id == null) {
   );
 } else {
   console.log(`yes user in store`);
-  router.go("/messenger");
   threadsController.updateThreads().then(
-    () => {},
+    () => {
+      router.go("/messenger");
+    },
     rej => {
       console.error("failed to get threads rej");
       console.error(rej);
