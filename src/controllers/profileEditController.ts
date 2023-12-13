@@ -1,4 +1,3 @@
-import STORE from "@/system/store";
 import ProfileEditAPI from "@/api/profileEditAPI";
 import UserInfoController from "@/controllers/userInfoController";
 import { type User } from "@/types/types.api";
@@ -10,36 +9,23 @@ export class ProfileEditController {
     }
     const { avatar, ...details } = profileEditInput;
 
-    const sendDetails = await ProfileEditAPI.sendDetails(details);
-    if (sendDetails == null) alert("Details edit failed");
-
+    const responseDetails = await ProfileEditAPI.sendDetails(details);
+    let responseAvatar = true;
     if (avatar[0] != null) {
       const avatarFormData = new FormData();
       avatarFormData.set("avatar", avatar[0]);
 
-      const sendAvatar = await ProfileEditAPI.sendAvatar(avatarFormData);
-      if (sendAvatar == null) alert("Avatar upload failed");
+      responseAvatar = await ProfileEditAPI.sendAvatar(avatarFormData);
     }
 
-    if (sendDetails != null) {
+    if (responseDetails != null && responseAvatar != null) {
+      alert("Ok");
       UserInfoController.isLogged();
+    } else if (responseAvatar == null) {
+      alert("Avatar upload failed");
+    } else {
+      alert("Info edit failed");
     }
-  }
-
-  public isCurrentUser(): boolean {
-    const path = window.location.pathname;
-
-    if (STORE.getState().target_user?.id == null) return true;
-    if (STORE.getState().target_user?.id === STORE.getState().user?.id) return true;
-
-    const settingsRegexp = /^\/settings$/;
-    if (settingsRegexp.test(path)) return true;
-    const currentId = STORE.getState().user.id;
-    if (currentId == null) return false;
-    const userRegexp = /\/profile\/(\d+)\/?.*$/;
-    const targetId = path.match(userRegexp);
-    if (targetId == null) return false;
-    return currentId === targetId[1];
   }
 
   public async passwordChange(passwordChangeInput: {

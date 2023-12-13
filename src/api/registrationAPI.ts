@@ -8,8 +8,7 @@ class RegistrationAPI extends BaseAPI {
       headers: { "Content-Type": "application/json" },
     });
     if (status === 200) return "ok";
-    const { reason } = JSON.parse(response);
-    throw new Error(reason);
+    throw new Error(response.reason);
   }
 }
 

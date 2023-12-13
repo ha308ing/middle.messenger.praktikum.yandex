@@ -57,8 +57,7 @@ class ThreadsController {
       alert("Failed to create thread");
       return null;
     }
-    const responseJson = JSON.parse(response);
-    const { id: newThreadId } = responseJson;
+    const { id: newThreadId } = response;
     this.updateThreads().then(
       () => {
         STORE.set("activeThread", newThreadId);
@@ -121,11 +120,13 @@ class ThreadsController {
   public async removeThread(threadId: number) {
     const response = await threadsAPI.removeThread(threadId);
     console.log(response);
-    STORE.set("activeThread", null);
-    router.go("/messenger");
-    this.updateThreads().then(() => {
-      return true;
-    });
+    if (response) {
+      STORE.set("activeThread", null);
+      router.go("/messenger");
+      this.updateThreads().then(() => {
+        return true;
+      });
+    }
   }
 }
 

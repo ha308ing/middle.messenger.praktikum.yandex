@@ -64,13 +64,15 @@ export default class HTTPTransport {
       } else {
         xhr.send();
       }
+      xhr.responseType = "json";
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           resolve(xhr);
         }
       };
-      // xhr.onload = resolve(xhr.re);
+
+      // xhr.onload = resolve(xhr.response);
       xhr.timeout = options.timeout ?? timeout;
       xhr.ontimeout = reject;
       xhr.onabort = reject;

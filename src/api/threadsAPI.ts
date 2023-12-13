@@ -6,14 +6,12 @@ import avatarFix from "@/utils/avatarFix";
 class ThreadsAPI extends BaseAPI {
   public async getThreads(offset = 0, limit = 10, title = ""): Promise<Thread[] | null> {
     try {
-      const request = await this.transporter.get("/chats", {
+      const { status, response } = await this.transporter.get("/chats", {
         headers: { "Content-Type": "application/json" },
         data: { offset, limit, title },
       });
-      const { status, response } = request;
-      const responseJson = JSON.parse(response);
-      if (status !== 200) throw new Error(`${status}: ${responseJson.reason}`);
-      return responseJson;
+      if (status !== 200) throw new Error(`${status}: ${response.reason}`);
+      return response;
     } catch (e) {
       console.error("ThreadsAPI: getThreads failed");
       console.error(e);
@@ -23,13 +21,12 @@ class ThreadsAPI extends BaseAPI {
 
   public async createThread(title: string) {
     try {
-      const request = await this.transporter.post("/chats", {
+      const { status, response } = await this.transporter.post("/chats", {
         data: JSON.stringify({ title }),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const { status, response } = request;
       if (status === 200) return response;
       throw new Error(`ThreadAPI: createThread failed: ${status}`);
     } catch (e) {
@@ -41,7 +38,7 @@ class ThreadsAPI extends BaseAPI {
   public async addUsers(userId: number, threadId: number) {
     try {
       const addUserObject = { users: [userId], chatId: threadId };
-      const request = await this.transporter.put("/chats/users", {
+      const { status, response } = await this.transporter.put("/chats/users", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -49,12 +46,10 @@ class ThreadsAPI extends BaseAPI {
         data: JSON.stringify(addUserObject),
       });
 
-      const { status, response } = request;
       if (status === 200) {
         return response;
       }
-      const response_ = JSON.parse(response);
-      throw new Error(`${status}, ${response_.reason}`);
+      throw new Error(`${status}, ${response.reason}`);
     } catch (e) {
       console.error("ThreasdAPI: addUsers failed");
       console.error(e);
@@ -64,12 +59,9 @@ class ThreadsAPI extends BaseAPI {
 
   public async getThreadUsers(threadId: number): Promise<User[] | false> {
     try {
-      const request = await this.transporter.get(`/chats/${threadId}/users`, { withCredentials: true });
-
-      const { status, response } = request;
-      const response_ = JSON.parse(response);
-      if (status === 200) return response_;
-      throw new Error(`${status},${response_.reason}`);
+      const { status, response } = await this.transporter.get(`/chats/${threadId}/users`, { withCredentials: true });
+      if (status === 200) return response;
+      throw new Error(`${status},${response.reason}`);
     } catch (e) {
       console.error("ThreadAPI getThreadUsers failed");
       console.error(e);
@@ -80,17 +72,13 @@ class ThreadsAPI extends BaseAPI {
   public async removeUsers(userId: number, threadId: number) {
     try {
       const removeUserObject = { users: [userId], chatId: threadId };
-      const request = await this.transporter.delete(`/chats/users`, {
+      const { status, response } = await this.transporter.delete(`/chats/users`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
         data: JSON.stringify(removeUserObject),
       });
-
-      const { status, response } = request;
       if (status === 200) return true;
-      const { reason } = JSON.parse(response);
-
-      throw new Error(`${status}: ${reason}`);
+      throw new Error(`${status}: ${response.reason}`);
     } catch (e) {
       console.error("ThreadAPI: removeUser failed");
       console.error(e);
@@ -101,17 +89,21 @@ class ThreadsAPI extends BaseAPI {
   public async removeThread(threadId: number) {
     try {
       const formattedRemoveThreadObj = { chatId: threadId };
-      const request = await this.transporter.delete(`/chats`, {
+      const { status, response } = await this.transporter.delete(`/chats`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
         data: JSON.stringify(formattedRemoveThreadObj),
       });
-
-      const { status, response } = request;
-      if (status === 200) return true;
-      const { reason } = JSON.parse(response);
-
-      throw new Error(`${status}: ${reason}`);
+      console.log(response);
+      if (status === 403) {
+        alert(response.reason);
+        return false;
+      }
+      if (status === 200) {
+        alert("Ok");
+        return true;
+      }
+      throw new Error(`${status}: ${response.reason}`);
     } catch (e) {
       console.error("ThreadsAPI: removeThread failed");
       console.error(e);
@@ -121,18 +113,14 @@ class ThreadsAPI extends BaseAPI {
 
   public async getThreadToken(threadId: number) {
     try {
-      const request = await this.transporter.post(`/chats/token/${threadId}`, {
+      const { status, response } = await this.transporter.post(`/chats/token/${threadId}`, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
       });
-
-      const { status, response } = request;
-
-      const response_ = JSON.parse(response);
-      if (status === 200) return response_.token;
-      throw new Error(`${status}, ${response_.reason}`);
+      if (status === 200) return response.token;
+      throw new Error(`${status}, ${response.reason}`);
     } catch (e) {
       console.error("ThradsAPI: getThreadToken failed");
       console.error(e);
@@ -144,15 +132,12 @@ class ThreadsAPI extends BaseAPI {
     try {
       const formData = new FormData();
       formData.set("reource", file[0]);
-      const request = await this.transporter.post("/resources", { data: formData });
-
-      const { status, response } = request;
-      const response_ = JSON.parse(response);
+      const { status, response } = await this.transporter.post("/resources", { data: formData });
       if (status === 200) {
-        return response_;
+        return response;
       }
-      alert(response_.reason);
-      throw new Error(`${status},${response_.reason}`);
+      alert(response.reason);
+      throw new Error(`${status},${response.reason}`);
     } catch (e) {
       console.error("ThreadsAPI: sendFile failed");
     }
@@ -164,14 +149,11 @@ class ThreadsAPI extends BaseAPI {
       const avatarFormData = new FormData();
       avatarFormData.set("avatar", avatar);
       avatarFormData.append("chatId", store.get("activeThread"));
-      const request = await this.transporter.put("/chats/avatar", {
+      const { status, response } = await this.transporter.put("/chats/avatar", {
         data: avatarFormData,
       });
-
-      const { status, response } = request;
       if (status === 200) {
-        let { avatar } = JSON.parse(response);
-        avatar = avatarFix(avatar);
+        const avatar = avatarFix(response.avatar);
         store.set(`threads_.${store.get("activeThread")}.avatar`, avatar);
         return;
       }
