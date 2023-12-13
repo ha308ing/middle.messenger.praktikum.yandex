@@ -2,6 +2,7 @@ import Handlebars from "handlebars";
 import EventBus from "@/system/eventBus";
 import { v4 as uuid } from "uuid";
 import isPlainObject from "@/utils/isPlainObject";
+import { type Indexed } from "@/types/types";
 
 type Prop<T> = Record<string | symbol, T>;
 export type Props = Prop<any>;
@@ -19,7 +20,7 @@ type FilteredProps = {
   };
 };
 
-export default class Component<T extends Record<string, any> = Props> {
+export default class Component<T extends Indexed = Props> {
   static EVENTS = {
     INIT: "component-init",
     CDM: "component-did-mount",

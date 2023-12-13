@@ -7,6 +7,7 @@ import ThreadAPI from "@/api/threadsAPI";
 import wsController from "@/controllers/wsController";
 import store from "@/system/store";
 import connect from "@/system/storeConnector";
+import { type Indexed } from "@/types/types";
 
 class AttachButton extends Component {
   constructor() {
@@ -30,7 +31,7 @@ class AttachButton extends Component {
 }
 
 export class SendBar extends Component {
-  constructor(props?: Record<string, any>) {
+  constructor(props?: Indexed) {
     super(
       "form",
       {

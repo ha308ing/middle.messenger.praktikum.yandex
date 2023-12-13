@@ -1,9 +1,8 @@
 import { BaseAPI } from "@/api/baseAPI";
-import { type UserInfo } from "@/types/types.api";
+import { type User } from "@/types/types.api";
 
 class UsersAPI extends BaseAPI {
-  public async getInfoById(id: number): Promise<UserInfo | null> {
-    console.log("UsersAPI: getInfoById", id);
+  public async getInfoById(id: number): Promise<User | null> {
     try {
       const request = await this.transporter.get(`/user/${id}`);
       const { status, response } = request;

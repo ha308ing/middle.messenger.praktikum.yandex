@@ -10,7 +10,7 @@ type TwoPanelLayoutComponentProps = {
 };
 
 export default class TwoPanelLayout extends Component<TwoPanelLayoutComponentProps> {
-  constructor(props?: Record<string, any>, persistClass = "") {
+  constructor(props?: TwoPanelLayoutComponentProps, persistClass = "") {
     // constructor(props) {
     super(
       "div",

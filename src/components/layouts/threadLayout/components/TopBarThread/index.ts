@@ -1,16 +1,25 @@
+import type IconButton from "@/components/elements/iconButton";
 import { IconButtonBack } from "@/components/elements/iconButton";
 import Component from "@/system/component";
 import connect from "@/system/storeConnector";
 import "./TopBarThread.scss";
-import { TopBarManageLinkConnected, TopBarMessengerLinkConnected } from "../TopBarThreadLink";
+import { TopBarManageLinkConnected, TopBarMessengerLinkConnected, type TopBarThreadLink } from "../TopBarThreadLink";
+import { type TopBarTitleLink } from "@/components/elements/topBar";
+
+type TopBarThreadProps = {
+  backButton?: IconButton;
+  TopBarLink?: TopBarThreadLink | TopBarTitleLink;
+  hidden?: boolean;
+  [key: string]: unknown;
+};
 
 class TopBarThread extends Component {
-  constructor(props?: any) {
+  constructor(props?: TopBarThreadProps) {
     super(
       "nav",
       {
         backButton: new IconButtonBack(),
-        TopBarLink: props.TopBarLink,
+        TopBarLink: props?.TopBarLink,
         hidden: false,
         ...props,
       },
@@ -44,7 +53,7 @@ class TopBarManage extends TopBarThread {
   }
 }
 
-const TopBarMapper = connect<typeof TopBarThread, { TopBarLink: any }>(state => {
+const TopBarMapper = connect<typeof TopBarThread, { TopBarLink: TopBarTitleLink }>(state => {
   const { activeThread } = state;
   if (activeThread == null) {
     return { hidden: true, class: "hidden" };

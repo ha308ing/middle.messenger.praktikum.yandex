@@ -4,6 +4,7 @@ import connect from "@/system/storeConnector";
 import "./threadsList.scss";
 import { type Thread } from "@/types/types.api";
 import router from "@/system/router";
+import { type Indexed } from "@/types/types";
 
 store.on(StoreEvents.clickThread, id => {
   store.set("activeThread", id);
@@ -14,7 +15,7 @@ store.on(StoreEvents.clickThread, id => {
 });
 
 export class ThreadsList_ extends Component {
-  constructor(props?: Record<string, any>) {
+  constructor(props?: Indexed) {
     super(
       "div",
       {
@@ -38,8 +39,8 @@ export class ThreadsList_ extends Component {
   }
 }
 
-class ThreadListItem extends Component {
-  constructor(props?: Record<string, any>) {
+export class ThreadListItem extends Component {
+  constructor(props?: Indexed) {
     super(
       "li",
       {

@@ -2,9 +2,11 @@ import Component from "@/system/component";
 import Message from "@/components/elements/message";
 import connect from "@/system/storeConnector";
 import store from "@/system/store";
+import { type WSMessage, type User } from "@/types/types.api";
+import { type Indexed } from "@/types/types";
 
 export class ThreadMessages extends Component {
-  constructor(props?: Record<string, any>) {
+  constructor(props?: Indexed) {
     super(
       "section",
       {
@@ -45,14 +47,13 @@ const ThreadMessagesConnected = connect<typeof ThreadMessages>(state => {
   if (!Array.isArray(messages)) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
   if (messages.length === 0) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
   const items = messages
-    .reduce((acc: Array<Record<string, any>>, m: Record<string, any>) => {
+    .reduce((acc: Message[], m: WSMessage) => {
       if (m.type === "message") {
         const date = new Date(m.time);
         const time = date.toLocaleTimeString();
         const day = date.toLocaleDateString();
         const m_ = new Message({
-          sender: state.threads[activeThread].users.find(x => x.id === m.user_id).login,
-          // sender: store.get(`threads.${activeThread}.users.${m.user_id}.login`),
+          sender: state.threads_[activeThread].users.find((x: User) => x.id === parseInt(m.user_id)).login ?? m.user_id,
           isOutgoing: m.user_id === store.get("user").id,
           text: m.content,
           attachments: false,

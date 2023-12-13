@@ -5,12 +5,11 @@ import type Component from "./component";
 
 export default function storeConnector<
   K extends new (...props: any[]) => Component = typeof Component,
-  T extends Indexed = Record<string, any>,
+  T extends Indexed = Indexed,
 >(mapFn: (state: State) => State & T) {
   return function (component: K): K {
     return class extends component {
       constructor(...props: any[]) {
-        // сохраняем начальное состояние
         let state = mapFn(store.state);
 
         super({ ...props, ...state });

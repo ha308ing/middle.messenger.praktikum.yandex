@@ -1,8 +1,8 @@
 import Input from "@/components/elements/input";
 import Button from "@/components/elements/button";
 import Form from "@/components/elements/form";
-import ThreadController from "@/controllers/threadsController";
 import threadsAPI from "@/api/threadsAPI";
+import { type Indexed } from "@/types/types";
 
 class ButtonFindUser extends Button {
   constructor() {
@@ -15,7 +15,7 @@ class ButtonFindUser extends Button {
 }
 
 class InputAvatar extends Input {
-  constructor(props?: Record<string, any>) {
+  constructor(props?: Indexed) {
     super(
       "div",
       {

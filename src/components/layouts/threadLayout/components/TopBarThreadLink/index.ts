@@ -2,10 +2,12 @@ import Component from "@/system/component";
 import router from "@/system/router";
 import connect from "@/system/storeConnector";
 import store from "@/system/store";
+import { type Indexed } from "@/types/types";
+import { type Thread } from "@/types/types.api";
 
 type TopBarThreadLinkProps = { avatar?: string; title?: string; click?: (...args: any[]) => any };
 
-class TopBarThreadLink extends Component {
+export class TopBarThreadLink extends Component {
   constructor(props?: TopBarThreadLinkProps) {
     super(
       "div",
@@ -25,8 +27,8 @@ class TopBarThreadLink extends Component {
   }
 }
 
-class TopBarMessengerLink extends TopBarThreadLink {
-  constructor(props: Record<string, any>) {
+export class TopBarMessengerLink extends TopBarThreadLink {
+  constructor(props: Indexed) {
     super({
       ...props,
       click: () => {
@@ -37,7 +39,7 @@ class TopBarMessengerLink extends TopBarThreadLink {
 }
 
 class TopBarManageLink extends TopBarThreadLink {
-  constructor(props: Record<string, any>) {
+  constructor(props: Indexed) {
     super({
       ...props,
       click: () => {

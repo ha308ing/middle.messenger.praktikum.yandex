@@ -6,10 +6,10 @@ import TopBar from "@/components/elements/topBar";
 import type Input from "@/components/elements/input";
 
 import ThreadController from "@/controllers/threadsController";
-import ThreadsListConnected, { type ThreadsList_ } from "@/components/elements/threadsList";
+import ThreadsListConnected, { type ThreadsList_, type ThreadListItem } from "@/components/elements/threadsList";
 
 export class LeftPanelTopBar extends TopBar {
-  constructor(props?: { content: any }) {
+  constructor(props?: { content: unknown }) {
     super({
       content: props?.content ?? new UserProfileTopBarLink({}),
     });
@@ -19,7 +19,7 @@ export class LeftPanelTopBar extends TopBar {
 type LeftPanelComponentProps = {
   TopBar?: TopBar | boolean;
   Search?: Input | boolean;
-  Threads?: any[] | boolean | ThreadsList_;
+  Threads?: ThreadListItem[] | boolean | ThreadsList_;
   noThreadsMessage?: string;
   StartThreadButton?: Button;
 };

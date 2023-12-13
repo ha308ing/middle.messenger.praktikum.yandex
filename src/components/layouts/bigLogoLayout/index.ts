@@ -5,11 +5,11 @@ import Logo from "@/components/elements/logo";
 
 type BigLogoLayoutComponentProps = {
   Logo: Logo;
-  content: any;
+  content: unknown;
 };
 
 type BigLogoLayoutProps = {
-  content: any;
+  content: unknown;
 };
 
 export default class BigLogoLayout extends Component<BigLogoLayoutComponentProps> {

@@ -8,12 +8,12 @@ import { InputUserFirstName } from "../InputUserFirstName";
 import InputUserAvatar from "../InputUserAvatar";
 import { InputUserDisplayName } from "../InputUserDisplayName";
 import { InputUserSecondName } from "../InputUserSecondName";
-import EventBus from "@/system/eventBus";
 import "./FormUser.scss";
 import type Input from "@/components/elements/input";
+import { type Indexed } from "@/types/types";
 
 class ButtonSave extends Button {
-  constructor(props?: Record<string, any>) {
+  constructor(props?: Indexed) {
     super({ buttonText: "Save", type: "submit", ...props }, "button button_save button_saveProfile button_submit");
   }
 }

@@ -1,4 +1,4 @@
-export type UserInfo = {
+export type User = {
   id: number;
   first_name: string;
   second_name: string;
@@ -9,7 +9,7 @@ export type UserInfo = {
   email: string;
 };
 
-export type UserDetails = Omit<UserInfo, "avatar">;
+export type UserDetails = Omit<User, "avatar">;
 
 export type Thread = {
   id: number;
@@ -50,5 +50,22 @@ export type Message = {
   user_id: number;
   content: string;
   time: string;
-  last_message: Record<string, any>;
+  last_message: Pick<Thread, "last_message">;
+};
+
+export type WSMessage = {
+  chat_id: number;
+  time: string;
+  type: string;
+  user_id: string;
+  content: string;
+  file?: {
+    id: number;
+    user_id: number;
+    path: string;
+    filename: string;
+    content_type: string;
+    content_size: number;
+    upload_date: string;
+  };
 };

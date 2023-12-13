@@ -10,7 +10,7 @@ import AvatarForm from "./components/AvatarForm";
 import ThreadTitleForm from "./components/ThreadTitleForm";
 import ThreadController from "@/controllers/threadsController";
 import { type ThreadMemberProps } from "../ThreadMember";
-import ThreadMembersListConnected from "./components/ThreadMembersList";
+import ThreadMembersListConnected, { type ThreadMembersList } from "./components/ThreadMembersList";
 
 class ButtonLeaveThread extends Button {
   constructor() {
@@ -34,7 +34,8 @@ class ButtonLeaveThread extends Button {
 type ThreadManageLayoutComponentProps = {
   ThreadTitleForm?: Form;
   FindUserForm?: Form;
-  ThreadMembers?: ThreadMember[] | false;
+  AvatarForm?: Form;
+  ThreadMembers?: ThreadMembersList | false;
   FoundUsers?: ThreadMember[] | false;
   ButtonLeaveThread?: Button;
 };

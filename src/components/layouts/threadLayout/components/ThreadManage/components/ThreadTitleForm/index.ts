@@ -2,6 +2,7 @@ import Button from "@/components/elements/button";
 import Form from "@/components/elements/form";
 import Input from "@/components/elements/input";
 import connect from "@/system/storeConnector";
+import { type Thread } from "@/types/types.api";
 
 type InputThreadTitleProps = {
   value?: string;

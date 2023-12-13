@@ -3,10 +3,10 @@ import STORE from "@/system/store";
 // import AuthAPI from "@/api/authAPI";
 import ProfileEditAPI from "@/api/profileEditAPI";
 import UserInfoController from "@/controllers/userInfoController";
-import { type UserInfo } from "@/types/types.api";
+import { type User } from "@/types/types.api";
 
 export class ProfileEditController {
-  public async sendForm(profileEditInput: UserInfo) {
+  public async sendForm(profileEditInput: User) {
     if (profileEditInput == null) {
       return;
     }

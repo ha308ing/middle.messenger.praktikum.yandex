@@ -1,6 +1,7 @@
 import store from "@/system/store";
 import WSTransport, { WSEvents } from "@/system/wsTransport";
 import MessagesController from "@/controllers/messagesController";
+import { type Message } from "@/types/types.api";
 
 class WebSocketController {
   async connect(userId: number, threadId: number, token: string) {
@@ -28,7 +29,7 @@ class WebSocketController {
       const updatedMessages = currentMessages != null ? [...currentMessages, ...messages] : messages;
       store.set(
         messagesPath,
-        updatedMessages.sort((a, b) => a.id - b.id)
+        updatedMessages.sort((a: Message, b: Message) => a.id - b.id)
       );
       const view = document.querySelector(".messages_container");
       if (view != null) view.scrollTo(0, view.scrollHeight);

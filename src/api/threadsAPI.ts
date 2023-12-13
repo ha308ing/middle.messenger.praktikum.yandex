@@ -1,4 +1,4 @@
-import { type Thread } from "@/types/types.api";
+import { type User, type Thread } from "@/types/types.api";
 import { BaseAPI } from "@/api/baseAPI";
 import store from "@/system/store";
 import avatarFix from "@/utils/avatarFix";
@@ -62,7 +62,7 @@ class ThreadsAPI extends BaseAPI {
     return false;
   }
 
-  public async getThreadUsers(threadId: number): Promise<any[] | false> {
+  public async getThreadUsers(threadId: number): Promise<User[] | false> {
     try {
       const request = await this.transporter.get(`/chats/${threadId}/users`, { withCredentials: true });
 

@@ -2,9 +2,11 @@ import Component from "@/system/component";
 import storeConnector from "@/system/storeConnector";
 import ThreadMember from "../../../ThreadMember";
 import store from "@/system/store";
+import { type User } from "@/types/types.api";
+import { type Indexed } from "@/types/types";
 
-class ThreadMembersList extends Component {
-  constructor(props?: any) {
+export class ThreadMembersList extends Component {
+  constructor(props?: Indexed) {
     super("ul", { ...props }, "threadMembersList");
   }
 

@@ -5,7 +5,7 @@ import type IconButton from "@/components/elements/iconButton";
 
 export type TopBarProps = {
   backButton?: false | IconButton;
-  content?: any;
+  content?: unknown;
   contextButton?: false | IconButton;
   editButton?: false | IconButton;
   exitButton?: false | IconButton;
@@ -23,7 +23,7 @@ export default class TopBar<K extends TopBarProps = TopBarProps> extends Compone
 }
 
 type TopBarTitleLinkProps = {
-  content?: any;
+  content?: unknown;
 };
 
 export class TopBarTitleLink extends Component<TopBarTitleLinkProps> {

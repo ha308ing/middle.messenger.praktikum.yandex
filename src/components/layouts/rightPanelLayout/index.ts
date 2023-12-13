@@ -2,7 +2,7 @@ import Component from "@/system/component";
 import rightPanelLayoutTemplateString from "./rightPanelLayout.hbs?raw";
 
 export type RightPanelProps = {
-  content?: any;
+  content?: unknown;
   noContentMessage?: string;
 };
 

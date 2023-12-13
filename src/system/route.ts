@@ -1,3 +1,4 @@
+import type Component from "@/system/component";
 import { type ComponentClass } from "@/system/component";
 import { renderDOMComponent } from "@/utils/renderDOM";
 
@@ -11,7 +12,7 @@ export class Route {
   public _pathname: string;
   public _props: RouteProps;
   public _rootSelector: RouteProps["rootSelector"];
-  public _block: any;
+  public _block: Component | null;
 
   constructor(pathaname: string, componentClass: ComponentClass, props: RouteProps) {
     this._componentClass = componentClass;
