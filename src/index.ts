@@ -30,9 +30,9 @@ store.on(StoreEvents.gotThread, threadData => {
   });
 
   threadsController.getThreadUsers(threadId).then(res => {
-    console.log("thread users");
-    console.log(res);
-    store.set(`threads.${threadId}.users`, res);
+    if (res != null) {
+      store.set(`threads_.${threadId}.users`, res);
+    }
   });
 });
 
@@ -51,12 +51,13 @@ if (store.get("user")?.id == null) {
   console.log(`no user in store`);
   authController.setUserInfo().then(
     res => {
-      router.go("/messenger");
-
       console.log(`authController 1st setUserInfo res:`, res);
-      threadsController.updateThreads().then(() => {});
+      threadsController.updateThreads().then(() => {
+        router.go("/messenger");
+      });
     },
     rej => {
+      // router.go("/messenger");
       console.log(`authController 1st setUserInfo failed rej:`, rej);
     }
   );
@@ -64,12 +65,12 @@ if (store.get("user")?.id == null) {
   console.log(`yes user in store`);
   threadsController.updateThreads().then(
     () => {
-      // router.go("/messenger");
+      router.go("/messenger");
     },
     rej => {
       console.error("failed to get threads rej");
       console.error(rej);
-      // router.go("/messenger");
+      router.go("/messenger");
     }
   );
 }

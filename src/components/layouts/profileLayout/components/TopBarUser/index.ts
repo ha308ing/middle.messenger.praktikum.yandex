@@ -1,6 +1,6 @@
 import type IconButton from "@/components/elements/iconButton";
 import { IconButtonBack } from "@/components/elements/iconButton";
-import { IconButtonPassword, IconButtonExit, IconButtonEdit } from "../IconButtons";
+import { IconButtonPassword, IconButtonExit } from "../IconButtons";
 import Component from "@/system/component";
 import connector from "@/system/storeConnector";
 

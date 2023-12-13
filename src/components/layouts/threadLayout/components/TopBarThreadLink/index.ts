@@ -53,8 +53,9 @@ const topBarMapper = connect<typeof TopBarThreadLink, TopBarThreadLinkProps>(sta
   const activeThreadId = state.activeThread;
   if (activeThreadId == null) return {};
   if (store?.get("threads") == null) return {};
-  const threadData = state.threads[activeThreadId];
-  return { ...threadData };
+  const threadData = state.threads.find((x: Thread) => x.id === activeThreadId);
+  const avatar = state.threads_[activeThreadId].avatar;
+  return { ...threadData, avatar };
 });
 
 export const TopBarManageLinkConnected = topBarMapper(TopBarManageLink);

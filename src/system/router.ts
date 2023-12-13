@@ -68,10 +68,10 @@ class Router {
       this._onRoute("/sign-in");
       return;
     }
-    if (store.get("user")?.id != null && this.allowed.includes(pathname)) {
+    /*     if (store.get("user")?.id != null && this.allowed.includes(pathname)) {
       this._onRoute("/messenger");
       return;
-    }
+    } */
     console.log("not restricted");
     if (this.redirects[pathname] != null) {
       window.location.pathname = this.redirects[pathname];

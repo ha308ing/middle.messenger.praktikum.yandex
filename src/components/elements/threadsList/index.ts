@@ -72,7 +72,7 @@ export const ThreadsListConnected = connect<typeof ThreadsList_>(state => {
   const threadItems =
     threads == null
       ? false
-      : Object.values(threads).map((t: Thread) => {
+      : threads.map((t: Thread) => {
           const { last_message } = t;
           let lastMessage = {};
           if (last_message != null) {
@@ -84,6 +84,7 @@ export const ThreadsListConnected = connect<typeof ThreadsList_>(state => {
           const active = t.id === activeThread ? { "data-threadActive": true } : {};
           return new ThreadListItem({
             ...t,
+            avatar: state?.threads_?.[t.id]?.avatar ?? t.avatar,
             "data-threadId": t.id,
             ...active,
             ...lastMessage,

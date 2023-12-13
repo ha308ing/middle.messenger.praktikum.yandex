@@ -27,7 +27,8 @@ class InputThreadTitle_ extends Input {
 
 const InputThreadTitle = connect<typeof InputThreadTitle_, InputThreadTitleProps>(state => {
   const activeThread = state?.activeThread;
-  const value = state.threads[activeThread].title ?? "Sweater";
+  if (activeThread == null) return {};
+  const value = state.threads.find((x: Thread) => x.id === activeThread)?.title ?? "Sweater";
   return {
     value,
   };

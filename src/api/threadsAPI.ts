@@ -172,7 +172,7 @@ class ThreadsAPI extends BaseAPI {
       if (status === 200) {
         let { avatar } = JSON.parse(response);
         avatar = avatarFix(avatar);
-        store.set(`threads.${store.get("activeThread")}.avatar`, avatar);
+        store.set(`threads_.${store.get("activeThread")}.avatar`, avatar);
         return;
       }
       throw new Error(`Avatar upload failed. Try smaller image`);

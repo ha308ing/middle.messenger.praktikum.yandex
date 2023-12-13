@@ -42,7 +42,7 @@ export class ThreadMessages extends Component {
 const ThreadMessagesConnected = connect<typeof ThreadMessages>(state => {
   const { activeThread } = state;
   if (activeThread == null) return { hide: true };
-  const messages = state?.messages[activeThread];
+  const messages = state?.messages?.[activeThread];
   if (messages == null) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
   if (!Array.isArray(messages)) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
   if (messages.length === 0) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
@@ -53,7 +53,8 @@ const ThreadMessagesConnected = connect<typeof ThreadMessages>(state => {
         const time = date.toLocaleTimeString();
         const day = date.toLocaleDateString();
         const m_ = new Message({
-          sender: state.threads_[activeThread].users.find((x: User) => x.id === parseInt(m.user_id)).login ?? m.user_id,
+          sender:
+            state?.threads_?.[activeThread]?.users.find((x: User) => x.id === parseInt(m.user_id))?.login ?? m.user_id,
           isOutgoing: m.user_id === store.get("user").id,
           text: m.content,
           attachments: false,

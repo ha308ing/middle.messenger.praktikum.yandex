@@ -17,8 +17,10 @@ export class ThreadMembersList extends Component {
 
 const ThreadMembersListConnected = storeConnector<typeof ThreadMembersList>(state => {
   const activeThreadId = state.activeThread;
-  const users = store.get(`threads.${activeThreadId}.users`);
-  const Members = users.map(u => new ThreadMember({ ...u, isMember: true }));
+  if (activeThreadId == null) return { Members: [] };
+  const users = store.get(`threads_.${activeThreadId}.users`);
+  if (users == null) return { Members: [] };
+  const Members = users.map((u: User) => new ThreadMember({ ...u, isMember: true }));
   return { Members };
 })(ThreadMembersList);
 

@@ -96,7 +96,7 @@ export default class ThreadManageLayout extends Component<ThreadManageLayoutComp
     store.emit(StoreEvents.updateUsers);
 
     if (store.getState().activeThread?.id != null) {
-      ThreadController.getThreadUsers(store.getState().activeThread.id).then(r => {
+      ThreadController.getThreadUsers(store.get("activeThread")).then(r => {
         store.emit(StoreEvents.updateUsers, r);
       });
     }

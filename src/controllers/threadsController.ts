@@ -1,7 +1,7 @@
 import UsersAPI from "@/api/usersAPI";
-import avatarFix from "@/utils/avatarFix";
+import avatarFix, { avatarFixObj } from "@/utils/avatarFix";
 import threadsAPI from "@/api/threadsAPI";
-import { type Thread } from "@/types/types.api";
+import { type User, type Thread } from "@/types/types.api";
 import STORE, { StoreEvents } from "@/system/store";
 import router from "@/system/router";
 // import threadsAPI from "@/api/threadsAPI";
@@ -10,25 +10,37 @@ import router from "@/system/router";
 // import Router from "@/system/Router";
 // import sb from "@/system/State";
 
+type ThreadsAndAvatars = {
+  threads: Thread[];
+  avatars: Record<number, { avatar: string }>;
+};
+
 class ThreadsController {
-  public async getThreads(offset?: number, limit?: number, title?: string): Promise<Record<string, Thread>> {
+  public async getThreads(offset?: number, limit?: number, title?: string): Promise<ThreadsAndAvatars> {
     const response = await threadsAPI.getThreads(offset, limit, title);
-    if (response == null) return {};
-    const responseFormed = response.reduce((acc, t) => ({ ...acc, [t.id]: t }), {});
+    if (response == null) return { threads: [], avatars: {} };
+    const responseFormed = response.reduce(
+      (acc: ThreadsAndAvatars, t: Thread) => {
+        if (t == null) return acc;
+        const t_ = avatarFixObj(t) as Thread;
+        if (t_.id == null) return acc;
+        acc.threads = [...acc.threads, t_];
+        acc.avatars[t_.id] = { avatar: t_.avatar };
+        return acc;
+      },
+      { threads: [], avatars: {} }
+    );
     return responseFormed;
   }
 
-  // public async saveThreads() {
   public async updateThreads() {
-    const threads = await this.getThreads();
-    const threadsMod: Record<string, Thread> = {};
+    const threadsAndAvatars = await this.getThreads();
+    STORE.set("threads", threadsAndAvatars.threads);
+    STORE.set("threads_", threadsAndAvatars.avatars);
 
-    Object.entries(threads).forEach(([threadId, thread]) => {
-      thread.avatar = avatarFix(thread.avatar);
-      threadsMod[threadId] = thread;
+    threadsAndAvatars.threads.forEach(thread => {
       STORE.emit(StoreEvents.gotThread, thread);
     });
-    STORE.set("threads", threadsMod);
   }
 
   public async createThread() {
@@ -50,6 +62,7 @@ class ThreadsController {
     this.updateThreads().then(
       () => {
         STORE.set("activeThread", newThreadId);
+        router.go("/messenger");
       }
       // rej => {}
     );
@@ -59,7 +72,7 @@ class ThreadsController {
   public async findUser(login: string) {
     const response = await UsersAPI.findUsers(login);
     if (response === false) return false;
-    const foundUsers = response.reduce((acc: any[], user: any) => {
+    const foundUsers = response.reduce((acc: User[], user: User) => {
       let { id, login, avatar } = user;
       avatar = avatarFix(avatar);
       return [...acc, { id, login, avatar, isMember: false }];
@@ -84,11 +97,12 @@ class ThreadsController {
 
     if (response === false) return false;
 
-    const formattedUsers = response.reduce((acc: any, user: any) => {
+    const formattedUsers = response.reduce((acc: Array<Pick<User, "id" | "login" | "avatar">>, user: User) => {
       let { id, login, avatar } = user;
       avatar = avatarFix(avatar);
       return [...acc, { id, login, avatar }];
     }, []);
+    STORE.set(`threads_.${threadId}.users`, formattedUsers);
     // STORE.emit(StoreEvents.updateUsers, formattedUsers);
     return formattedUsers;
   }
@@ -106,12 +120,12 @@ class ThreadsController {
 
   public async removeThread(threadId: number) {
     const response = await threadsAPI.removeThread(threadId);
-    if (!response) return false;
+    console.log(response);
+    STORE.set("activeThread", null);
+    router.go("/messenger");
     this.updateThreads().then(() => {
-      STORE.set("activeThread", null);
-      router.go("/messenger");
+      return true;
     });
-    return true;
   }
 }
 
