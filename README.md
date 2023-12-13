@@ -5,7 +5,7 @@
 - to use external data store, event bus and controllers were used
 - added routing
 
-[![2023-12-12-043356.gif](https://i.postimg.cc/mrG8HQqg/2023-12-12-043356.gif)](https://postimg.cc/FYDytJNM)
+[![2023-12-13-161043.gif](https://i.postimg.cc/WbhSrkWN/2023-12-13-161043.gif)](https://postimg.cc/9rHGHrHK)
 
 
 # Project Messenger "Sweater"
