@@ -7,9 +7,8 @@ import connector from "@/system/storeConnector";
 type TopBarUserConstructorProps = {
   backButton: IconButton;
   login?: string;
-  passwordChangeButton: IconButton;
-  editButton: IconButton;
-  exitButton: IconButton;
+  passwordChangeButton: IconButton | false;
+  exitButton: IconButton | false;
 };
 
 type TopBarUserProps = {
@@ -23,7 +22,6 @@ export class TopBarUser_ extends Component<TopBarUserConstructorProps> {
       {
         backButton: new IconButtonBack(),
         login: props?.login ?? "Sweater",
-        editButton: new IconButtonEdit(),
         passwordChangeButton: new IconButtonPassword(),
         exitButton: new IconButtonExit(),
       },
@@ -40,8 +38,6 @@ export class TopBarUser_ extends Component<TopBarUserConstructorProps> {
     </div>
 
     {{{passwordChangeButton}}}
-
-    {{{editButton}}}
 
     {{{exitButton}}}
     `;

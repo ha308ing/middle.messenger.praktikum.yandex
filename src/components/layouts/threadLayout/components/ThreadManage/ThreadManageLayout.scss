@@ -26,7 +26,8 @@
     width: 100%;
   }
 
-  .form_inputsContainer {
+  .threadMembersContainer .form_inputsContainer {
+    height: 100% !important;
     width: 20rem;
   }
 
@@ -35,10 +36,6 @@
     flex-flow: row nowrap;
     justify-content: center;
     margin-bottom: 2rem;
-
-    .form_inputsContainer {
-      margin-bottom: 0;
-    }
   }
 
   .searchContainer,
@@ -76,6 +73,12 @@
 
   .threadMembersList {
     padding-left: 0;
+
+    .threadMember {
+      width: 35rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }
 

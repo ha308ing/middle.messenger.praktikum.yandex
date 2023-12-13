@@ -23,9 +23,7 @@ export class IconButtonPassword extends IconButtonPassword_ {
 export class IconButtonEdit extends IconButtonEdit_ {
   constructor(props?: IconButtonProps) {
     super({
-      click: () => {
-        ProfileEditController.toggleEditMode();
-      },
+      click: () => {},
       ...props,
     });
   }

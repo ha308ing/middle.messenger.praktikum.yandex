@@ -16,7 +16,7 @@ class ButtonLeaveThread extends Button {
   constructor() {
     super(
       {
-        buttonText: "Leave thread",
+        buttonText: "Delete thread",
         click: () => {
           const { activeThread } = store.getState();
           if (activeThread == null) {

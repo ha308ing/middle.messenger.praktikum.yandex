@@ -1,6 +1,5 @@
 import Input, { type InputValueStringProp } from "@/components/elements/input";
 import connect from "@/system/storeConnector";
-import { EditModeBus } from "../FormUser";
 
 class InputUserFirstName_ extends Input {
   constructor(props: InputValueStringProp = { value: false, disabled: false }) {
@@ -26,7 +25,7 @@ export const InputUserFirstName = connect<typeof InputUserFirstName_, InputValue
   const value = state.user?.first_name ?? false;
   return {
     value,
-    readonly: EditModeBus.enable,
+    readonly: false,
   };
 })(InputUserFirstName_);
 

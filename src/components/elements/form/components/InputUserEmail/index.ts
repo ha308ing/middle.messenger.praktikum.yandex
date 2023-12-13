@@ -1,6 +1,5 @@
 import Input, { type InputValueStringProp } from "@/components/elements/input";
 import connect from "@/system/storeConnector";
-import { EditModeBus } from "../FormUser";
 
 class InputUserEmail_ extends Input {
   constructor(props: InputValueStringProp = { value: false, disabled: false }) {
@@ -27,7 +26,7 @@ export const InputUserEmail = connect<typeof InputUserEmail_, InputValueStringPr
   const value = state.user?.email ?? false;
   return {
     value,
-    readonly: EditModeBus.enable,
+    readonly: false,
   };
 })(InputUserEmail_);
 

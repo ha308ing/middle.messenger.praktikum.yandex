@@ -1,6 +1,5 @@
 import Input, { type InputValueStringProp } from "@/components/elements/input";
 import connect from "@/system/storeConnector";
-import { EditModeBus, EditModeBusEvents } from "../FormUser";
 
 export class InputUserSecondName_ extends Input {
   constructor(props: InputValueStringProp = { value: false, disabled: false }) {
@@ -19,10 +18,6 @@ export class InputUserSecondName_ extends Input {
       },
       "input input_secondName"
     );
-
-    EditModeBus.on(EditModeBusEvents.toggleEditMode, value => {
-      this.setProps({ readonly: value });
-    });
   }
 }
 
@@ -30,7 +25,7 @@ export const InputUserSecondName = connect<typeof InputUserSecondName_, InputVal
   const value = state.user?.second_name ?? false;
   return {
     value,
-    readonly: EditModeBus.enable,
+    readonly: false,
   };
 })(InputUserSecondName_);
 

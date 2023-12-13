@@ -3,7 +3,6 @@ import STORE from "@/system/store";
 // import AuthAPI from "@/api/authAPI";
 import ProfileEditAPI from "@/api/profileEditAPI";
 import UserInfoController from "@/controllers/userInfoController";
-import { EditModeBus, EditModeBusEvents } from "@/components/elements/form/components/FormUser";
 import { type UserInfo } from "@/types/types.api";
 
 export class ProfileEditController {
@@ -66,10 +65,6 @@ export class ProfileEditController {
     } else {
       alert("Failed to change password");
     }
-  }
-
-  public toggleEditMode() {
-    EditModeBus.emit(EditModeBusEvents.toggleEditMode);
   }
 }
 
