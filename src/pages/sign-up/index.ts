@@ -28,11 +28,8 @@ export class FormRegistration extends Form {
         ],
         buttons: [new ButtonSubmitRegistration(), new ButtonCancelRegistration()],
         submitter: registrationInput => {
-          console.log("registration form input");
-          console.log(registrationInput);
           RegistrationController.register(registrationInput).then(
-            res => {
-              console.log(res);
+            () => {
               authController.setUserInfo().then(
                 res => {
                   console.log(res);

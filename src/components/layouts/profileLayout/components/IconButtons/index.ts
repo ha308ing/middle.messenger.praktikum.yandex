@@ -5,7 +5,6 @@ import {
   type IconButtonProps,
 } from "@/components/elements/iconButton";
 import AuthController from "@/controllers/authController";
-import ProfileEditController from "@/controllers/profileEditController";
 import Router from "@/system/router";
 
 export class IconButtonPassword extends IconButtonPassword_ {

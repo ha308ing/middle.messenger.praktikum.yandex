@@ -54,7 +54,7 @@ export default class WSTransport extends EventBus {
   subscribe() {
     this.socket.addEventListener("open", () => {
       console.log("WSTransport: Connection has been established");
-      this.emit(WSEvents.openConnection, "hello");
+      this.emit(WSEvents.openConnection);
     });
 
     this.socket.addEventListener("close", event => {

@@ -14,8 +14,7 @@ class WebSocketController {
     }
     const ws = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${threadId}/${token}`);
 
-    ws.on(WSEvents.openConnection, content => {
-      console.log(`socket ${threadId} opened connection`, content);
+    ws.on(WSEvents.openConnection, () => {
       if (store.get(`messages.${threadId}`) == null) {
         store.set(`messages.${threadId}`, []);
         this.getOldMessages(threadId);
@@ -23,7 +22,6 @@ class WebSocketController {
     });
 
     ws.on(WSEvents.newMessage, messages => {
-      console.log("ws event new message");
       const messagesPath = `messages.${threadId}`;
       const currentMessages = store.get(messagesPath);
       const updatedMessages = currentMessages != null ? [...currentMessages, ...messages] : messages;
@@ -48,11 +46,8 @@ class WebSocketController {
       let socket = store.get(`sockets.${threadId}`) as WSTransport;
       if (socket.socket.readyState !== 1) {
         let retries = 10;
-        console.log(`socket is not opened`);
         const t = setInterval(() => {
-          console.log("interval");
           socket = store.get(`sockets.${threadId}`) as WSTransport;
-          console.log(`retry`, retries);
           if (socket.socket.readyState === 1 && retries > 0) {
             socket.send(message);
             clearInterval(t);
@@ -65,9 +60,6 @@ class WebSocketController {
             retries--;
           }
         }, 1000);
-        // clearInterval(t);
-        console.log("sending message to", threadId, "; message:", message);
-        console.log(`socket state:`, socket.socket.readyState);
       } else {
         socket.send(message);
       }
@@ -81,10 +73,8 @@ class WebSocketController {
   }
 
   async getUnreadMessages(threadId: number) {
-    console.log("getting old messages");
     const socket = store.get(`sockets.${threadId}`) as WSTransport;
     let newMessagesCount = await MessagesController.getNewMessagesCount(threadId);
-    console.log("newMessagesCount", newMessagesCount);
     while (newMessagesCount > 0) {
       const lastMessageId = store.get(`messages.${threadId}`)[0].id;
       socket.getOld(lastMessageId);
@@ -93,7 +83,6 @@ class WebSocketController {
   }
 
   getOldMessages(threadId: number, lastMessageId = 0) {
-    console.log("getting old messages");
     const socket = store.get(`sockets.${threadId}`) as WSTransport;
     socket.getOld(lastMessageId);
   }

@@ -1,12 +1,9 @@
 import STORE from "@/system/store";
-// import UsersAPI from "@/api/UsersAPI";
-// import sweater from "@/assets/sweater.png"
 import AuthAPI from "@/api/authAPI";
 import avatarFix from "@/utils/avatarFix";
 
 export class UserInfoController {
   public async isLogged() {
-    console.log("UserInfoController: isLogged()");
     const { status, response } = await AuthAPI.isLogged();
     if (status !== 200) return false;
 

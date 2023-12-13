@@ -14,18 +14,13 @@ export default function storeConnector<
 
         super({ ...props, ...state });
 
-        // подписываемся на событие
         store.on(StoreEvents.update, () => {
-          // console.log("Store Connector emit updated event");
-          // при обновлении получаем новое состояние
           const newState = mapFn(store.state);
 
-          // если что-то из используемых данных поменялось, обновляем компонент
           if (!isEqual(state, newState)) {
             this.setProps({ ...newState });
           }
 
-          // не забываем сохранить новое состояние
           state = newState;
         });
       }

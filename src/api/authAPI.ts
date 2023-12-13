@@ -19,7 +19,6 @@ class AuthAPI extends BaseAPI {
       console.error("AuthAPI isLogged failed");
       console.error(e);
     }
-    console.log("end");
     return { status: null, response: null };
   }
 
@@ -43,7 +42,6 @@ class AuthAPI extends BaseAPI {
     } catch (e) {
       console.error(e);
     }
-    console.log("end");
     return { status: 0 };
   }
 
@@ -61,7 +59,6 @@ class AuthAPI extends BaseAPI {
       console.error("AuthAPI logout");
       console.error(e);
     }
-    console.log("end");
     return false;
   }
 }

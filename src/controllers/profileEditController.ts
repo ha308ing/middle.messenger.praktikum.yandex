@@ -1,6 +1,4 @@
-// import LoginAPI from "@/api/loginAPI";
 import STORE from "@/system/store";
-// import AuthAPI from "@/api/authAPI";
 import ProfileEditAPI from "@/api/profileEditAPI";
 import UserInfoController from "@/controllers/userInfoController";
 import { type User } from "@/types/types.api";
@@ -13,7 +11,6 @@ export class ProfileEditController {
     const { avatar, ...details } = profileEditInput;
 
     const sendDetails = await ProfileEditAPI.sendDetails(details);
-    console.log(sendDetails);
     if (sendDetails == null) alert("Details edit failed");
 
     if (avatar[0] != null) {
@@ -21,7 +18,6 @@ export class ProfileEditController {
       avatarFormData.set("avatar", avatar[0]);
 
       const sendAvatar = await ProfileEditAPI.sendAvatar(avatarFormData);
-      console.log(sendAvatar);
       if (sendAvatar == null) alert("Avatar upload failed");
     }
 

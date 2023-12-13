@@ -17,12 +17,10 @@ class UsersAPI extends BaseAPI {
       console.error("UsersAPI: getInfoById failed");
       console.error(e);
     }
-    console.log("end");
     return null;
   }
 
   public async findUsers(login: string) {
-    console.log("UsersAPI: findUsers", login);
     try {
       const request = await this.transporter.post("/user/search", {
         headers: { "Content-Type": "application/json" },
@@ -35,7 +33,6 @@ class UsersAPI extends BaseAPI {
       console.error(`UsersAPI: findUsers failed`);
       console.error(e);
     }
-    console.log("end");
     return false;
   }
 }

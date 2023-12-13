@@ -169,7 +169,6 @@ class ThreadsAPI extends BaseAPI {
       });
 
       const { status, response } = request;
-      console.log(request);
       if (status === 200) {
         let { avatar } = JSON.parse(response);
         avatar = avatarFix(avatar);

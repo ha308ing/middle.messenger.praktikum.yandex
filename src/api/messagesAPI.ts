@@ -15,7 +15,6 @@ class MessagesAPI extends BaseAPI {
       console.error("MessagesAPI: getNewMessagesCount failed");
       console.error(e);
     }
-    console.log("end");
     return null;
   }
 }

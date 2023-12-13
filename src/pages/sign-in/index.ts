@@ -36,30 +36,7 @@ class SigninForm extends Form {
         inputs: [new InputLogin(), new InputPassword()],
         buttons: [new ButtonSignin(), new ButtonSignup()],
         submitter: loginInput => {
-          console.log("authorize form submitter");
-          console.log("submitter");
-          console.log(`login input`);
-          console.log(loginInput);
-
           authController.signin(loginInput);
-          /* res => {
-              console.log(res);
-              authController.setUserInfo().then(
-                res => {
-                  console.log(res);
-                  console.log("siginin form: user data set");
-                  // router.go("/messenger");
-                },
-                rej => {
-                  console.error("signin form: failed to set user info");
-                  console.error(rej);
-                }
-              );
-            },
-            rej => {
-              alert(rej);
-            }
-          ); */
         },
       },
       "form form_authorization"

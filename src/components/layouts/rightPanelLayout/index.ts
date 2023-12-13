@@ -17,15 +17,6 @@ export default class RightPanel<K extends RightPanelProps = RightPanelProps> ext
       },
       `rightPanel_container ${persistClass}`
     );
-
-    /*     Store.on(StoreEvents.ActivateThread, (arg) => {
-      this.setProps({
-        content: new ThreadLayout({
-          TopBar: new TopBarThread(),
-          content: new ThreadMessages({messages:[]})
-        })
-      })
-    }) */
   }
 
   protected _setTemplate(): string | null {

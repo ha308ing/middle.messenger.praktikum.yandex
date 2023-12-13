@@ -27,7 +27,6 @@ export default class ErrorMessage extends Component<ErrorMessageComponentProps> 
             buttonText: "Go Home",
             click: (event: Event) => {
               event.preventDefault();
-              console.log("go home");
               Router.go("/sign-in");
             },
           },
