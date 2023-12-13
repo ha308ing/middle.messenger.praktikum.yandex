@@ -49,7 +49,7 @@ const TopBarMapper = connect<typeof TopBarThread, { TopBarLink: any }>(state => 
   if (activeThread == null) {
     return { hidden: true, class: "hidden" };
   } else {
-    const thread = state.threads.find((x: { id: number }) => x.id === activeThread);
+    const thread = state.threads[activeThread];
     if (thread == null) {
       return { hidden: true, class: "hidden" };
     } else {

@@ -11,20 +11,21 @@ import router from "@/system/router";
 // import sb from "@/system/State";
 
 class ThreadsController {
-  public async getThreads(offset?: number, limit?: number, title?: string): Promise<Thread[]> {
+  public async getThreads(offset?: number, limit?: number, title?: string): Promise<Record<string, Thread>> {
     const response = await threadsAPI.getThreads(offset, limit, title);
-    if (response == null) return [];
-    return response;
+    if (response == null) return {};
+    const responseFormed = response.reduce((acc, t) => ({ ...acc, [t.id]: t }), {});
+    return responseFormed;
   }
 
   // public async saveThreads() {
   public async updateThreads() {
     const threads = await this.getThreads();
-    const threadsMod: Thread[] = [];
+    const threadsMod: Record<string, Thread> = {};
 
-    threads.forEach(thread => {
+    Object.entries(threads).forEach(([threadId, thread]) => {
       thread.avatar = avatarFix(thread.avatar);
-      threadsMod.push({ ...thread });
+      threadsMod[threadId] = thread;
       STORE.emit(StoreEvents.gotThread, thread);
     });
     STORE.set("threads", threadsMod);
@@ -69,7 +70,10 @@ class ThreadsController {
 
   public async addUsers(userId: number, threadId: number) {
     const response = await threadsAPI.addUsers(userId, threadId);
-    if (response === false) return false;
+    if (response === false) {
+      alert("Failed to add user");
+      return false;
+    }
     const users = await this.getThreadUsers(threadId);
     STORE.emit(StoreEvents.updateUsers, users);
     return true;
@@ -85,13 +89,16 @@ class ThreadsController {
       avatar = avatarFix(avatar);
       return [...acc, { id, login, avatar }];
     }, []);
-    STORE.emit(StoreEvents.updateUsers, formattedUsers);
-    return true;
+    // STORE.emit(StoreEvents.updateUsers, formattedUsers);
+    return formattedUsers;
   }
 
   public async removeUsers(userId: number, threadId: number) {
     const response = await threadsAPI.removeUsers(userId, threadId);
-    if (!response) return false;
+    if (!response) {
+      alert("Failed to remove user");
+      return false;
+    }
     const users = await this.getThreadUsers(threadId);
     STORE.emit(StoreEvents.updateUsers, users);
     return true;

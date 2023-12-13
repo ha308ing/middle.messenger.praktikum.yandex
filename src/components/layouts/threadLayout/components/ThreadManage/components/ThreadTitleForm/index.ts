@@ -16,7 +16,8 @@ class InputThreadTitle_ extends Input {
         type: "text",
         name: "threadTitle",
         placeholder: "Thread title",
-        value: props?.value ?? "Sweater",
+        value: "Sweater",
+        ...props,
       },
       "titleContainer"
     );
@@ -24,10 +25,10 @@ class InputThreadTitle_ extends Input {
 }
 
 const InputThreadTitle = connect<typeof InputThreadTitle_, InputThreadTitleProps>(state => {
-  // const activeThread = state?.activeThread
-  const title = state.activeThread?.title ?? "Sweater";
+  const activeThread = state?.activeThread;
+  const value = state.threads[activeThread].title ?? "Sweater";
   return {
-    title,
+    value,
   };
 })(InputThreadTitle_);
 

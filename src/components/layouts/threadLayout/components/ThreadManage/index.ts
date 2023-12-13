@@ -6,9 +6,11 @@ import Button from "@/components/elements/button";
 import type Form from "@/components/elements/form";
 import store, { StoreEvents } from "@/system/store";
 import FindUserForm from "./components/FindUserForm";
+import AvatarForm from "./components/AvatarForm";
 import ThreadTitleForm from "./components/ThreadTitleForm";
 import ThreadController from "@/controllers/threadsController";
 import { type ThreadMemberProps } from "../ThreadMember";
+import ThreadMembersListConnected from "./components/ThreadMembersList";
 
 class ButtonLeaveThread extends Button {
   constructor() {
@@ -47,10 +49,11 @@ export default class ThreadManageLayout extends Component<ThreadManageLayoutComp
     super(
       "section",
       {
-        ThreadMembers: props.ThreadMembers,
+        ThreadMembers: new ThreadMembersListConnected(),
         FoundUsers: props.FoundUsers ?? false,
         ThreadTitleForm: new ThreadTitleForm(),
         FindUserForm: new FindUserForm(),
+        AvatarForm: new AvatarForm(),
         ButtonLeaveThread: new ButtonLeaveThread(),
       },
       "threadManage"

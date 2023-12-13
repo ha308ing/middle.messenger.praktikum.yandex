@@ -71,7 +71,7 @@ export const ThreadsListConnected = connect<typeof ThreadsList_>(state => {
   const threadItems =
     threads == null
       ? false
-      : threads.map((t: Thread) => {
+      : Object.values(threads).map((t: Thread) => {
           const { last_message } = t;
           let lastMessage = {};
           if (last_message != null) {

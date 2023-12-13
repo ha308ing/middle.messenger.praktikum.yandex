@@ -69,6 +69,7 @@ const inputValidator: Record<string, (string: string) => boolean> = {
   phone: phoneValidate,
   message: messageValidate,
   findUser: () => true,
+  threadTitle: () => true,
   setTitle: () => {
     return true;
   },

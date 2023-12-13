@@ -51,7 +51,8 @@ const ThreadMessagesConnected = connect<typeof ThreadMessages>(state => {
         const time = date.toLocaleTimeString();
         const day = date.toLocaleDateString();
         const m_ = new Message({
-          sender: m.user_id,
+          sender: state.threads[activeThread].users.find(x => x.id === m.user_id).login,
+          // sender: store.get(`threads.${activeThread}.users.${m.user_id}.login`),
           isOutgoing: m.user_id === store.get("user").id,
           text: m.content,
           attachments: false,

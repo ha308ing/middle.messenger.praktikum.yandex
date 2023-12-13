@@ -24,12 +24,12 @@ export default class ThreadMember extends Component {
         "data-userId": props.id,
         iconButtonClose: new IconButtonClose({
           click_capture: () => {
-            const { activeThread } = Store.getState();
+            const activeThread = Store.get("activeThread");
             if (activeThread == null) {
               console.error("Failed to remove user. No active thread in the store");
               return;
             }
-            console.log(`add user ${props.id} to ${activeThread}`);
+            console.log(`remove user ${props.id} from ${activeThread}`);
             const userId = props.id;
             ThreadController.removeUsers(userId, activeThread);
           },

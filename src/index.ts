@@ -28,6 +28,12 @@ store.on(StoreEvents.gotThread, threadData => {
       }
     );
   });
+
+  threadsController.getThreadUsers(threadId).then(res => {
+    console.log("thread users");
+    console.log(res);
+    store.set(`threads.${threadId}.users`, res);
+  });
 });
 
 router
@@ -58,7 +64,7 @@ if (store.get("user")?.id == null) {
   console.log(`yes user in store`);
   threadsController.updateThreads().then(
     () => {
-      router.go("/messenger");
+      // router.go("/messenger");
     },
     rej => {
       console.error("failed to get threads rej");

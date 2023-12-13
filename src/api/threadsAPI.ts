@@ -1,5 +1,7 @@
 import { type Thread } from "@/types/types.api";
 import { BaseAPI } from "@/api/baseAPI";
+import store from "@/system/store";
+import avatarFix from "@/utils/avatarFix";
 
 class ThreadsAPI extends BaseAPI {
   public async getThreads(offset = 0, limit = 10, title = ""): Promise<Thread[] | null> {
@@ -155,6 +157,31 @@ class ThreadsAPI extends BaseAPI {
       console.error("ThreadsAPI: sendFile failed");
     }
     return false;
+  }
+
+  public async changeAvatar(avatar: File) {
+    try {
+      const avatarFormData = new FormData();
+      avatarFormData.set("avatar", avatar);
+      avatarFormData.append("chatId", store.get("activeThread"));
+      const request = await this.transporter.put("/chats/avatar", {
+        data: avatarFormData,
+      });
+
+      const { status, response } = request;
+      console.log(request);
+      if (status === 200) {
+        let { avatar } = JSON.parse(response);
+        avatar = avatarFix(avatar);
+        store.set(`threads.${store.get("activeThread")}.avatar`, avatar);
+        return;
+      }
+      throw new Error(`Avatar upload failed. Try smaller image`);
+    } catch (e) {
+      alert(e);
+    }
+
+    return null;
   }
 }
 
