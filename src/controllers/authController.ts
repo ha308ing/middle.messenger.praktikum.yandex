@@ -21,9 +21,11 @@ export class AuthController {
 
   public async signin(loginInput = { login: "marta2", password: "Peter123" }) {
     const { status, message } = await AuthAPI.signin(loginInput);
+    const errorMessage = `Signin failed: ${message}`;
 
     if (status !== 200 && status !== 400) {
-      throw new Error(`Signin failed, ${status}: ${message}`);
+      alert(errorMessage);
+      throw new Error(errorMessage);
     }
     this.setUserInfo().then(() => {
       threadsController.updateThreads().then(

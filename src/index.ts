@@ -53,7 +53,7 @@ if (store.get("user")?.id == null) {
     res => {
       console.log(`authController 1st setUserInfo res:`, res);
       threadsController.updateThreads().then(() => {
-        router.go("/messenger");
+        router.go("/messenger", true);
       });
     },
     rej => {
@@ -65,7 +65,7 @@ if (store.get("user")?.id == null) {
   console.log(`yes user in store`);
   threadsController.updateThreads().then(
     () => {
-      router.go("/messenger");
+      router.go(window.location.pathname);
     },
     rej => {
       console.error("failed to get threads rej");

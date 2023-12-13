@@ -40,8 +40,8 @@ class Router {
     return this;
   }
 
-  go(pathname: string) {
-    if (window.location.pathname === pathname) return;
+  go(pathname: string, force = false) {
+    if (window.location.pathname === pathname && !force) return;
     this.history.pushState({}, "", pathname);
     this._onRoute(pathname);
   }
