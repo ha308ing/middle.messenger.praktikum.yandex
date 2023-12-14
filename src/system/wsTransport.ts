@@ -12,7 +12,7 @@ export default class WSTransport extends EventBus {
 
   public socket: WebSocket;
   protected readonly pingInterval;
-  constructor(host: string, pingInterval = 30000) {
+  constructor(host: string, pingInterval = 20000) {
     super();
     // this.host = host
     this.socket = new WebSocket(host);
@@ -53,13 +53,12 @@ export default class WSTransport extends EventBus {
 
   subscribe() {
     this.socket.addEventListener("open", () => {
-      console.log("WSTransport: Connection has been established");
       this.emit(WSEvents.openConnection);
     });
 
     this.socket.addEventListener("close", event => {
       if (event.wasClean) {
-        console.log("WSTransport: Connection was closed gracefully");
+        console.log("WSTransport: Connection was closed");
       } else {
         console.log("WSTransport: Connection was interrupted");
       }
@@ -71,14 +70,14 @@ export default class WSTransport extends EventBus {
 
     this.socket.addEventListener("message", event => {
       const dataParsed = JSON.parse(event.data);
+      let newMessages = [];
       if (dataParsed?.type !== "pong" && dataParsed != null) {
         if (Array.isArray(dataParsed)) {
-          this.emit(WSEvents.newMessage, dataParsed);
-        } else {
-          const dataArray = [];
-          dataArray.push(dataParsed);
-          this.emit(WSEvents.newMessage, dataArray);
+          newMessages = dataParsed.reverse();
+        } else if (!Array.isArray(dataParsed)) {
+          newMessages.push(dataParsed);
         }
+        this.emit(WSEvents.newMessage, newMessages);
       }
     });
 

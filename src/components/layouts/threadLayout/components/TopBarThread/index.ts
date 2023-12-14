@@ -58,7 +58,7 @@ const TopBarMapper = connect<typeof TopBarThread, { TopBarLink: TopBarTitleLink 
   if (activeThread == null) {
     return { hidden: true, class: "hidden" };
   } else {
-    const thread = state.threads[activeThread];
+    const thread = state?.threads_?.[activeThread];
     if (thread == null) {
       return { hidden: true, class: "hidden" };
     } else {

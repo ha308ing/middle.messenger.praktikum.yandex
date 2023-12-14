@@ -1,9 +1,7 @@
 import Component from "@/system/component";
 import router from "@/system/router";
 import connect from "@/system/storeConnector";
-import store from "@/system/store";
 import { type Indexed } from "@/types/types";
-import { type Thread } from "@/types/types.api";
 
 type TopBarThreadLinkProps = { avatar?: string; title?: string; click?: (...args: any[]) => any };
 
@@ -51,11 +49,10 @@ class TopBarManageLink extends TopBarThreadLink {
 
 const topBarMapper = connect<typeof TopBarThreadLink, TopBarThreadLinkProps>(state => {
   const activeThreadId = state.activeThread;
-  if (activeThreadId == null) return {};
-  if (store?.get("threads") == null) return {};
-  const threadData = state.threads.find((x: Thread) => x.id === activeThreadId);
-  const avatar = state.threads_[activeThreadId].avatar;
-  return { ...threadData, avatar };
+  const isNullThread = activeThreadId == null || state?.threads_?.[activeThreadId] == null;
+  if (isNullThread) return {};
+  const threadData = state.threads_[activeThreadId];
+  return { ...threadData };
 });
 
 export const TopBarManageLinkConnected = topBarMapper(TopBarManageLink);

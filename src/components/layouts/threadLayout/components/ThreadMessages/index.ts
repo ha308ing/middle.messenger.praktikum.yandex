@@ -42,29 +42,21 @@ export class ThreadMessages extends Component {
 const ThreadMessagesConnected = connect<typeof ThreadMessages>(state => {
   const { activeThread } = state;
   if (activeThread == null) return { hide: true };
-  const messages = state?.messages?.[activeThread];
-  if (messages == null) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
-  if (!Array.isArray(messages)) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
+  const messages = state?.messages?.[activeThread] ?? [];
   if (messages.length === 0) return { messages: [], hide: false, class: "", activeThread, emptyThread: true };
-  const items = messages
-    .reduce((acc: Message[], m: WSMessage) => {
-      if (m.type === "message") {
-        const date = new Date(m.time);
-        const time = date.toLocaleTimeString();
-        const day = date.toLocaleDateString();
-        const m_ = new Message({
-          sender:
-            state?.threads_?.[activeThread]?.users.find((x: User) => x.id === parseInt(m.user_id))?.login ?? m.user_id,
-          isOutgoing: m.user_id === store.get("user").id,
-          text: m.content,
-          attachments: false,
-          time: `${time} - ${day}`,
-        });
-        acc = [...acc, m_];
-      }
-      return acc;
-    }, [])
-    .filter((x: string | boolean) => x !== false);
+  const items = messages.map((m: WSMessage) => {
+    const date = new Date(m.time);
+    const time = date.toLocaleTimeString();
+    const day = date.toLocaleDateString();
+    return new Message({
+      sender:
+        state?.threads_?.[activeThread]?.users.find((x: User) => x.id === parseInt(m.user_id))?.login ?? m.user_id,
+      isOutgoing: m.user_id === store.get("user").id,
+      text: m.content,
+      attachments: false,
+      time: `${time} - ${day}`,
+    });
+  });
 
   return { messages: items, hide: false, class: "", activeThread, emptyThread: false };
 })(ThreadMessages);

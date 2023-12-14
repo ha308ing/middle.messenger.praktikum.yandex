@@ -4,43 +4,34 @@ import threadsAPI from "@/api/threadsAPI";
 import { type User, type Thread } from "@/types/types.api";
 import STORE, { StoreEvents } from "@/system/store";
 import router from "@/system/router";
-// import threadsAPI from "@/api/threadsAPI";
-// import wsController from "./wsController";
-// import router from "@/system/router";
-// import Router from "@/system/Router";
-// import sb from "@/system/State";
+import wsController from "./wsController";
+import sweater from "@/assets/sweater.png";
 
-type ThreadsAndAvatars = {
-  threads: Thread[];
-  avatars: Record<number, { avatar: string }>;
-};
+type Threads = Record<number, { avatar: string }>;
 
 class ThreadsController {
-  public async getThreads(offset?: number, limit?: number, title?: string): Promise<ThreadsAndAvatars> {
+  public async getThreads(offset?: number, limit?: number, title?: string): Promise<Threads> {
     const response = await threadsAPI.getThreads(offset, limit, title);
-    if (response == null) return { threads: [], avatars: {} };
-    const responseFormed = response.reduce(
-      (acc: ThreadsAndAvatars, t: Thread) => {
-        if (t == null) return acc;
-        const t_ = avatarFixObj(t) as Thread;
-        if (t_.id == null) return acc;
-        acc.threads = [...acc.threads, t_];
-        acc.avatars[t_.id] = { avatar: t_.avatar };
-        return acc;
-      },
-      { threads: [], avatars: {} }
-    );
+    if (response == null) return {};
+    const responseFormed = response.reduce((acc: Threads, t: Thread) => {
+      if (t == null) return acc;
+      const t_ = avatarFixObj(t) as Thread;
+      if (t_.id == null) return acc;
+      wsController.connect(t.id);
+      this.getThreadUsers(t.id).then(res => {
+        if (res != null) {
+          STORE.set(`threads_.${t.id}.users`, res);
+        }
+      });
+      acc[t_.id] = t_;
+      return acc;
+    }, {});
     return responseFormed;
   }
 
   public async updateThreads() {
-    const threadsAndAvatars = await this.getThreads();
-    STORE.set("threads", threadsAndAvatars.threads);
-    STORE.set("threads_", threadsAndAvatars.avatars);
-
-    threadsAndAvatars.threads.forEach(thread => {
-      STORE.emit(StoreEvents.gotThread, thread);
-    });
+    const threads = await this.getThreads();
+    STORE.set("threads_", threads);
   }
 
   public async createThread() {
@@ -58,13 +49,10 @@ class ThreadsController {
       return null;
     }
     const { id: newThreadId } = response;
-    this.updateThreads().then(
-      () => {
-        STORE.set("activeThread", newThreadId);
-        router.go("/messenger");
-      }
-      // rej => {}
-    );
+    await wsController.connect(newThreadId);
+    STORE.set("threads_", { [newThreadId]: { id: newThreadId, title, avatar: sweater, users: [STORE.get("user")] } });
+    STORE.emit(StoreEvents.activateThread, newThreadId);
+
     return null;
   }
 
@@ -102,7 +90,6 @@ class ThreadsController {
       return [...acc, { id, login, avatar }];
     }, []);
     STORE.set(`threads_.${threadId}.users`, formattedUsers);
-    // STORE.emit(StoreEvents.updateUsers, formattedUsers);
     return formattedUsers;
   }
 
@@ -119,14 +106,15 @@ class ThreadsController {
 
   public async removeThread(threadId: number) {
     const response = await threadsAPI.removeThread(threadId);
-    console.log(response);
     if (response) {
+      wsController.sockets[threadId].close();
       STORE.set("activeThread", null);
+      STORE.set(`threads_.${threadId}`, null);
       router.go("/messenger");
-      this.updateThreads().then(() => {
-        return true;
-      });
+
+      this.updateThreads();
     }
+    return true;
   }
 }
 

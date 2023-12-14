@@ -6,8 +6,6 @@ class AuthAPI extends BaseAPI {
     console.log("LoginAPI: isLogged");
     try {
       const { status, response } = await this.transporter.get("/auth/user");
-      console.log("isLogged")
-      console.log(response)
       if (status === 200) {
         return { status, response };
       }

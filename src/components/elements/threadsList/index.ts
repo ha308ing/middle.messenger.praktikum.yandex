@@ -7,7 +7,7 @@ import router from "@/system/router";
 import { type Indexed } from "@/types/types";
 
 store.on(StoreEvents.clickThread, id => {
-  store.set("activeThread", id);
+  store.emit(StoreEvents.activateThread, id);
   router.go("/messenger");
 
   const view = document.querySelector(".messages_container");
@@ -67,12 +67,13 @@ export class ThreadListItem extends Component {
 }
 
 export const ThreadsListConnected = connect<typeof ThreadsList_>(state => {
-  const { activeThread, threads } = state;
+  const { activeThread, threads_: threads } = state;
 
   const threadItems =
     threads == null
       ? false
-      : threads.map((t: Thread) => {
+      : Object.values(threads as Record<string, Thread>).reduce((acc: ThreadListItem[], t: Thread) => {
+          if (t == null) return acc;
           const { last_message } = t;
           let lastMessage = {};
           if (last_message != null) {
@@ -82,14 +83,16 @@ export const ThreadsListConnected = connect<typeof ThreadsList_>(state => {
           }
 
           const active = t.id === activeThread ? { "data-threadActive": true } : {};
-          return new ThreadListItem({
-            ...t,
-            avatar: state?.threads_?.[t.id]?.avatar ?? t.avatar,
-            "data-threadId": t.id,
-            ...active,
-            ...lastMessage,
-          });
-        });
+          return [
+            new ThreadListItem({
+              ...t,
+              "data-threadId": t.id,
+              ...active,
+              ...lastMessage,
+            }),
+            ...acc,
+          ];
+        }, []);
 
   return { threads: threadItems };
 })(ThreadsList_);

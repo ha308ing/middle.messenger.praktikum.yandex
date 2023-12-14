@@ -29,7 +29,7 @@ export class AuthController {
     this.setUserInfo().then(() => {
       threadsController.updateThreads().then(
         () => {
-          router.go("/messenger");
+          router.go("/messenger", true);
         },
         rej => {
           console.log("signin rejected", rej);

@@ -9,32 +9,10 @@ import router from "@/system/router";
 import PasswordChangePage from "@/pages/password-change";
 import MessengerPage from "@/pages/messenger";
 import ThreadManagePage from "@/pages/thread-manage";
-import wsController from "./controllers/wsController";
 import Error404 from "@/pages/404";
 import Error5xx from "@/pages/5xx";
-import threadsAPI from "./api/threadsAPI";
-
-store.on(StoreEvents.gotThread, threadData => {
-  const { id: threadId } = threadData;
-  const userId = store.get("user.id");
-
-  threadsAPI.getThreadToken(threadId).then(threadToken => {
-    wsController.connect(userId, threadId, threadToken).then(
-      socket => {
-        store.set(`sockets.${threadId}`, socket);
-      },
-      rej => {
-        console.error(rej);
-      }
-    );
-  });
-
-  threadsController.getThreadUsers(threadId).then(res => {
-    if (res != null) {
-      store.set(`threads_.${threadId}.users`, res);
-    }
-  });
-});
+import wsController from "./controllers/wsController";
+import { type Thread } from "./types/types.api";
 
 router
   .use("/", SigninPage)
@@ -46,6 +24,10 @@ router
   .use("/password-change", PasswordChangePage)
   .use("/404", Error404)
   .use("/5xx", Error5xx);
+
+store.on(StoreEvents.activateThread, threadId => {
+  store.set("activeThread", threadId);
+});
 
 if (store.get("user")?.id == null) {
   console.log(`no user in store`);
@@ -63,16 +45,12 @@ if (store.get("user")?.id == null) {
   );
 } else {
   console.log(`yes user in store`);
-  threadsController.updateThreads().then(
-    () => {
-      router.go(window.location.pathname);
-    },
-    rej => {
-      console.error("failed to get threads rej");
-      console.error(rej);
-      router.go("/messenger");
-    }
-  );
+  const savedTheads = store.get("threads_");
+  Object.values(savedTheads as Record<string, Thread>).forEach(t => {
+    if (t?.id != null) wsController.connect(t.id);
+  });
+  const targatpathname = window.location.pathname;
+  if (!router.restricted.includes(targatpathname)) router.go("/messenger");
 }
 
 router.start();

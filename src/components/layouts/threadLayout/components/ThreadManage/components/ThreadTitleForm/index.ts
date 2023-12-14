@@ -2,7 +2,6 @@ import Button from "@/components/elements/button";
 import Form from "@/components/elements/form";
 import Input from "@/components/elements/input";
 import connect from "@/system/storeConnector";
-import { type Thread } from "@/types/types.api";
 
 type InputThreadTitleProps = {
   value?: string;
@@ -28,7 +27,7 @@ class InputThreadTitle_ extends Input {
 const InputThreadTitle = connect<typeof InputThreadTitle_, InputThreadTitleProps>(state => {
   const activeThread = state?.activeThread;
   if (activeThread == null) return {};
-  const value = state.threads.find((x: Thread) => x.id === activeThread)?.title ?? "Sweater";
+  const value = state.threads_[activeThread].title ?? "Sweater";
   return {
     value,
   };
