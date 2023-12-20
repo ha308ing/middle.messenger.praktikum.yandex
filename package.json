@@ -9,7 +9,7 @@
     "npm": "~9.8.1"
   },
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite",
     "build": "npm run prebuild && vite build --emptyOutDir",
     "preview": "vite preview --open",
     "server": "node server.js",

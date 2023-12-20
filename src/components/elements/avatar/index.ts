@@ -1,33 +1,51 @@
-import Component, { type Props } from "@/system/Component";
-import sweaterImage from "@/assets/sweater.png";
+import Component from "@/system/component";
+import sweater from "@/assets/sweater.png";
 import "./avatar.scss";
 
-export default class Avatar extends Component {
+export type AvatarProps = {
+  src?: string;
+  alt?: string;
+};
+
+export default class Avatar extends Component<AvatarProps> {
+  constructor(props?: AvatarProps, persistClass: string = "") {
+    super("img", { src: props?.src ?? sweater, alt: props?.alt ?? "Sweater" }, `avatar ${persistClass}`);
+  }
+
   _setTemplate() {
     return " ";
   }
 }
 
-export function createAvatarProfile(props: Props = {}, persistClass = "") {
-  return new Avatar(
-    "img",
-    {
-      src: sweaterImage,
-      class: "avatar avatar_profile",
-      ...props,
-    },
-    persistClass
-  );
+function classifiedAvatar(className: string) {
+  return class extends Avatar {
+    constructor(props?: AvatarProps) {
+      super(props, className);
+    }
+  };
 }
 
-export function createAvatarThread(props: Props = {}, persistClass = "") {
-  return new Avatar(
-    "img",
-    {
-      src: sweaterImage,
-      class: "avatar avatar_thread",
-      ...props,
-    },
-    persistClass
-  );
+export const AvatarProfile = classifiedAvatar("avatar_profile");
+export const AvatarThread = classifiedAvatar("avatar_thread");
+
+/* export class AvatarProfile extends Avatar {
+  constructor(props:AvatarProps) {
+    super(
+      "img",
+      "avatar avatar_profile"
+    );
+  }
 }
+
+export class AvatarThread extends Avatar {
+  constructor(props: AvatarProps) {
+    super(
+      "img",
+      {
+        src: props?.src,
+        alt: props?.alt
+      },
+      "avatar avatar_thread"
+    );
+  }
+} */

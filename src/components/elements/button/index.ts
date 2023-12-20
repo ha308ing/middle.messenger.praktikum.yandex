@@ -1,18 +1,52 @@
-import Component from "@/system/Component";
+import Component from "@/system/component";
 import "./button.scss";
+import Router from "@/system/router";
 
-export default class Button extends Component {
+type ButtonProps = {
+  class?: string;
+  buttonText?: string;
+  type?: string;
+  disabled?: boolean;
+  click?: (event: Event) => any;
+  style?: string;
+};
+
+export default class Button extends Component<ButtonProps> {
+  constructor(props?: ButtonProps, persistClass?: string) {
+    super(
+      "button",
+      {
+        ...props,
+      },
+      persistClass ?? ""
+    );
+  }
+
   protected _setTemplate(): string {
     return `{{buttonText}}`;
   }
 }
 
-export const ButtonSubmitRegistration = new Button("button", {
-  class: "button button_signup button_submit",
-  buttonText: "Sign Up",
-});
+export class ButtonSubmitRegistration extends Button {
+  constructor() {
+    super({
+      class: "button button_signup button_submit",
+      buttonText: "Sign Up",
+      type: "submit",
+      disabled: true,
+    });
+  }
+}
 
-export const ButtonCancelRegistration = new Button("button", {
-  class: "button",
-  buttonText: "Cancel",
-});
+export class ButtonCancelRegistration extends Button {
+  constructor() {
+    super({
+      class: "button",
+      buttonText: "Cancel",
+      type: "button",
+      click: () => {
+        Router.go("/sign-in");
+      },
+    });
+  }
+}

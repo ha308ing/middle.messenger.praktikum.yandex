@@ -1,15 +1,10 @@
-import Handlebars from "handlebars";
-import "@/components/layouts/errorPage";
-import errorPageTemplateString from "@/components/layouts/errorPage/errorPage.hbs?raw";
+import BigLogoLayout from "@/components/layouts/bigLogoLayout";
+import ErrorMessage from "@/components/layouts/errorMessage";
 
-const pageContext = {
-  rootClass: "page errorPage errorPage_5xx bigLogoLayout",
-  errorCode: "5xx",
-  errorMessage: "something went wrong",
-  buttonText: "Go home",
-  onclick: "console.log('errorPage button clicked')",
-};
-
-const page = Handlebars.compile(errorPageTemplateString);
-
-document.body.innerHTML = page(pageContext);
+export default class Page5xx extends BigLogoLayout {
+  constructor() {
+    super({
+      content: new ErrorMessage({ errorCode: "5xx", errorMessage: "something went wrong" }),
+    });
+  }
+}

@@ -1,0 +1,31 @@
+.threadMember {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 3rem;
+  padding: 0.6rem 0.3rem;
+
+  .memberLogoUsername {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .avatar {
+    margin-right: 3rem;
+    aspect-ratio: 1;
+    height: 3rem;
+    width: min-content;
+  }
+
+  .threadMember_login {
+    margin-right: auto;
+  }
+
+  .iconButton_icon {
+    height: 1rem;
+    width: auto;
+  }
+}

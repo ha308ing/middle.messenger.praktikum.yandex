@@ -1,13 +1,18 @@
+{{#unless disabled}}
+
 {{#if label}}
   <label for="{{name}}" class="input_label">{{label}}</label>
 {{/if}}
 
 <input
   class="input_input  {{#if readonly}}input_input__readonly{{/if}}"
+  autocomplete="off"
   type="{{type}}"
   id="{{name}}"
   name="{{name}}"
   placeholder="{{placeholder}}"
   value="{{value}}"
-  {{#if data-readonly}}readonly{{/if}}
+  {{#if readonly}}readonly{{/if}}
 />
+
+{{/unless}}

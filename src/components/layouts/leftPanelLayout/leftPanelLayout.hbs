@@ -1,0 +1,14 @@
+<header>
+  {{{TopBar}}}
+  {{#if Search}}
+    {{{Search}}}
+  {{/if}}
+</header>
+
+  {{#if Threads}}
+      {{{Threads}}}
+    {{else }}
+      <span class="threadList__empty_message">{{noThreadsMessage}}</span>
+  {{/if}}
+
+{{{StartThreadButton}}}

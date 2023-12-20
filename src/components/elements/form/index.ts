@@ -1,107 +1,42 @@
-import Component, { type Props } from "@/system/Component";
+import Component from "@/system/component";
 import formTemplateString from "./form.hbs?raw";
-import { inputValidate } from "@/utils/inputValidation";
+import { formDefaultEvents } from "./formDefaultEvents";
+import type Input from "@/components/elements/input";
+import type Button from "@/components/elements/button";
 
-export default class Form extends Component {
+export type FormProps = {
+  inputs?: Array<Input | boolean>;
+  submitter?: (args_: any) => any;
+  submit_capture?: (args_: any) => any;
+  input_capture?: (args_: any) => any;
+  change_capture?: (args_: any) => any;
+  blur_capture?: (args_: any) => any;
+  buttons?: Button[];
+  editMode?: boolean;
+};
+
+export default class Form extends Component<FormProps> {
+  constructor(props: FormProps = {}, persistClass = "") {
+    super(
+      "form",
+      {
+        ...formDefaultEvents,
+        ...props,
+        submit_capture:
+          props.submitter != null
+            ? (event: Event) => {
+                const formValue = formDefaultEvents.submit_capture(event);
+                if (props.submitter != null) {
+                  props.submitter(formValue);
+                }
+              }
+            : formDefaultEvents.submit_capture,
+      },
+      persistClass
+    );
+  }
+
   protected _setTemplate(): string {
     return formTemplateString.trim();
   }
-}
-
-export function createForm(props: Props = {}, persistClass: string = "") {
-  return new Form(
-    "form",
-    {
-      blur_capture: function (event: Event) {
-        if (!(event.target instanceof HTMLInputElement)) return;
-        const { input, inputParent, submit } = getFormElements(event);
-
-        const isValid = inputValidate(input);
-
-        if (!isValid) {
-          inputParent.classList.add("input__invalid");
-          submit.setAttribute("disabled", "disabled");
-        }
-      },
-      change_capture: function (event: Event) {
-        const { input, inputParent, submit } = getFormElements(event);
-
-        const isValid = inputValidate(input);
-
-        if (!isValid) {
-          inputParent.classList.add("input__invalid");
-          submit.setAttribute("disabled", "disabled");
-        }
-      },
-      input_capture: (event: Event) => {
-        const { input, inputParent, submit } = getFormElements(event);
-
-        inputParent.classList.remove("input__invalid");
-
-        const isValid = inputValidate(input);
-        if (isValid) {
-          inputParent.classList.remove("input__invalid");
-          submit.removeAttribute("disabled");
-        }
-      },
-      submit_capture: (event: Event) => {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
-        const form = event.currentTarget as HTMLFormElement;
-        if (form == null) throw new Error(`submit values: no form is found`);
-
-        const isFormValid = validateForm(form);
-        console.log(`form is valid: ${isFormValid}`);
-
-        if (!isFormValid) return;
-
-        const formValues = getFormValues(form);
-        console.log(formValues);
-        return formValues;
-      },
-      ...props,
-    },
-    persistClass
-  );
-}
-
-interface FormElement {
-  form: HTMLFormElement;
-  input: HTMLInputElement;
-  inputParent: HTMLElement;
-  submit: HTMLButtonElement;
-}
-
-function getFormElements(event: Event): FormElement {
-  const form = event.currentTarget as HTMLFormElement;
-  if (form == null) throw new Error("form blur: form not found");
-
-  const input = event.target as HTMLInputElement;
-  if (input == null) throw new Error("form blur: no target on event");
-
-  const inputParent = input.parentElement;
-  if (inputParent == null) throw new Error("form blur: parent div not found");
-
-  const submit = form.querySelector(".button_submit") as HTMLButtonElement;
-  if (submit == null) throw new Error("form blur: submit button not found");
-
-  return { form, input, inputParent, submit };
-}
-
-function getFormValues(form: HTMLFormElement) {
-  return Array.from(form.querySelectorAll("input")).reduce((result, input): Record<string, string> => {
-    const inputName = input.getAttribute("name");
-    if (inputName == null) throw new Error(`get form values: no name attribute`);
-    return { ...result, [inputName]: input.value };
-  }, {});
-}
-
-function validateForm(form: HTMLFormElement) {
-  return Array.from(form.querySelectorAll("input")).reduce((result, input): boolean => {
-    const isInputValid = inputValidate(input, false);
-    if (input.value == null || input.value.length === 0) return false;
-    result = result && isInputValid;
-    return result;
-  }, true);
 }

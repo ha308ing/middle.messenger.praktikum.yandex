@@ -43,7 +43,8 @@
 }
 
 .input__readonly .input_input,
-.input[data-readonly] .input_input {
+.input[data-readonly] .input_input,
+.input_input__readonly {
   border-color: transparent;
   cursor: default;
 }

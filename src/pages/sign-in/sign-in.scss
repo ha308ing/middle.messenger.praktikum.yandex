@@ -1,0 +1,37 @@
+@use "@/components/styles/modules/variables";
+@use "@/components/styles/modules/bigLogoLayout";
+
+.bigLogoLayout_content_container .heading {
+  font-weight: normal;
+  font-size: 1.5rem;
+  margin-bottom: 5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.form_authorization {
+  .input {
+    width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .input_login {
+    margin-bottom: 2rem;
+  }
+
+  .input_password {
+    margin-bottom: 5rem;
+  }
+
+  .button_signin,
+  .button_signup {
+    display: block;
+    width: variables.$button_width;
+    margin: 0 auto;
+  }
+
+  .button_signin {
+    margin-bottom: 2rem;
+  }
+}

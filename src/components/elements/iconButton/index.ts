@@ -1,4 +1,4 @@
-import Component, { type Props } from "@/system/Component";
+import Component from "@/system/component";
 import iconButtonTemplateString from "./iconButton.hbs?raw";
 import "./iconButton.scss";
 import icon_context_horizontal from "@/assets/icon_context_horizontal.png";
@@ -11,73 +11,60 @@ import icon_back from "@/assets/icon_back.png";
 import icon_exit from "@/assets/icon_exit.png";
 import icon_edit from "@/assets/icon_edit.png";
 import icon_send from "@/assets/icon_send.png";
+import Router from "@/system/router";
 
-export default class IconButton extends Component {
+export type IconButtonProps = {
+  type?: string;
+  iconButtonIcon: string;
+  click?: ((...args: any[]) => any) | false;
+  click_capture?: ((...args: any[]) => any) | false;
+};
+
+export default class IconButton extends Component<IconButtonProps> {
+  constructor(props: IconButtonProps, persistClass: string) {
+    super(
+      "button",
+      {
+        iconButtonIcon: props.iconButtonIcon,
+        type: props?.type ?? "button",
+        click: props?.click ?? false,
+        click_capture: props?.click_capture ?? false,
+      },
+      `iconButton ${persistClass}`
+    );
+  }
+
   protected _setTemplate(): string {
     return iconButtonTemplateString.trim();
   }
 }
 
-export function createIconButtonContextVertical(props: Props = {}) {
-  return new IconButton(
-    "button",
-    { type: "button", iconButtonIcon: icon_context_vertical, ...props },
-    "iconButton iconButtonContext"
-  );
+function setIcon(icon: string, defaultClass: string) {
+  return class extends IconButton {
+    constructor(props?: Omit<IconButtonProps, "iconButtonIcon">, persistClass: string = "") {
+      super({ iconButtonIcon: icon, ...props }, `${defaultClass} ${persistClass}`);
+    }
+  };
 }
 
-export function createIconButtonContextHorizontal(props: Props = {}) {
-  return new IconButton(
-    "button",
-    { type: "button", iconButtonIcon: icon_context_horizontal, ...props },
-    "iconButton iconButtonContext"
-  );
-}
+export const IconButtonContextVertical = setIcon(icon_context_vertical, "iconButtonContext");
+export const IconButtonContextHorizontal = setIcon(icon_context_horizontal, "iconButtonContext");
+export const IconButtonBack_ = setIcon(icon_back, "iconButtonBack");
+export const IconButtonAttach = setIcon(icon_attach, "iconButtonAttach");
+export const IconButtonSend = setIcon(icon_send, "iconButtonSend");
+export const IconButtonInvite = setIcon(icon_invite, "iconButtonInvite");
+export const IconButtonExit_ = setIcon(icon_exit, "iconButtonExit");
+export const IconButtonPassword_ = setIcon(icon_password, "iconButtonPassword");
+export const IconButtonEdit_ = setIcon(icon_edit, "iconButtonEdit");
+export const IconButtonClose = setIcon(icon_close, "iconButtonClose");
 
-export function createIconButtonBack(props: Props = {}) {
-  return new IconButton("button", { type: "button", iconButtonIcon: icon_back, ...props }, "iconButton iconButtonBack");
-}
-
-export function createIconButtonAttach(props: Props = {}) {
-  return new IconButton(
-    "button",
-    { type: "button", iconButtonIcon: icon_attach, ...props },
-    "iconButton iconButtonAttach"
-  );
-}
-
-export function createIconButtonSend(props: Props = {}) {
-  return new IconButton("button", { type: "button", iconButtonIcon: icon_send, ...props }, "iconButton iconButtonSend");
-}
-
-export function createIconButtonClose(props: Props = {}) {
-  return new IconButton(
-    "button",
-    { type: "button", iconButtonIcon: icon_close, ...props },
-    "iconButton iconButtonClose"
-  );
-}
-
-export function createIconButtonInvite(props: Props = {}) {
-  return new IconButton(
-    "button",
-    { type: "button", iconButtonIcon: icon_invite, ...props },
-    "iconButton iconButtonInvite"
-  );
-}
-
-export function createIconButtonExit(props: Props = {}) {
-  return new IconButton("button", { type: "button", iconButtonIcon: icon_exit, ...props }, "iconButton iconButtonExit");
-}
-
-export function createIconButtonPassword(props: Props = {}) {
-  return new IconButton(
-    "button",
-    { type: "button", iconButtonIcon: icon_password, ...props },
-    "iconButton iconButtonPassword"
-  );
-}
-
-export function iconButtonEdit(props: Props = {}) {
-  return new IconButton("button", { type: "button", iconButtonIcon: icon_edit, ...props }, "iconButton iconButtonEdit");
+export class IconButtonBack extends IconButtonBack_ {
+  constructor(props?: IconButtonProps) {
+    super({
+      click: () => {
+        Router.back();
+      },
+      ...props,
+    });
+  }
 }
