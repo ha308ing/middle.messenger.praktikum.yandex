@@ -42,8 +42,8 @@ class Router {
 
   go(pathname: string, force = false) {
     if (window.location.pathname === pathname && !force) return;
+    pathname = this._onRoute(pathname);
     this.history.pushState({}, "", pathname);
-    this._onRoute(pathname);
   }
 
   back() {
@@ -66,7 +66,7 @@ class Router {
   _onRoute(pathname: string) {
     if (store.get("user")?.id == null && this.restricted.includes(pathname)) {
       this._onRoute("/sign-in");
-      return;
+      return "/sign-in";
     }
     /*     if (store.get("user")?.id != null && this.allowed.includes(pathname)) {
       this._onRoute("/messenger");
@@ -75,13 +75,12 @@ class Router {
     console.log("not restricted");
     if (this.redirects[pathname] != null) {
       window.location.pathname = this.redirects[pathname];
-      return;
+      return pathname;
     }
-    console.log("onroute", window.location.pathname);
     const route = this.routes[pathname];
     if (route == null) {
       if (this.routes["/404"] != null) this.go("/404");
-      return;
+      return "/404";
     }
     if (this._currentRoute != null) {
       // this._currentRoute._block.content.remove()
@@ -90,6 +89,7 @@ class Router {
 
     this._currentRoute = route;
     route.render();
+    return pathname;
   }
 }
 
