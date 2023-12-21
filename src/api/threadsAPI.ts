@@ -36,6 +36,7 @@ class ThreadsAPI extends BaseAPI {
   }
 
   public async addUsers(userId: number, threadId: number) {
+    let message = "Ok";
     try {
       const addUserObject = { users: [userId], chatId: threadId };
       const { status, response } = await this.transporter.put("/chats/users", {
@@ -47,14 +48,15 @@ class ThreadsAPI extends BaseAPI {
       });
 
       if (status === 200) {
-        return response;
+        return { result: true, message };
       }
+      message = response.reason;
       throw new Error(`${status}, ${response.reason}`);
     } catch (e) {
       console.error("ThreasdAPI: addUsers failed");
       console.error(e);
     }
-    return false;
+    return { result: false, message: `Failed to add user: ${message}` };
   }
 
   public async getThreadUsers(threadId: number): Promise<User[] | false> {
@@ -70,6 +72,7 @@ class ThreadsAPI extends BaseAPI {
   }
 
   public async removeUsers(userId: number, threadId: number) {
+    let message = "Ok";
     try {
       const removeUserObject = { users: [userId], chatId: threadId };
       const { status, response } = await this.transporter.delete(`/chats/users`, {
@@ -77,16 +80,18 @@ class ThreadsAPI extends BaseAPI {
         withCredentials: true,
         data: JSON.stringify(removeUserObject),
       });
-      if (status === 200) return true;
+      if (status === 200) return { result: true, message };
+      message = response.reason;
       throw new Error(`${status}: ${response.reason}`);
     } catch (e) {
       console.error("ThreadAPI: removeUser failed");
       console.error(e);
     }
-    return false;
+    return { result: false, message: `Failed to remove user: ${message}` };
   }
 
   public async removeThread(threadId: number) {
+    let message = "Ok";
     try {
       const formattedRemoveThreadObj = { chatId: threadId };
       const { status, response } = await this.transporter.delete(`/chats`, {
@@ -94,21 +99,14 @@ class ThreadsAPI extends BaseAPI {
         withCredentials: true,
         data: JSON.stringify(formattedRemoveThreadObj),
       });
-      console.log(response);
-      if (status === 403) {
-        alert(response.reason);
-        return false;
-      }
-      if (status === 200) {
-        alert("Ok");
-        return true;
-      }
+      if (status === 200) return { result: true, message };
+      message = response.reason;
       throw new Error(`${status}: ${response.reason}`);
     } catch (e) {
       console.error("ThreadsAPI: removeThread failed");
       console.error(e);
     }
-    return false;
+    return { result: false, message: `Failed to remove thread: ${message}` };
   }
 
   public async getThreadToken(threadId: number) {

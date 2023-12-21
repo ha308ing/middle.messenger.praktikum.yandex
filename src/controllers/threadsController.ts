@@ -69,9 +69,9 @@ class ThreadsController {
   }
 
   public async addUsers(userId: number, threadId: number) {
-    const response = await threadsAPI.addUsers(userId, threadId);
-    if (response === false) {
-      alert("Failed to add user");
+    const { result, message } = await threadsAPI.addUsers(userId, threadId);
+    alert(message);
+    if (!result) {
       return false;
     }
     const users = await this.getThreadUsers(threadId);
@@ -94,9 +94,9 @@ class ThreadsController {
   }
 
   public async removeUsers(userId: number, threadId: number) {
-    const response = await threadsAPI.removeUsers(userId, threadId);
-    if (!response) {
-      alert("Failed to remove user");
+    const { result, message } = await threadsAPI.removeUsers(userId, threadId);
+    alert(message);
+    if (!result) {
       return false;
     }
     const users = await this.getThreadUsers(threadId);
@@ -105,8 +105,9 @@ class ThreadsController {
   }
 
   public async removeThread(threadId: number) {
-    const response = await threadsAPI.removeThread(threadId);
-    if (response) {
+    const { result, message } = await threadsAPI.removeThread(threadId);
+    alert(message);
+    if (result) {
       wsController.sockets[threadId].close();
       STORE.set("activeThread", null);
       STORE.set(`threads_.${threadId}`, null);
