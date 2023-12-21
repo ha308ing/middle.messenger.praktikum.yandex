@@ -105,16 +105,13 @@ class ThreadsController {
   }
 
   public async removeThread(threadId: number) {
-    const { result, message } = await threadsAPI.removeThread(threadId);
+    const { message } = await threadsAPI.removeThread(threadId);
     alert(message);
-    if (result) {
-      wsController.sockets[threadId].close();
-      STORE.set("activeThread", null);
-      STORE.set(`threads_.${threadId}`, null);
-      router.go("/messenger");
-
-      this.updateThreads();
-    }
+    wsController.sockets[threadId].close();
+    STORE.set("activeThread", null);
+    STORE.set(`threads_.${threadId}`, null);
+    router.go("/messenger");
+    this.updateThreads();
     return true;
   }
 }
