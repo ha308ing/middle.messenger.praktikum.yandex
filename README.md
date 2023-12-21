@@ -1,12 +1,12 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4abdf3ad-280d-4be4-a89a-c669f97d395f/deploy-status?branch=deploy)](https://app.netlify.com/sites/tangerine-panda-5ff950/deploys)
 
 # Sprint 4 Info
+
 - add testing of component, httpTransport, router with jest
-- add husky, to validate code on commit and push
+- add husky and lint-staged, to validate code on commit and push
 - updated script with npm-run-all
 
-[![2023-12-13-161043.gif](https://i.postimg.cc/WbhSrkWN/2023-12-13-161043.gif)](https://postimg.cc/9rHGHrHK)
-
+[![2023-12-21-144425.gif](https://i.postimg.cc/85twBtWB/2023-12-21-144425.gif)](https://postimg.cc/hzQ9K82f)
 
 # Project Messenger "Sweater"
 
