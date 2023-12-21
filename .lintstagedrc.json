@@ -1,0 +1,7 @@
+{
+  "./src/**/*.{scss,css}": ["prettier --check", "stylelint"],
+  "./src/**/*.{ts,js}": ["prettier --check", "eslint"],
+  "./*.{ts,js}": ["prettier --check", "eslint"],
+  "./*.{json, toml}": ["prettier --check"],
+  "./src/**/*.html": ["prettier --check"]
+}

@@ -75,4 +75,8 @@ class Store extends EventBus {
   }
 }
 
+if (window.localStorage.getItem("threads") != null) {
+  window.localStorage.clear();
+}
+
 export default new Store();

@@ -69,9 +69,9 @@ class ThreadsController {
   }
 
   public async addUsers(userId: number, threadId: number) {
-    const response = await threadsAPI.addUsers(userId, threadId);
-    if (response === false) {
-      alert("Failed to add user");
+    const { result, message } = await threadsAPI.addUsers(userId, threadId);
+    alert(message);
+    if (!result) {
       return false;
     }
     const users = await this.getThreadUsers(threadId);
@@ -84,19 +84,19 @@ class ThreadsController {
 
     if (response === false) return false;
 
-    const formattedUsers = response.reduce((acc: Array<Pick<User, "id" | "login" | "avatar">>, user: User) => {
-      let { id, login, avatar } = user;
+    const formattedUsers = response.reduce((acc: Array<Pick<User, "id" | "login" | "avatar" | "role">>, user: User) => {
+      let { id, login, avatar, role } = user;
       avatar = avatarFix(avatar);
-      return [...acc, { id, login, avatar }];
+      return [...acc, { id, login, avatar, role }];
     }, []);
     STORE.set(`threads_.${threadId}.users`, formattedUsers);
     return formattedUsers;
   }
 
   public async removeUsers(userId: number, threadId: number) {
-    const response = await threadsAPI.removeUsers(userId, threadId);
-    if (!response) {
-      alert("Failed to remove user");
+    const { result, message } = await threadsAPI.removeUsers(userId, threadId);
+    alert(message);
+    if (!result) {
       return false;
     }
     const users = await this.getThreadUsers(threadId);
@@ -105,15 +105,13 @@ class ThreadsController {
   }
 
   public async removeThread(threadId: number) {
-    const response = await threadsAPI.removeThread(threadId);
-    if (response) {
-      wsController.sockets[threadId].close();
-      STORE.set("activeThread", null);
-      STORE.set(`threads_.${threadId}`, null);
-      router.go("/messenger");
-
-      this.updateThreads();
-    }
+    const { message } = await threadsAPI.removeThread(threadId);
+    alert(message);
+    wsController.sockets[threadId].close();
+    STORE.set("activeThread", null);
+    STORE.set(`threads_.${threadId}`, null);
+    router.go("/messenger");
+    this.updateThreads();
     return true;
   }
 }

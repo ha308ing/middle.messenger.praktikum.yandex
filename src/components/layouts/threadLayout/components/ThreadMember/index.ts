@@ -12,6 +12,8 @@ export type ThreadMemberProps = {
   avatar: string;
   id: number;
   isMember: boolean;
+  isAdmin: boolean;
+  isCurrentUser: boolean;
 };
 
 export default class ThreadMember extends Component {
@@ -22,6 +24,8 @@ export default class ThreadMember extends Component {
         memberLogoUsername: new MemberLogoUsername({ login: props.login, avatar: props.avatar ?? sweater }),
         "data-username": props.login,
         "data-userId": props.id,
+        isCurrentUser: props.isCurrentUser,
+        isAdmin: props.isAdmin,
         iconButtonClose: new IconButtonClose({
           click_capture: () => {
             const activeThread = Store.get("activeThread");
