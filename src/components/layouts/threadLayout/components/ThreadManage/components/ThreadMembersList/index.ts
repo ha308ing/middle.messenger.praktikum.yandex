@@ -20,7 +20,10 @@ const ThreadMembersListConnected = storeConnector<typeof ThreadMembersList>(stat
   if (activeThreadId == null) return { Members: [] };
   const users = store.get(`threads_.${activeThreadId}.users`);
   if (users == null) return { Members: [] };
-  const Members = users.map((u: User) => new ThreadMember({ ...u, isMember: true }));
+  const Members = users.map(
+    (u: User) =>
+      new ThreadMember({ ...u, isMember: true, isCurrentUser: u.id === state?.user?.id, isAdmin: u.role === "admin" })
+  );
   return { Members };
 })(ThreadMembersList);
 

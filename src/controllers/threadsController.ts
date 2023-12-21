@@ -84,10 +84,10 @@ class ThreadsController {
 
     if (response === false) return false;
 
-    const formattedUsers = response.reduce((acc: Array<Pick<User, "id" | "login" | "avatar">>, user: User) => {
-      let { id, login, avatar } = user;
+    const formattedUsers = response.reduce((acc: Array<Pick<User, "id" | "login" | "avatar" | "role">>, user: User) => {
+      let { id, login, avatar, role } = user;
       avatar = avatarFix(avatar);
-      return [...acc, { id, login, avatar }];
+      return [...acc, { id, login, avatar, role }];
     }, []);
     STORE.set(`threads_.${threadId}.users`, formattedUsers);
     return formattedUsers;

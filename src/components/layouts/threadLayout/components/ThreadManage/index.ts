@@ -9,8 +9,8 @@ import FindUserForm from "./components/FindUserForm";
 import AvatarForm from "./components/AvatarForm";
 import ThreadTitleForm from "./components/ThreadTitleForm";
 import ThreadController from "@/controllers/threadsController";
-import { type ThreadMemberProps } from "../ThreadMember";
 import ThreadMembersListConnected, { type ThreadMembersList } from "./components/ThreadMembersList";
+import { type User } from "@/types/types.api";
 
 class ButtonLeaveThread extends Button {
   constructor() {
@@ -67,8 +67,15 @@ export default class ThreadManageLayout extends Component<ThreadManageLayoutComp
       const FoundUsers =
         foundUsers != null
           ? foundUsers.map(
-              (t: ThreadMemberProps) =>
-                new ThreadMember({ id: t.id, login: t.login, avatar: t.avatar, isMember: false })
+              (t: User) =>
+                new ThreadMember({
+                  id: t.id,
+                  login: t.login,
+                  avatar: t.avatar,
+                  isMember: false,
+                  isCurrentUser: t.id === store.get("user.id"),
+                  isAdmin: t.role === "admin",
+                })
             )
           : false;
       if (FoundUsers.length === 0) {
@@ -85,9 +92,16 @@ export default class ThreadManageLayout extends Component<ThreadManageLayoutComp
       }
       const ThreadMembers =
         threadMembers != null
-          ? threadMembers.map(
-              (t: ThreadMemberProps) => new ThreadMember({ id: t.id, login: t.login, avatar: t.avatar, isMember: true })
-            )
+          ? threadMembers.map((t: User) => {
+              return new ThreadMember({
+                id: t.id,
+                login: t.login,
+                avatar: t.avatar,
+                isMember: true,
+                isCurrentUser: t.id === store.get("user.id"),
+                isAdmin: t.role === "admin",
+              });
+            })
           : false;
 
       this.setProps({ ThreadMembers, FoundUsers: false });
