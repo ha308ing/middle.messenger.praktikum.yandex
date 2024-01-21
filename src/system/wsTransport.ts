@@ -71,7 +71,8 @@ export default class WSTransport extends EventBus {
     this.socket.addEventListener("message", event => {
       const dataParsed = JSON.parse(event.data);
       let newMessages = [];
-      if (dataParsed?.type !== "pong" && dataParsed != null) {
+      const irrelevantMessage = dataParsed?.type === "pong" || dataParsed?.type === "user connected";
+      if (!irrelevantMessage && dataParsed != null) {
         if (Array.isArray(dataParsed)) {
           newMessages = dataParsed.reverse();
         } else if (!Array.isArray(dataParsed)) {

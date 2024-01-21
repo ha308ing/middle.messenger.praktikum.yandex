@@ -2,6 +2,7 @@
   "root": true,
   "env": { "browser": true },
   "ignorePatterns": ["dist/"],
+  "parserOptions": { "project": null, "sourceType": "module", "ecmaVersion": "latest" },
   "overrides": [
     {
       "files": "./src/**/*.{ts,js}",
@@ -18,8 +19,7 @@
     {
       "env": { "node": true, "es6": true },
       "extends": ["eslint:recommended"],
-      "files": "./*.js",
-      "parserOptions": { "project": null, "sourceType": "module", "ecmaVersion": "latest" }
+      "files": "./*.js"
     }
   ]
 }

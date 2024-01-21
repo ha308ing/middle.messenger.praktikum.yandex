@@ -7,6 +7,7 @@ export type User = {
   login: string;
   avatar: string;
   email: string;
+  role: string;
 };
 
 export type UserDetails = Omit<User, "avatar">;
