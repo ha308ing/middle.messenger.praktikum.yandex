@@ -1,28 +1,20 @@
 import "./threadManage.scss";
-import TwoPanelLayout from "@/components/layouts/twoPanelsLayout";
-// import { ThreadManage } from "@/components/layouts/threadLayout";
-import RightPanel from "@/components/layouts/rightPanelLayout";
-import ThreadManageLayout from "@/components/layouts/threadLayout/components/ThreadManage";
-// import TopBarThreadConnected from "@/components/layouts/threadLayout/components/TopBarThread";
-// import Component from "@/system/component";
-import { TopBarManageConnected } from "@/components/layouts/threadLayout/components/TopBarThread";
+import { TwoPanelLayout } from "@/components/layouts/twoPanelsLayout";
+import { RightPanel } from "@/components/layouts/rightPanelLayout";
+import { TopBarManageConnected, ThreadManageLayout } from "@/components/layouts/threadLayout";
 
-export default class ThreadManagePage extends TwoPanelLayout {
+class ThreadManageRightPanel extends RightPanel {
   constructor() {
-    super({
-      RightPanel: new RightPanel({
-        content: [new TopBarManageConnected(), new ThreadManageLayout({})],
-      }),
-    });
+    super();
+
+    this.lists.content = [new TopBarManageConnected(), new ThreadManageLayout()];
   }
 }
 
-// export default class ThreadActivePage extends TwoPanelLayout {
-//   constructor() {
-//     super({
-//       RightPanel: new RightPanel({
-//         content: [new TopBarThread(), new ThreadMessagesConnected(), new SendMessageFormConnected()],
-//       }),
-//     });
-//   }
-// }
+export class ThreadManagePage extends TwoPanelLayout {
+  constructor() {
+    super();
+
+    this.lists.RightPanel = [new ThreadManageRightPanel()];
+  }
+}

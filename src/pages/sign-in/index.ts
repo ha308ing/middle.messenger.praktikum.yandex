@@ -1,9 +1,9 @@
 import "./sign-in.scss";
-import Form from "@/components/elements/form";
+import { Form } from "@/components/elements/form";
 import { InputLogin, InputPassword } from "@/components/elements/input";
-import Button from "@/components/elements/button";
+import { Button } from "@/components/elements/button";
 import router from "@/system/router";
-import BigLogoLayout from "@/components/layouts/bigLogoLayout";
+import { BigLogoLayout } from "@/components/layouts/bigLogoLayout";
 import authController from "@/controllers/authController";
 
 class ButtonSignin extends Button {
@@ -31,23 +31,21 @@ class ButtonSignup extends Button {
 
 class SigninForm extends Form {
   constructor() {
-    super(
-      {
-        inputs: [new InputLogin(), new InputPassword()],
-        buttons: [new ButtonSignin(), new ButtonSignup()],
-        submitter: loginInput => {
-          authController.signin(loginInput);
-        },
+    super({
+      submitter: loginInput => {
+        authController.signin(loginInput);
       },
-      "form form_authorization"
-    );
+      class: "form form_authorization",
+    });
+
+    this.lists.inputs = [new InputLogin(), new InputPassword()];
+    this.lists.buttons = [new ButtonSignin(), new ButtonSignup()];
   }
 }
 
-export default class SigninPage extends BigLogoLayout {
+export class SigninPage extends BigLogoLayout {
   constructor() {
-    super({
-      content: [`<h1 class="heading">Sign In</h1>`, new SigninForm()],
-    });
+    super();
+    this.lists.content = [`<h1 class="heading">Sign In</h1>`, new SigninForm()];
   }
 }

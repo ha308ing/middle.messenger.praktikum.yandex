@@ -1,9 +1,9 @@
-import STORE from "@/system/store";
+import store from "@/system/store";
 import AuthAPI from "@/api/authAPI";
 import { avatarFixObj } from "@/utils/avatarFix";
 import threadsController from "@/controllers/threadsController";
 import router from "@/system/router";
-import SigninPage from "@/pages/sign-in";
+import { SigninPage } from "@/pages/sign-in";
 
 export class AuthController {
   public async isLogged() {
@@ -15,7 +15,7 @@ export class AuthController {
     const { status, response } = await this.isLogged();
     if (status !== 200 && status !== 400) throw new Error(`${status}: ${response.reason}`);
     const responseFixedAvatar = avatarFixObj(response);
-    STORE.set("user", responseFixedAvatar);
+    store.set("user", responseFixedAvatar);
     return true;
   }
 
@@ -45,7 +45,7 @@ export class AuthController {
     console.log(`logout response: `, response);
     router.clearRedirects();
     window.localStorage.clear();
-    STORE.clearState();
+    store.clearState();
     router.use("/", SigninPage);
     router.use("/sign-in", SigninPage);
     router.use("/sign-up", SigninPage).go("/sign-in");

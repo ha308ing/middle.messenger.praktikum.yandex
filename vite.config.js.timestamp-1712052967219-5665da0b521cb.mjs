@@ -1,0 +1,40 @@
+// vite.config.js
+import { defineConfig } from "file:///home/user/code/yandex-practicum/projects/middle.messenger.praktikum.yandex/node_modules/vite/dist/node/index.js";
+import { resolve } from "path";
+import handlebars from "file:///home/user/code/yandex-practicum/projects/middle.messenger.praktikum.yandex/node_modules/vite-plugin-handlebars/dist/index.js";
+var __vite_injected_original_dirname = "/home/user/code/yandex-practicum/projects/middle.messenger.praktikum.yandex";
+var title = "YP-Project Messenger-Sprint 1";
+var pageData = {
+  "/index.html": { title }
+};
+var vite_config_default = defineConfig({
+  root: resolve(__vite_injected_original_dirname, "src"),
+  // publicDir: resolve(__dirname, "static"),  resolve: {
+  resolve: {
+    alias: { "@": resolve(__vite_injected_original_dirname, "src") }
+  },
+  build: {
+    outDir: resolve(__vite_injected_original_dirname, "dist"),
+    rollupOptions: {
+      input: {
+        index: resolve(__vite_injected_original_dirname, "src/index.html")
+      }
+    }
+  },
+  server: {
+    port: 3e3
+  },
+  plugins: [
+    handlebars({
+      context(pagePath) {
+        return pageData[pagePath];
+      },
+      partialDirectory: [resolve(__vite_injected_original_dirname, "src/components")],
+      helpers: {}
+    })
+  ]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCIvaG9tZS91c2VyL2NvZGUveWFuZGV4LXByYWN0aWN1bS9wcm9qZWN0cy9taWRkbGUubWVzc2VuZ2VyLnByYWt0aWt1bS55YW5kZXhcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfZmlsZW5hbWUgPSBcIi9ob21lL3VzZXIvY29kZS95YW5kZXgtcHJhY3RpY3VtL3Byb2plY3RzL21pZGRsZS5tZXNzZW5nZXIucHJha3Rpa3VtLnlhbmRleC92aXRlLmNvbmZpZy5qc1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9pbXBvcnRfbWV0YV91cmwgPSBcImZpbGU6Ly8vaG9tZS91c2VyL2NvZGUveWFuZGV4LXByYWN0aWN1bS9wcm9qZWN0cy9taWRkbGUubWVzc2VuZ2VyLnByYWt0aWt1bS55YW5kZXgvdml0ZS5jb25maWcuanNcIjtpbXBvcnQgeyBkZWZpbmVDb25maWcgfSBmcm9tIFwidml0ZVwiO1xuaW1wb3J0IHsgcmVzb2x2ZSB9IGZyb20gXCJwYXRoXCI7XG5pbXBvcnQgaGFuZGxlYmFycyBmcm9tIFwidml0ZS1wbHVnaW4taGFuZGxlYmFyc1wiO1xuXG5jb25zdCB0aXRsZSA9IFwiWVAtUHJvamVjdCBNZXNzZW5nZXItU3ByaW50IDFcIjtcbmNvbnN0IHBhZ2VEYXRhID0ge1xuICBcIi9pbmRleC5odG1sXCI6IHsgdGl0bGUgfSxcbn07XG5cbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XG4gIHJvb3Q6IHJlc29sdmUoX19kaXJuYW1lLCBcInNyY1wiKSxcbiAgLy8gcHVibGljRGlyOiByZXNvbHZlKF9fZGlybmFtZSwgXCJzdGF0aWNcIiksICByZXNvbHZlOiB7XG4gIHJlc29sdmU6IHtcbiAgICBhbGlhczogeyBcIkBcIjogcmVzb2x2ZShfX2Rpcm5hbWUsIFwic3JjXCIpIH0sXG4gIH0sXG4gIGJ1aWxkOiB7XG4gICAgb3V0RGlyOiByZXNvbHZlKF9fZGlybmFtZSwgXCJkaXN0XCIpLFxuICAgIHJvbGx1cE9wdGlvbnM6IHtcbiAgICAgIGlucHV0OiB7XG4gICAgICAgIGluZGV4OiByZXNvbHZlKF9fZGlybmFtZSwgXCJzcmMvaW5kZXguaHRtbFwiKSxcbiAgICAgIH0sXG4gICAgfSxcbiAgfSxcbiAgc2VydmVyOiB7XG4gICAgcG9ydDogMzAwMCxcbiAgfSxcbiAgcGx1Z2luczogW1xuICAgIGhhbmRsZWJhcnMoe1xuICAgICAgY29udGV4dChwYWdlUGF0aCkge1xuICAgICAgICByZXR1cm4gcGFnZURhdGFbcGFnZVBhdGhdO1xuICAgICAgfSxcbiAgICAgIHBhcnRpYWxEaXJlY3Rvcnk6IFtyZXNvbHZlKF9fZGlybmFtZSwgXCJzcmMvY29tcG9uZW50c1wiKV0sXG4gICAgICBoZWxwZXJzOiB7fSxcbiAgICB9KSxcbiAgXSxcbn0pO1xuIl0sCiAgIm1hcHBpbmdzIjogIjtBQUFtWixTQUFTLG9CQUFvQjtBQUNoYixTQUFTLGVBQWU7QUFDeEIsT0FBTyxnQkFBZ0I7QUFGdkIsSUFBTSxtQ0FBbUM7QUFJekMsSUFBTSxRQUFRO0FBQ2QsSUFBTSxXQUFXO0FBQUEsRUFDZixlQUFlLEVBQUUsTUFBTTtBQUN6QjtBQUVBLElBQU8sc0JBQVEsYUFBYTtBQUFBLEVBQzFCLE1BQU0sUUFBUSxrQ0FBVyxLQUFLO0FBQUE7QUFBQSxFQUU5QixTQUFTO0FBQUEsSUFDUCxPQUFPLEVBQUUsS0FBSyxRQUFRLGtDQUFXLEtBQUssRUFBRTtBQUFBLEVBQzFDO0FBQUEsRUFDQSxPQUFPO0FBQUEsSUFDTCxRQUFRLFFBQVEsa0NBQVcsTUFBTTtBQUFBLElBQ2pDLGVBQWU7QUFBQSxNQUNiLE9BQU87QUFBQSxRQUNMLE9BQU8sUUFBUSxrQ0FBVyxnQkFBZ0I7QUFBQSxNQUM1QztBQUFBLElBQ0Y7QUFBQSxFQUNGO0FBQUEsRUFDQSxRQUFRO0FBQUEsSUFDTixNQUFNO0FBQUEsRUFDUjtBQUFBLEVBQ0EsU0FBUztBQUFBLElBQ1AsV0FBVztBQUFBLE1BQ1QsUUFBUSxVQUFVO0FBQ2hCLGVBQU8sU0FBUyxRQUFRO0FBQUEsTUFDMUI7QUFBQSxNQUNBLGtCQUFrQixDQUFDLFFBQVEsa0NBQVcsZ0JBQWdCLENBQUM7QUFBQSxNQUN2RCxTQUFTLENBQUM7QUFBQSxJQUNaLENBQUM7QUFBQSxFQUNIO0FBQ0YsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K

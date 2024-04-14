@@ -5,3 +5,5 @@ export type PlainObject<T = unknown> = {
 export type Indexed<T = unknown> = {
   [k in string]: T;
 };
+
+export type Nullable<T> = T | null;

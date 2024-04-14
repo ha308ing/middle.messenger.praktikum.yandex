@@ -1,6 +1,6 @@
 type handler<T = any> = (...args: T[]) => void;
 
-export default class EventBus {
+export class EventBus {
   _events: Record<string, handler[]> = {};
 
   on(event: string, handler: handler): void {

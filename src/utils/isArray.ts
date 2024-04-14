@@ -3,6 +3,6 @@
  * @param value unknown
  * @returns boolean
  */
-export default function isArray(value: unknown): value is [] {
+export function isArray(value: unknown): value is [] {
   return Array.isArray(value);
 }

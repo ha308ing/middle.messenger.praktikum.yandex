@@ -1,12 +1,12 @@
-import isEqual from "@/utils/isEqual";
-import store, { StoreEvents, type State } from "@/system/store";
-import { type Indexed } from "@/types/types";
-import type Component from "./component";
+import { isEqual } from "@/utils/isEqual";
+import store, { StoreEvents } from "@/system/store";
+import type { State } from "@/system/store";
+import type { Indexed } from "@/types/types";
+import type { Block } from "./block";
 
-export default function storeConnector<
-  K extends new (...props: any[]) => Component = typeof Component,
-  T extends Indexed = Indexed,
->(mapFn: (state: State) => State & T) {
+export function storeConnector<K extends new (...props: any[]) => Block = typeof Block, T extends Indexed = Indexed>(
+  mapFn: (state: State) => State & T
+) {
   return function (component: K): K {
     return class extends component {
       constructor(...props: any[]) {

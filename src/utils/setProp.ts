@@ -31,7 +31,7 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
   return lhs;
 }
 
-export default function setProp(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+export function setProp(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
   if (typeof object !== "object" || object === null) {
     return object;
   }

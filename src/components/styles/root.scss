@@ -1,8 +1,9 @@
 @use "@/components/styles/modules/colors";
-@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap";
+
+// @import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap";
 
 :root {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 *,
@@ -10,6 +11,15 @@
 *::after {
   box-sizing: border-box;
   font-size: 1rem;
+  cursor: default;
+}
+
+input {
+  cursor: initial;
+}
+
+button > * {
+  cursor: pointer;
 }
 
 h1,
@@ -26,8 +36,10 @@ body {
 
 .page,
 #app {
-  font-family: "Open Sans", sans-serif;
+  // font-family: "Open Sans", sans-serif;
+  font-family: sans-serif;
   background-color: colors.$pureWhite;
+  color: colors.$darkGrey;
   width: 100vw;
   height: 100vh;
   margin: 0;

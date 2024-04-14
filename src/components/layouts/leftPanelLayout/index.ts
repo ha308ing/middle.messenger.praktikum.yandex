@@ -1,17 +1,17 @@
-import Component from "@/system/component";
-import leftPanelTemplateString from "./leftPanelLayout.hbs?raw";
-import Button from "@/components/elements/button";
-import UserProfileTopBarLink from "./components/TopBarProfileLink";
-import TopBar from "@/components/elements/topBar";
-import type Input from "@/components/elements/input";
-
+import template from "./leftPanelLayout.hbs?raw";
+import { Button } from "@/components/elements/button";
+import { UserProfileTopBarLinkConnected } from "./elements/topBarProfileLink";
+import { TopBar } from "@/components/elements/topBar";
+import type { Input } from "@/components/elements/input";
 import ThreadController from "@/controllers/threadsController";
-import ThreadsListConnected, { type ThreadsList_, type ThreadListItem } from "@/components/elements/threadsList";
+import { ThreadsListConnected } from "@/components/elements/threadsList";
+import type { ThreadsList, ThreadListItem } from "@/components/elements/threadsList";
+import { Block } from "@/system/block";
 
 export class LeftPanelTopBar extends TopBar {
   constructor(props?: { content: unknown }) {
     super({
-      content: props?.content ?? new UserProfileTopBarLink({}),
+      content: props?.content ?? new UserProfileTopBarLinkConnected({}),
     });
   }
 }
@@ -19,36 +19,36 @@ export class LeftPanelTopBar extends TopBar {
 type LeftPanelComponentProps = {
   TopBar?: TopBar | boolean;
   Search?: Input | boolean;
-  Threads?: ThreadListItem[] | boolean | ThreadsList_;
+  Threads?: ThreadListItem[] | boolean | ThreadsList;
   noThreadsMessage?: string;
   StartThreadButton?: Button;
 };
 
-export default class LeftPanel extends Component<LeftPanelComponentProps> {
-  constructor(props?: LeftPanelComponentProps) {
-    super(
-      "section",
-      {
-        TopBar: props?.TopBar ?? new LeftPanelTopBar(),
-        Search: false,
-        Threads: new ThreadsListConnected({}),
-        noThreadsMessage: "you have no threads",
-        StartThreadButton: new Button(
-          {
-            buttonText: "Start a thread",
-            click: (event: Event) => {
-              event.preventDefault();
-              ThreadController.createThread();
-            },
-          },
-          "button button_startThread"
-        ),
+export class LeftPanel extends Block<LeftPanelComponentProps> {
+  constructor() {
+    super("section", {
+      Search: false,
+      noThreadsMessage: "you have no threads",
+      class: "leftPanel_container",
+    });
+
+    this.children.TopBar = new LeftPanelTopBar();
+    this.children.Threads = new ThreadsListConnected();
+    this.children.StartThreadButton = new Button({
+      buttonText: "Start a thread",
+      class: "button button_startThread",
+      click: (event: Event) => {
+        event.preventDefault();
+        ThreadController.createThread();
       },
-      "leftPanel_container"
-    );
+    });
   }
 
-  protected _setTemplate(): string | null {
-    return leftPanelTemplateString.trim();
+  render() {
+    return this.compile(template.trim(), {
+      TopBar: this.children.TopBar,
+      Threads: this.children.Threads,
+      StartThreadButton: this.children.StartThreadButton,
+    });
   }
 }

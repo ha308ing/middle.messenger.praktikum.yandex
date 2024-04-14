@@ -1,4 +1,4 @@
-import HTTPTransport from "@/system/httpTransport";
+import { HTTPTransport } from "@/system/httpTransport";
 const hostDefault = "https://ya-praktikum.tech/api/v2";
 
 export class BaseAPI {

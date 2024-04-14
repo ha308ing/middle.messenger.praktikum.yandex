@@ -1,6 +1,6 @@
-import STORE from "@/system/store";
+import store from "@/system/store";
 import AuthAPI from "@/api/authAPI";
-import avatarFix from "@/utils/avatarFix";
+import { avatarFix } from "@/utils/avatarFix";
 
 export class UserInfoController {
   public async isLogged() {
@@ -9,13 +9,13 @@ export class UserInfoController {
 
     const avatar = response.avatar;
     response.avatar = avatarFix(avatar);
-    STORE.set("user", response);
+    store.set("user", response);
 
     return true;
   }
 
   public isCurrent() {
-    const { user, target_user } = STORE.getState();
+    const { user, target_user } = store.getState();
     return user.id === target_user.id;
   }
 }

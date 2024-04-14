@@ -1,4 +1,4 @@
-import { type ComponentClass } from "@/system/component";
+import { type BlockClass } from "@/system/block";
 import { Route } from "@/system/route";
 import store from "./store";
 
@@ -24,7 +24,7 @@ class Router {
     this._rootSelector = rootSelector;
   }
 
-  use(pathname: string, component: ComponentClass) {
+  use(pathname: string, component: BlockClass) {
     const route = new Route(pathname, component, { rootSelector: this._rootSelector });
     this.routes = { ...this.routes, [pathname]: route };
     return this;
@@ -54,24 +54,33 @@ class Router {
     this.history.forward();
   }
 
+  _isAuthorized() {
+    return store.get("user")?.id != null;
+  }
+
   start(path?: string) {
     window.onpopstate = <T extends Event = PopStateEvent>(event: T) => {
+      const messengerPathname = "/messenger";
+      const rootPathaname = "/";
+      const target = event.currentTarget as Window;
+      let { pathname } = target.location;
+      if ((!this.restricted.includes(pathname) || pathname === rootPathaname) && this._isAuthorized()) {
+        pathname = messengerPathname;
+        window.location.pathname = messengerPathname;
+        this._onRoute(pathname);
+        return;
+      }
       if (event.currentTarget == null) throw new Error("Router: popstate event - no event target");
-      this._onRoute((event.currentTarget as Window).location.pathname);
+      this._onRoute(pathname);
     };
-    // .bind(this);
     this._onRoute(path ?? window.location.pathname);
   }
 
   _onRoute(pathname: string) {
-    if (store.get("user")?.id == null && this.restricted.includes(pathname)) {
+    if (!this._isAuthorized() && this.restricted.includes(pathname)) {
       this._onRoute("/sign-in");
       return "/sign-in";
     }
-    /*     if (store.get("user")?.id != null && this.allowed.includes(pathname)) {
-      this._onRoute("/messenger");
-      return;
-    } */
     console.log("not restricted");
     if (this.redirects[pathname] != null) {
       window.location.pathname = this.redirects[pathname];
@@ -83,7 +92,6 @@ class Router {
       return "/404";
     }
     if (this._currentRoute != null) {
-      // this._currentRoute._block.content.remove()
       this._currentRoute.leave();
     }
 

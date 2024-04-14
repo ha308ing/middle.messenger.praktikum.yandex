@@ -1,5 +1,5 @@
 import { describe, test, expect, jest, afterEach, beforeEach } from "@jest/globals";
-import HTTPTransport from "@/system/httpTransport";
+import { HTTPTransport } from "@/system/httpTransport";
 
 let http = new HTTPTransport("", {});
 let spyRequest = jest.spyOn(http, "request");

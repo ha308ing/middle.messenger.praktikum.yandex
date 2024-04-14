@@ -20,7 +20,7 @@ type Options = {
 
 type OptionsWithoutMethod = Omit<Options, "method">;
 
-export default class HTTPTransport {
+export class HTTPTransport {
   public host: string;
   public defaultOptions: OptionsWithoutMethod;
   constructor(host: string, defaultOptions: OptionsWithoutMethod) {

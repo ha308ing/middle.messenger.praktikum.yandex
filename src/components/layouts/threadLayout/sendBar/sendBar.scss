@@ -1,0 +1,32 @@
+.sendBar {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .iconButtonSend .iconButton_icon {
+    margin-left: 1rem;
+    height: 1.5rem;
+  }
+
+  // .iconButton {
+  //   &_icon {
+  //     height: 1.5rem;
+  //     width: auto;
+  //   }
+
+  //   &_attach {
+  //     margin-right: 1rem;
+  //   }
+  // }
+
+  .inputText_message {
+    flex-grow: 1;
+    text-align: center;
+
+    .inputText_input {
+      width: 100%;
+    }
+  }
+}

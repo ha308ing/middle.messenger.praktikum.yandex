@@ -1,17 +1,19 @@
-import type Component from "@/system/component";
+import type { Block } from "@/system/block";
 
-function renderDOM(rootSelector: string, ...element: HTMLElement[]) {
-  const rootNode = document.querySelector(rootSelector);
-  if (rootNode == null) throw new Error("renderDOM: rootNode is not found");
-  rootNode.innerHTML = "";
-  rootNode.append(...element);
+export function renderDOMBlock(query: string, block: Block | Block[]) {
+  const root = document.querySelector(query);
+
+  function appendBlock(block: Block) {
+    if (root == null) throw Error("renderDOMBlock: no root element found");
+    root.appendChild(block.element);
+    block.dispatchComponentDidMount();
+  }
+
+  if (Array.isArray(block)) {
+    block.forEach(appendBlock);
+  } else {
+    appendBlock(block);
+  }
+
+  return root;
 }
-
-export function renderDOMComponent(rootSelector: string, ...component: Component[]) {
-  const rootNode = document.querySelector(rootSelector);
-  if (rootNode == null) throw new Error("renderDOM: rootNode is not found");
-  rootNode.innerHTML = "";
-  rootNode.append(...component.map(c => c.content));
-}
-
-export default renderDOM;

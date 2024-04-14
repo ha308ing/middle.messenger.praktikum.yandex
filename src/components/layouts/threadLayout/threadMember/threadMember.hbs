@@ -1,0 +1,15 @@
+{{{memberLogoUsername}}}
+
+{{#if isAdmin }}
+  <span style="color:#777;font-size:.7em;border: 1px solid #777;border-radius: 3px;">admin</span>
+{{/if}}
+
+{{#unless isCurrentUser}}
+  {{#unless isAdmin}}
+    {{#if isMember}}
+      {{{iconButtonClose}}}
+    {{else}}
+      {{{iconButtonInvite}}}
+    {{/if}}
+  {{/unless}}
+{{/unless}}

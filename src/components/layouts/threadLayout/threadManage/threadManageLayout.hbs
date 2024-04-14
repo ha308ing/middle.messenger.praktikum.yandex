@@ -1,0 +1,21 @@
+<article class="threadManageContainer">
+
+  <div class="logoContainer">
+    {{{AvatarForm}}}
+  </div>
+
+  <div class="searchContainer">
+    {{{FindUserForm}}}
+  </div>
+</article>
+
+<section class="threadMembersContainer">
+  {{#if ThreadMembers}}
+    <h2 class="heading">Thread members</h2>
+      {{{ThreadMembers}}}
+    {{/if}}
+
+    {{{FoundUsers}}}
+</section>
+
+{{{ButtonLeaveThread}}}

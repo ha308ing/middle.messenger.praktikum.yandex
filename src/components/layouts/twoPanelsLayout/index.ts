@@ -1,30 +1,28 @@
-import Component from "@/system/component";
 import twoPanelLayoutTemplateString from "./twoPanelsLayout.hbs?raw";
 import "./twoPanelsLayout.scss";
-import LeftPanel from "@/components/layouts/leftPanelLayout";
-import RightPanel from "@/components/layouts/rightPanelLayout";
+import { LeftPanel } from "@/components/layouts/leftPanelLayout";
+import type { RightPanel } from "@/components/layouts/rightPanelLayout";
+import { Block } from "@/system/block";
 
 type TwoPanelLayoutComponentProps = {
   LeftPanel?: LeftPanel;
   RightPanel?: RightPanel;
 };
 
-export default class TwoPanelLayout extends Component<TwoPanelLayoutComponentProps> {
-  constructor(props?: TwoPanelLayoutComponentProps, persistClass = "") {
-    // constructor(props) {
-    super(
-      "div",
-      {
-        LeftPanel: props?.LeftPanel ?? new LeftPanel({}),
-        RightPanel: props?.RightPanel ?? new RightPanel({}),
+export class TwoPanelLayout extends Block<TwoPanelLayoutComponentProps> {
+  constructor() {
+    super("div", {
+      class: `threadsPage_container leftPanelLayout_container`,
+    });
 
-        ...props,
-      },
-      `threadsPage_container leftPanelLayout_container ${persistClass}`
-    );
+    this.children.LeftPanel = new LeftPanel();
   }
 
-  protected _setTemplate(): string | null {
-    return twoPanelLayoutTemplateString.trim();
+  render() {
+    const template = twoPanelLayoutTemplateString.trim();
+    return this.compile(template, {
+      LeftPanel: this.children?.LeftPanel,
+      RightPanel: this.children?.RightPanel,
+    });
   }
 }

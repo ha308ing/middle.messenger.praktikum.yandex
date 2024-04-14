@@ -1,4 +1,4 @@
-import EventBus from "@/system/eventBus";
+import { EventBus } from "@/system/eventBus";
 
 export enum WSEvents {
   openConnection = "openConnection",
@@ -7,7 +7,7 @@ export enum WSEvents {
   closeConnection = "closeConnection",
 }
 
-export default class WSTransport extends EventBus {
+export class WSTransport extends EventBus {
   events = WSEvents;
 
   public socket: WebSocket;

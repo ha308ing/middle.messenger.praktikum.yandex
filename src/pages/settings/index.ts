@@ -1,13 +1,21 @@
 import "./settings.scss";
-import TwoPanelLayout from "@/components/layouts/twoPanelsLayout";
-import RightPanel from "@/components/layouts/rightPanelLayout";
+import { TwoPanelLayout } from "@/components/layouts/twoPanelsLayout";
+import { RightPanel } from "@/components/layouts/rightPanelLayout";
 import { UserLayout } from "@/components/layouts/profileLayout";
 
-export default class ProfilePage extends TwoPanelLayout {
+class SettingsRightPanel extends RightPanel {
   constructor() {
-    super({
-      RightPanel: new RightPanel({ content: new UserLayout() }),
-    });
+    super();
+
+    this.lists.content = [new UserLayout()];
+  }
+}
+
+export class SettingsPage extends TwoPanelLayout {
+  constructor() {
+    super();
+
+    this.children.RightPanel = new SettingsRightPanel();
 
     // UserInfoController.isLogged();
   }

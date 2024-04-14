@@ -1,7 +1,7 @@
 import { type User, type Thread } from "@/types/types.api";
 import { BaseAPI } from "@/api/baseAPI";
 import store from "@/system/store";
-import avatarFix from "@/utils/avatarFix";
+import { avatarFix } from "@/utils/avatarFix";
 
 class ThreadsAPI extends BaseAPI {
   public async getThreads(offset = 0, limit = 10, title = ""): Promise<Thread[] | null> {

@@ -1,5 +1,5 @@
-import EventBus from "@/system/eventBus";
-import setProp from "@/utils/setProp";
+import { EventBus } from "@/system/eventBus";
+import { setProp } from "@/utils/setProp";
 
 export enum StoreEvents {
   deactivateThread = "deactivateThread",

@@ -41,7 +41,8 @@ const nameValidate = (string: string) => validate(nameRegexp)(string);
 /*
  *password — от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.
  */
-const passwordRegexp = [/\S{8,40}/, /[A-Z]/, /[0-9]/];
+// const passwordRegexp = [/\S{8,40}/, /[A-Z]/, /[0-9]/];
+const passwordRegexp = [/\S{8,40}/, /[a-z]/, /[0-9]/];
 const passwordValidate = (string: string) => validate(passwordRegexp)(string);
 
 /*
@@ -56,7 +57,7 @@ const phoneValidate = (string: string) => validate(phoneRegexp)(string);
 const messageRegexp = /\w+/;
 const messageValidate = (string: string) => validate(messageRegexp)(string);
 
-const inputValidator: Record<string, (string: string) => boolean> = {
+export const inputValidator: Record<string, (string: string) => boolean> = {
   login: loginValidate,
   email: emailValidate,
   first_name: nameValidate,
@@ -77,5 +78,3 @@ const inputValidator: Record<string, (string: string) => boolean> = {
     return true;
   },
 };
-
-export default inputValidator;

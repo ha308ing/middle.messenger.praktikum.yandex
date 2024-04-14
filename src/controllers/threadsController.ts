@@ -1,11 +1,11 @@
 import UsersAPI from "@/api/usersAPI";
-import avatarFix, { avatarFixObj } from "@/utils/avatarFix";
+import { avatarFix, avatarFixObj } from "@/utils/avatarFix";
 import threadsAPI from "@/api/threadsAPI";
 import { type User, type Thread } from "@/types/types.api";
-import STORE, { StoreEvents } from "@/system/store";
+import store, { StoreEvents } from "@/system/store";
 import router from "@/system/router";
 import wsController from "./wsController";
-import sweater from "@/assets/sweater.png";
+import { brandImage } from "@/system/consts";
 
 type Threads = Record<number, { avatar: string }>;
 
@@ -20,7 +20,7 @@ class ThreadsController {
       wsController.connect(t.id);
       this.getThreadUsers(t.id).then(res => {
         if (res != null) {
-          STORE.set(`threads_.${t.id}.users`, res);
+          store.set(`threads_.${t.id}.users`, res);
         }
       });
       acc[t_.id] = t_;
@@ -31,7 +31,7 @@ class ThreadsController {
 
   public async updateThreads() {
     const threads = await this.getThreads();
-    STORE.set("threads_", threads);
+    store.set("threads_", threads);
   }
 
   public async createThread() {
@@ -50,8 +50,10 @@ class ThreadsController {
     }
     const { id: newThreadId } = response;
     await wsController.connect(newThreadId);
-    STORE.set("threads_", { [newThreadId]: { id: newThreadId, title, avatar: sweater, users: [STORE.get("user")] } });
-    STORE.emit(StoreEvents.activateThread, newThreadId);
+    store.set("threads_", {
+      [newThreadId]: { id: newThreadId, title, avatar: brandImage, users: [store.get("user")] },
+    });
+    store.emit(StoreEvents.activateThread, newThreadId);
 
     return null;
   }
@@ -59,12 +61,19 @@ class ThreadsController {
   public async findUser(login: string) {
     const response = await UsersAPI.findUsers(login);
     if (response === false) return false;
+    const activeThreadId = store.get("activeThread");
+
+    const members = store.get(`threads_.${activeThreadId}.users`) as User[];
+
     const foundUsers = response.reduce((acc: User[], user: User) => {
       let { id, login, avatar } = user;
+      if (members.find(m => m.id === id) != null) {
+        return acc;
+      }
       avatar = avatarFix(avatar);
-      return [...acc, { id, login, avatar, isMember: false }];
+      return [...acc, { id, login, avatar, isMember: false, class: "foundUser" }];
     }, []);
-    STORE.emit(StoreEvents.findUsers, foundUsers);
+    store.emit(StoreEvents.findUsers, foundUsers);
     return true;
   }
 
@@ -74,8 +83,7 @@ class ThreadsController {
     if (!result) {
       return false;
     }
-    const users = await this.getThreadUsers(threadId);
-    STORE.emit(StoreEvents.updateUsers, users);
+    await this.getThreadUsers(threadId);
     return true;
   }
 
@@ -86,10 +94,13 @@ class ThreadsController {
 
     const formattedUsers = response.reduce((acc: Array<Pick<User, "id" | "login" | "avatar" | "role">>, user: User) => {
       let { id, login, avatar, role } = user;
+      const isCurrentUser = id === store.get("user.id");
+      const isAdmin = role === "admin";
+
       avatar = avatarFix(avatar);
-      return [...acc, { id, login, avatar, role }];
+      return [...acc, { id, login, avatar, role, isAdmin, isCurrentUser }];
     }, []);
-    STORE.set(`threads_.${threadId}.users`, formattedUsers);
+    store.set(`threads_.${threadId}.users`, formattedUsers);
     return formattedUsers;
   }
 
@@ -99,8 +110,7 @@ class ThreadsController {
     if (!result) {
       return false;
     }
-    const users = await this.getThreadUsers(threadId);
-    STORE.emit(StoreEvents.updateUsers, users);
+    await this.getThreadUsers(threadId);
     return true;
   }
 
@@ -108,8 +118,8 @@ class ThreadsController {
     const { message } = await threadsAPI.removeThread(threadId);
     alert(message);
     wsController.sockets[threadId].close();
-    STORE.set("activeThread", null);
-    STORE.set(`threads_.${threadId}`, null);
+    store.set("activeThread", null);
+    store.set(`threads_.${threadId}`, null);
     router.go("/messenger");
     this.updateThreads();
     return true;

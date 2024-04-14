@@ -12,13 +12,15 @@
 
 .input_input {
   border: 0;
-  border-bottom: 2px solid colors.$pureBlack;
+  border-bottom: 2px solid colors.$lightGrey;
   text-align: center;
   padding: 6px 0;
   width: 100%;
+  transition: border-color 0.2s ease-out;
 
   &:focus-visible {
     outline: 0;
+    border-color: colors.$pureBlack;
   }
 }
 

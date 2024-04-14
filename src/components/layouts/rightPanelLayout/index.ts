@@ -1,25 +1,24 @@
-import Component from "@/system/component";
 import rightPanelLayoutTemplateString from "./rightPanelLayout.hbs?raw";
+import { Block } from "@/system/block";
 
 export type RightPanelProps = {
   content?: unknown;
   noContentMessage?: string;
 };
 
-export default class RightPanel<K extends RightPanelProps = RightPanelProps> extends Component<RightPanelProps> {
+export class RightPanel<K extends RightPanelProps = RightPanelProps> extends Block<RightPanelProps> {
   constructor(props?: K, persistClass = "") {
-    super(
-      "section",
-      {
-        content: props?.content ?? false,
-        noContentMessage: props?.noContentMessage == null ? "please select a thread" : props.noContentMessage,
-        ...props,
-      },
-      `rightPanel_container ${persistClass}`
-    );
+    super("section", {
+      class: `rightPanel_container ${persistClass}`,
+      ...props,
+    });
   }
 
-  protected _setTemplate(): string | null {
-    return rightPanelLayoutTemplateString.trim();
+  render() {
+    return this.compile(rightPanelLayoutTemplateString.trim(), {
+      ...this.props,
+      content: this.lists.content,
+      noContentMessage: this.children?.noContentMessage ?? "please select a thread",
+    });
   }
 }

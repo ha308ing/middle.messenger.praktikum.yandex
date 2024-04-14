@@ -1,5 +1,5 @@
 import store from "@/system/store";
-import WSTransport, { WSEvents } from "@/system/wsTransport";
+import { WSTransport, WSEvents } from "@/system/wsTransport";
 import MessagesController from "@/controllers/messagesController";
 import threadsAPI from "@/api/threadsAPI";
 

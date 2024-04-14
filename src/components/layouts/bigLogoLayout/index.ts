@@ -1,30 +1,25 @@
 import bigLogoLayoutTemplateString from "./bigLogoLayout.hbs?raw";
-import Component from "@/system/component";
 import "./bigLogoLayout.scss";
-import Logo from "@/components/elements/logo";
+import { Logo } from "@/components/elements/logo";
+import { Block } from "@/system/block";
 
 type BigLogoLayoutComponentProps = {
-  Logo: Logo;
-  content: unknown;
+  content: Array<Block | string>;
 };
 
-type BigLogoLayoutProps = {
-  content: unknown;
-};
+export class BigLogoLayout extends Block<BigLogoLayoutComponentProps> {
+  constructor() {
+    super("article", {
+      class: "bigLogoLayout",
+    });
 
-export default class BigLogoLayout extends Component<BigLogoLayoutComponentProps> {
-  constructor(props: BigLogoLayoutProps) {
-    super(
-      "article",
-      {
-        Logo: new Logo(),
-        content: props.content ?? "no content",
-      },
-      "bigLogoLayout"
-    );
+    this.children.Logo = new Logo();
   }
 
-  protected _setTemplate(): string | null {
-    return bigLogoLayoutTemplateString.trim();
+  render() {
+    return this.compile(bigLogoLayoutTemplateString.trim(), {
+      Logo: this.children.Logo,
+      content: this.lists?.content ?? "no content",
+    });
   }
 }

@@ -2,17 +2,19 @@ import "@/components/styles/root.scss";
 import store, { StoreEvents } from "@/system/store";
 import threadsController from "@/controllers/threadsController";
 import authController from "@/controllers/authController";
-import SigninPage from "@/pages/sign-in";
-import SignupPage from "@/pages/sign-up";
-import SettingsPage from "@/pages/settings";
 import router from "@/system/router";
-import PasswordChangePage from "@/pages/password-change";
-import MessengerPage from "@/pages/messenger";
-import ThreadManagePage from "@/pages/thread-manage";
-import Error404 from "@/pages/404";
-import Error5xx from "@/pages/5xx";
 import wsController from "./controllers/wsController";
 import { type Thread } from "./types/types.api";
+import {
+  SigninPage,
+  SignupPage,
+  MessengerPage,
+  SettingsPage,
+  ThreadManagePage,
+  PasswordChangePage,
+  Page404,
+  Page5xx,
+} from "@/pages";
 
 router
   .use("/", SigninPage)
@@ -22,8 +24,8 @@ router
   .use("/settings", SettingsPage)
   .use("/thread-manage", ThreadManagePage)
   .use("/password-change", PasswordChangePage)
-  .use("/404", Error404)
-  .use("/5xx", Error5xx);
+  .use("/404", Page404)
+  .use("/5xx", Page5xx);
 
 store.on(StoreEvents.activateThread, threadId => {
   store.set("activeThread", threadId);
@@ -46,9 +48,10 @@ if (store.get("user")?.id == null) {
 } else {
   console.log(`yes user in store`);
   const savedTheads = store.get("threads_");
-  Object.values(savedTheads as Record<string, Thread>).forEach(t => {
-    if (t?.id != null) wsController.connect(t.id);
-  });
+  if (savedTheads != null)
+    Object.values(savedTheads as Record<string, Thread>).forEach(t => {
+      if (t?.id != null) wsController.connect(t.id);
+    });
   const targatpathname = window.location.pathname;
   if (!router.restricted.includes(targatpathname)) router.go("/messenger");
 }

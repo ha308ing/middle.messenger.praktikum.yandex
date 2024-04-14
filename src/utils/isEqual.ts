@@ -1,7 +1,7 @@
 import { type PlainObject } from "@/types/types";
 import isArrayOrObject from "./isArrayOrObject";
 
-function isEqual(lhs: PlainObject | [], rhs: PlainObject | []) {
+export function isEqual(lhs: PlainObject | [], rhs: PlainObject | []) {
   if (lhs == null && rhs == null) return true;
   if (lhs != null && rhs == null) return false;
   if (lhs == null && rhs != null) return false;
@@ -26,5 +26,3 @@ function isEqual(lhs: PlainObject | [], rhs: PlainObject | []) {
 
   return true;
 }
-
-export default isEqual;

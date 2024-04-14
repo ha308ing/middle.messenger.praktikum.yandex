@@ -9,7 +9,7 @@ const pageData = {
 
 export default defineConfig({
   root: resolve(__dirname, "src"),
-  // publicDir: resolve(__dirname, "static"),  resolve: {
+  publicDir: resolve(__dirname, "public"),
   resolve: {
     alias: { "@": resolve(__dirname, "src") },
   },

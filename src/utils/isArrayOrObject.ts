@@ -1,5 +1,5 @@
-import isPlainObject from "@/utils/isPlainObject";
-import isArray from "@/utils/isArray";
+import { isPlainObject } from "@/utils/isPlainObject";
+import { isArray } from "@/utils/isArray";
 import { type PlainObject } from "@/types/types";
 
 /**
