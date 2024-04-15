@@ -26,7 +26,7 @@ export class ThreadMembersList extends Block {
       (u: ThreadMemberProps) => new ThreadMember({ ...u, ...memberDefaultProps })
     );
     this.lists.Members.forEach(m => {
-      m.dispatchComponentDidMount();
+      if (m instanceof Block) m.dispatchComponentDidMount();
     });
     return true;
   }

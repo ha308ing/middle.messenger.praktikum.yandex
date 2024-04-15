@@ -5,7 +5,7 @@ import type { IconButtonProps } from "./iconButton";
 const icon_back = "/icon_back.png";
 
 export class IconButtonBack extends IconButton {
-  constructor(props: IconButtonProps) {
+  constructor(props?: IconButtonProps) {
     super(
       {
         click: () => {

@@ -4,9 +4,9 @@ import template from "./threadListItem.hbs?raw";
 
 type ThreadListItemProps = {
   avatar: string;
-  class: string;
   title: string;
-  id: string;
+  id: number;
+  class?: string;
 };
 
 export class ThreadListItem extends Block {

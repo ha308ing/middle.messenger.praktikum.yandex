@@ -1,4 +1,4 @@
-import type Block from "@/system/block";
+import type { Block } from "@/system/block";
 import { type BlockClass } from "@/system/block";
 import { renderDOMBlock } from "@/utils/renderDOM";
 

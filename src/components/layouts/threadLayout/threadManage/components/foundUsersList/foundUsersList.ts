@@ -23,7 +23,7 @@ export class FoundUsersList extends Block {
       (u: ThreadMemberProps) => new ThreadMember({ ...u, ...foundUserDefaultProps })
     );
     this.lists.FoundUsers.forEach(m => {
-      m.dispatchComponentDidMount();
+      if (m instanceof Block) m.dispatchComponentDidMount();
     });
     return true;
   }

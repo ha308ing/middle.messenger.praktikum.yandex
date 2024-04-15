@@ -6,7 +6,7 @@ import { blockEvents } from "./events";
 
 type BlockChildren = Record<string, Block>;
 type BlockEvents = Record<string, (...arg: any[]) => any>;
-type BlockLists = Record<string, Block[]>;
+type BlockLists = Record<string, Array<Block | string>>;
 type BlockProps = {
   __id?: string;
   events?: BlockEvents;
